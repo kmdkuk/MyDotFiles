@@ -196,4 +196,4 @@ sudo_path=({/usr/local,/usr,}/sbin(N-/))
 path=(~/bin(N-/) /usr/local/bin(N-/) ${path})
 
 ## rbenv install
-eval "$(rbenv init -)"
+eval "$(rbenv init -)"export PATH="$HOME/.rbenv/bin:$PATH"
