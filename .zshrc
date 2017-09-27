@@ -168,7 +168,7 @@ esac
 
 # vim:set ft=zsh:
 
-JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+# JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 #   typeset
 #    -U 重複パスを登録しない
@@ -196,4 +196,4 @@ sudo_path=({/usr/local,/usr,}/sbin(N-/))
 path=(~/bin(N-/) /usr/local/bin(N-/) ${path})
 
 ## rbenv install
-eval "$(rbenv init -)"export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"export PATH="$HOME/.rbenv/bin:$PATH"
