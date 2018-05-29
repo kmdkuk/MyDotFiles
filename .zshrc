@@ -25,8 +25,8 @@ SAVEHIST=1000000
 # 1行表示
 # PROMPT="%~ %# "
 # 2行表示
-#PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-#%# "
+# PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+# %# "
 
 
 # 単語の区切り文字を指定する
@@ -55,21 +55,6 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
-
-
-########################################
-# vcs_info
-autoload -Uz vcs_info
-autoload -Uz add-zsh-hook
-
-zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
-
-function _update_vcs_info_msg() {
-    LANG=en_US.UTF-8 vcs_info
-    RPROMPT="${vcs_info_msg_0_}"
-}
-add-zsh-hook precmd _update_vcs_info_msg
 
 
 ########################################
@@ -137,6 +122,53 @@ alias sudo='sudo '
 alias -g L='| less'
 alias -g G='| grep'
 
+# ------------------------------------
+# Docker aliases
+# ------------------------------------
+
+alias d="docker"
+
+# Get the latest container ID
+alias dl="docker ps --latest --quiet"
+
+# List containers
+alias dps="docker ps"
+
+# List containers including stopped containers
+alias dpa="docker ps --all"
+
+# List images
+alias di="docker images"
+
+# List images including intermediates
+alias dia="docker images --all"
+
+# Tree images including intermediates
+alias dit="docker images --tree"
+
+# Get an IPaddress of a container
+alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+
+# Run a daemonized container
+alias drd="docker run --detach --publish-all"
+
+# Run an interactive container 
+alias dri="docker run --interactive --tty --publish-all"
+
+# Remove all containers
+alias drm='docker rm $(docker ps --all --quiet)'
+
+# Remove all images
+alias drmi='docker rmi $(docker images --quiet)'
+
+# Remove all containers and images by force
+alias dclean='docker kill $(docker ps --all --quiet); drm; drmi;'
+
+# List all aliases relating to docker
+dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)='\(.*\)'/\1    => \2/"| sed "s/'\\\'//g"; }
+
+alias dc='docker-compose'
+
 # C で標準出力をクリップボードにコピーする
 # mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
 if which pbcopy >/dev/null 2>&1 ; then
@@ -149,7 +181,6 @@ elif which putclip >/dev/null 2>&1 ; then
     # Cygwin
     alias -g C='| putclip'
 fi
-
 
 
 ########################################
@@ -196,8 +227,9 @@ sudo_path=({/usr/local,/usr,}/sbin(N-/))
 path=(~/bin(N-/) /usr/local/bin(N-/) ${path})
 
 ## rbenv install
-# eval "$(rbenv init -)"export PATH="$HOME/.rbenv/bin:$PATH"
-[ -f ~/.bundler-exec.sh ] && source ~/.bundler-exec.sh
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+## [ -f ~/.bundler-exec.sh ] && source ~/.bundler-exec.sh
 
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 function is_osx() { [[ $OSTYPE == darwin* ]]; }
@@ -260,3 +292,6 @@ function tmux_automatically_attach_session()
     fi
 }
 tmux_automatically_attach_session
+
+eval "$(docker-machine env)"
+export PATH=/usr/local/opt/openssl/bin:$PATH
