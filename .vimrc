@@ -63,6 +63,19 @@ NeoBundle 'yuku-t/vim-ref-ri'
 " メソッド定義元へのジャンプ
 NeoBundle 'szw/vim-tags'
 
+" ファイルをtree表示
+NeoBundle 'scrooloose/nerdtree'
+
+" Rails向けのコマンドを提供する
+NeoBundle 'tpope/vim-rails'
+" Ruby向けにendを自動挿入してくれる
+NeoBundle 'tpope/vim-endwise'
+
+" インデントに色を付けて見やすくする
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup = 1
 
 " vimのlua機能が使える時だけ以下のVimプラグインをインストールする
 if has('lua')
