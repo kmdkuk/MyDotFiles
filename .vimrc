@@ -1,116 +1,121 @@
-"----------------------------------------------------------
-" NeoBundle
-"----------------------------------------------------------
-if has('vim_starting')
-  "初回起動時のみruntimepathにNeoBundleのパスを指定する
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-
-  " NeoBundleが未インストールであればgit cloneする
-  if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
-    echo "install NeoBundle..."
-    :call system("git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
-    endif
+" dein settings {{{
+if &compatible
+  set nocompatible
 endif
+" dein.vimのディレクトリ
+let s:dein_dir = expand('~/.vim/bundle')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+" なければgit clone
+if !isdirectory(s:dein_repo_dir)
+  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+endif
+execute 'set runtimepath^=' . s:dein_repo_dir
 
-" インストールするVimプラグインを以下に記述
-" NeoBundle自身を管理
-NeoBundleFetch 'Shougo/neobundle.vim'
-" カラースキームmolokai
-NeoBundle 'tomasr/molokai'
-" ステータスラインの表示内容強化
-NeoBundle 'itchyny/lightline.vim'
-" インデントの可視化
-NeoBundle 'Yggdroot/indentLine'
-" 末尾の全角半角空白文字を赤くハイライト
-NeoBundle 'bronson/vim-trailing-whitespace'
-" 構文エラーチェック
-NeoBundle 'scrooloose/syntastic'
-" 多機能セレクタ
-NeoBundle 'ctrlpvim/ctrlp.vim'
-" CtrlPの拡張プラグイン. 関数検索
-NeoBundle 'tacahiroy/ctrlp-funky'
-" CtrlPの拡張プラグイン. コマンド履歴検索
-NeoBundle 'suy/vim-ctrlp-commandline'
-" CtrlPの検索にagを使う
-NeoBundle 'rking/ag.vim'
-" プロジェクトに入ってるESLintを読み込む
-NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim'
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" コード補完
-NeoBundle 'rsense/rsense'
-NeoBundle "Shougo/neocomplete.vim"
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_ignore_case = 1
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#enable_auto_select = 1
-    let g:neocomplete#enable_enable_camel_case_completion = 0
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns._ = '\h\w*'
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" NeoBundle 'supermomonga/neocomplete-rsense.vim'
+  call dein#add('Shougo/dein.vim')
+  call dein#add('Shougo/neocomplcache.vim')
+  call dein#add('Shougo/neocomplcache-rsense.vim')
 
-" 静的解析
-NeoBundle 'scrooloose/syntastic'
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  " カラースキームmolokai
+  call dein#add( 'tomasr/molokai')
+  " ステータスラインの表示内容強化
+  call dein#add( 'itchyny/lightline.vim')
+  " インデントの可視化
+  call dein#add( 'Yggdroot/indentLine')
+  " 末尾の全角半角空白文字を赤くハイライト
+  call dein#add( 'bronson/vim-trailing-whitespace')
+  " 構文エラーチェック
+  call dein#add( 'scrooloose/syntastic')
+  " 多機能セレクタ
+  call dein#add( 'ctrlpvim/ctrlp.vim')
+  " CtrlPの拡張プラグイン. 関数検索
+  call dein#add( 'tacahiroy/ctrlp-funky')
+  " CtrlPの拡張プラグイン. コマンド履歴検索
+  call dein#add( 'suy/vim-ctrlp-commandline')
+  " CtrlPの検索にagを使う
+  call dein#add( 'rking/ag.vim')
+  " プロジェクトに入ってるESLintを読み込む
+  call dein#add( 'pmsorhaindo/syntastic-local-eslint.vim')
+  " 静的解析
+  call dein#add( 'scrooloose/syntastic')
 
-" ドキュメント参照
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'yuku-t/vim-ref-ri'
+  " ドキュメント参照
+  call dein#add( 'thinca/vim-ref')
+  call dein#add( 'yuku-t/vim-ref-ri')
 
-" メソッド定義元へのジャンプ
-NeoBundle 'szw/vim-tags'
+  " メソッド定義元へのジャンプ
+  call dein#add( 'szw/vim-tags')
 
-" ファイルをtree表示
-NeoBundle 'scrooloose/nerdtree'
+  " ファイルをtree表示
+  call dein#add( 'scrooloose/nerdtree')
 
-" Rails向けのコマンドを提供する
-NeoBundle 'tpope/vim-rails'
-" Ruby向けにendを自動挿入してくれる
-NeoBundle 'tpope/vim-endwise'
+  " Rails向けのコマンドを提供する
+  call dein#add( 'tpope/vim-rails')
+  " Ruby向けにendを自動挿入してくれる
+  call dein#add( 'tpope/vim-endwise')
 
-" インデントに色を付けて見やすくする
-NeoBundle 'nathanaelkane/vim-indent-guides'
+  " インデントに色を付けて見やすくする
+  call dein#add( 'nathanaelkane/vim-indent-guides')
 
-" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
-let g:indent_guides_enable_on_vim_startup = 1
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
 " vimのlua機能が使える時だけ以下のVimプラグインをインストールする
 if has('lua')
   " コードの自動補完
-  NeoBundle 'Shougo/neocomplete.vim'
+  call dein#add( 'Shougo/neocomplcache.vim')
   " スニペットの補完機能
-  NeoBundle "Shougo/neosnippet"
+  call dein#add( "Shougo/neosnippet")
   " スニペット集
-  NeoBundle 'Shougo/neosnippet-snippets'
+  call dein#add( 'Shougo/neosnippet-snippets')
 endif
 
-call neobundle#end()
+  call dein#end()
+  call dein#save_state()
+endif
 
-" ファイルタイプ別のVimプラグイン/インデントを有効にする
-filetype plugin indent on
-
-" 未インストールのVimプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
-NeoBundleCheck
+" その他インストールしていないものはこちらに入れる
+if dein#check_install()
+  call dein#install()
+endif
+" }}}
 
 " -------------------------------
 " Rsense
 " -------------------------------
-let g:rsenseHome = '/home/kouki/.rbenv/shims/rsense'
+let g:rsenseHome = '/User/kouki/.rbenv/shims/rsense'
 let g:rsenseUseOmniFunc = 1
 
-" --------------------------------
-" neocomplete.vim
-" --------------------------------
+" neocomplcacheの設定
+" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
+
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+
+
+" Rsense用の設定
+if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " --------------------------------
 " rubocop
@@ -124,9 +129,7 @@ let g:syntastic_ruby_checkers = ['rubocop']
 "----------------------------------------------------------
 " カラースキーム
 "----------------------------------------------------------
-if neobundle#is_installed('molokai')
-  colorscheme molokai " カラースキームにmolokaiを設定する
-endif
+colorscheme molokai " カラースキームにmolokaiを設定する
 set t_Co=256 " iTerm2など既に256色環境なら無くても良い
 syntax enable " 構文に色を付ける
 
@@ -192,4 +195,3 @@ vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 
 set backspace=indent,eol,start
-
