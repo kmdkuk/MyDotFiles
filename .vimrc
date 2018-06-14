@@ -63,6 +63,9 @@ if dein#load_state(s:dein_dir)
   " インデントに色を付けて見やすくする
   call dein#add( 'nathanaelkane/vim-indent-guides')
 
+  "ruby
+  call dein#add('vim-ruby/vim-ruby')
+
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
@@ -108,7 +111,6 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
-
 
 " Rsense用の設定
 if !exists('g:neocomplcache_omni_patterns')
