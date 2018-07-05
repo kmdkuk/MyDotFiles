@@ -69,6 +69,17 @@ if dein#load_state(s:dein_dir)
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
+  call dein#add('KazuakiM/vim-qfstatusline')
+  call dein#add('mojako/ref-sources.vim')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('vim-scripts/taglist.vim')
+  call dein#add('osyo-manga/shabadou.vim')
+  call dein#add('osyo-manga/vim-watchdogs')
+  call dein#add('mustardamus/jqapi', {'lazy':1})
+  call dein#add('tokuhirom/jsref',   {'lazy':1})
+
 " vimのlua機能が使える時だけ以下のVimプラグインをインストールする
 if has('lua')
   " コードの自動補完
