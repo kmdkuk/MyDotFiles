@@ -80,6 +80,9 @@ if dein#load_state(s:dein_dir)
   call dein#add('mustardamus/jqapi', {'lazy':1})
   call dein#add('tokuhirom/jsref',   {'lazy':1})
 
+  " C/C++コード補完
+  call dein#add('justmao945/vim-clang')
+
 " vimのlua機能が使える時だけ以下のVimプラグインをインストールする
 if has('lua')
   " コードの自動補完
