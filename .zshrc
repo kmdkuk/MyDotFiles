@@ -229,9 +229,6 @@ sudo_path=({/usr/local,/usr,}/sbin(N-/))
 ## pathを設定
 path=(~/bin(N-/) /usr/local/bin(N-/) ${path})
 
-## rbenv install
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/bin:$PATH"
 ## [ -f ~/.bundler-exec.sh ] && source ~/.bundler-exec.sh
 
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
@@ -296,5 +293,5 @@ function tmux_automatically_attach_session()
 }
 tmux_automatically_attach_session
 
-eval "$(docker-machine env)"
+function git (){hub "$@"}
 export PATH=/usr/local/opt/openssl/bin:$PATH
