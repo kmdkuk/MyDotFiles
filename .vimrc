@@ -226,3 +226,4 @@ autocmd BufWrite *.{hpp} :CPPCodeCleanup
 autocmd BufWrite *.{c} :CPPCodeCleanup
 autocmd BufWrite *.{h} :CPPCodeCleanup
 
+set clipboard+=unnamed
