@@ -291,7 +291,17 @@ function tmux_automatically_attach_session()
         fi
     fi
 }
-tmux_automatically_attach_session
 
 function git (){hub "$@"}
 export PATH=/usr/local/opt/openssl/bin:$PATH
+
+## setting for go
+export GO_VERSION=1.11.4
+export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:/usr/local/go/bin:${PATH}
+export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
+echo Now using golang v$GO_VERSION
