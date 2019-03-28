@@ -1,0 +1,15 @@
+[user]
+	email = kouworld0123@gmail.com
+	name = kouki
+[core]
+	excludesfile = /Users/kmdkuk/.gitignore_global
+	editor = vim -c \"set fenc=utf-8\"
+[ghq]
+	root = /Users/kmdkuk/go/src
+[fetch]
+	prune = true
+[alias]
+	tree = log --graph --all --format=\"%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s\"
+	delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+[commit]
+	template = /Users/kmdkuk/.commit_template
