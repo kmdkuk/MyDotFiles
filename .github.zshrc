@@ -6,8 +6,6 @@
 # 環境変数
 export PATH=/usr/local/bin:$PATH
 export LANG=ja_JP.UTF-8
-export PATH="/Users/kouki/anaconda/bin:$PATH"
-export PATH="$HOME/.pyenv/bin:$PATH"
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -305,3 +303,10 @@ export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 echo Now using golang v$GO_VERSION
+
+## setting for anyenv
+eval "$(anyenv init -)"
+
+if [ -e /usr/local/share/zsh-completions ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+fi
