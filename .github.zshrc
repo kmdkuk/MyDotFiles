@@ -310,6 +310,11 @@ if [ -f /usr/local/bin/anyenv ]; then
     eval "$(anyenv init -)"
 fi
 
+if [ -d $HOME/.anyenv ]; then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
+
 if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
