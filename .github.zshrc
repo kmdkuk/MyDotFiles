@@ -294,10 +294,11 @@ function git (){hub "$@"}
 export PATH=/usr/local/opt/openssl/bin:$PATH
 
 ## setting for go
-export GO_VERSION=1.11.4
+export GO_VERSION="`goenv version`"
 export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
+export GOENV_DISABLE_GOPATH=1
 export PATH=$GOBIN:/usr/local/go/bin:${PATH}
 export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
