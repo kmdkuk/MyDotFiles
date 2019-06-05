@@ -290,7 +290,7 @@ function tmux_automatically_attach_session()
     fi
 }
 
-function git (){hub "$@"}
+eval "$(hub alias -s)"
 export PATH=/usr/local/opt/openssl/bin:$PATH
 
 ## setting for go
