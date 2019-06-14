@@ -299,6 +299,7 @@ export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export GOENV_DISABLE_GOPATH=1
+export GO111MODULE=on
 export PATH=$GOBIN:/usr/local/go/bin:${PATH}
 export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
