@@ -16,6 +16,7 @@ if dein#load_state(s:dein_dir)
 
   call dein#add('Shougo/dein.vim')
   call dein#add('tomasr/molokai')
+  call dein#add('mechatroner/rainbow_csv')
   " ファイル構造見れるやつ
   call dein#add('scrooloose/nerdtree')
   " 補完
@@ -23,6 +24,9 @@ if dein#load_state(s:dein_dir)
   call dein#add('prabirshrestha/vim-lsp')
   call dein#add('prabirshrestha/asyncomplete.vim')
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+
+  call dein#add('tpope/vim-endwise')
+  call dein#add('w0rp/ale')
 
   call dein#end()
   call dein#save_state()
@@ -52,6 +56,29 @@ if executable('clangd')
         autocmd FileType objcpp setlocal omnifunc=lsp#complete
     augroup end
 endif
+
+if executable('bash-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'bash-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+        \ 'whitelist': ['sh'],
+        \ })
+endif
+
+if executable('solargraph')
+    " gem install solargraph
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+endif
+
+let g:ale_fixers = {
+      \ 'ruby': ['rubocop'],
+      \ }
+let g:ale_fix_on_save = 1
 
 " NERDTree settings
 let g:NERDTreeShowBookmarks=1
