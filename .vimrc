@@ -25,6 +25,10 @@ if dein#load_state(s:dein_dir)
   call dein#add('prabirshrestha/asyncomplete.vim')
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
 
+  " for typescript
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('ryanolsonx/vim-lsp-typescript')
+
   call dein#add('tpope/vim-endwise')
   call dein#add('w0rp/ale')
 
@@ -72,6 +76,15 @@ if executable('solargraph')
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
         \ 'initialization_options': {"diagnostics": "true"},
         \ 'whitelist': ['ruby'],
+        \ })
+endif
+
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript', 'typescript.tsx'],
         \ })
 endif
 

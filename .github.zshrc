@@ -305,6 +305,7 @@ export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 echo Now using golang v$GO_VERSION
+export PATH=$HOME/.anyenv/envs/nodenv/shims/bin:$PATH
 
 ## setting for anyenv
 if [ -f /usr/local/bin/anyenv ]; then
