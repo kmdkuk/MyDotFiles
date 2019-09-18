@@ -349,3 +349,6 @@ function ghq-new() {
     rm -rf $TMPREPODIR
 }
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+export PATH="${HOME}/bin:$PATH"
+alias sudo='sudo -E'

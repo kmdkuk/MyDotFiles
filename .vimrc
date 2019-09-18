@@ -27,8 +27,9 @@ if dein#load_state(s:dein_dir)
 
   " for typescript
   call dein#add('leafgarland/typescript-vim')
-  call dein#add('ryanolsonx/vim-lsp-typescript')
-
+  if executable('typescript-langage-server')
+    call dein#add('ryanolsonx/vim-lsp-typescript')
+  endif
   call dein#add('tpope/vim-endwise')
   call dein#add('w0rp/ale')
 
