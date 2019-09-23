@@ -213,4 +213,4 @@ vnoremap ( "zdi^V(<C-R>z)<ESC>
 vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 
-
+au BufNewFile,BufRead Dockerfile* setf Dockerfile

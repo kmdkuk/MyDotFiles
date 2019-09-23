@@ -349,3 +349,13 @@ function ghq-new() {
     rm -rf $TMPREPODIR
 }
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+# 補完ロード
+if [ -e ~/.zsh/completions ]; then
+  fpath=(~/.zsh/completions $fpath)
+fi
+
+autoload -U compinit
+compinit
+
+export EDITOR=vim
