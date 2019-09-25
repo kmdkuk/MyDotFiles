@@ -15,7 +15,8 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#add('Shougo/dein.vim')
-  call dein#add('tomasr/molokai')
+  " call dein#add('tomasr/molokai')
+  call dein#add('altercation/vim-colors-solarized')
   call dein#add('mechatroner/rainbow_csv')
   " ファイル構造見れるやつ
   call dein#add('scrooloose/nerdtree')
@@ -160,7 +161,9 @@ nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
 set t_Co=256
-colorscheme molokai
+set background=dark
+colorscheme solarized
+" colorscheme molokai
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)

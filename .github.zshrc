@@ -11,21 +11,10 @@ export LANG=ja_JP.UTF-8
 autoload -Uz colors
 colors
 
-# emacs 風キーバインドにする
-# bindkey -e
-
 # ヒストリの設定
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-
-# プロンプト
-# 1行表示
-# PROMPT="%~ %# "
-# 2行表示
-# PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-# %# "
-
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -71,9 +60,6 @@ setopt ignore_eof
 
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
-
-# ディレクトリ名だけでcdする
-setopt auto_cd
 
 # cd したら自動的にpushdする
 setopt auto_pushd
@@ -190,7 +176,25 @@ case ${OSTYPE} in
     darwin*)
         #Mac用の設定
         export CLICOLOR=1
-        alias ls='ls -G -F'
+        alias ls='gls -G -F --color=auto'
+        path=(
+          /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
+          /usr/local/opt/ed/libexec/gnubin(N-/) # ed
+          /usr/local/opt/findutils/libexec/gnubin(N-/) # findutils
+          /usr/local/opt/gnu-sed/libexec/gnubin(N-/) # sed
+          /usr/local/opt/gnu-tar/libexec/gnubin(N-/) # tar
+          /usr/local/opt/grep/libexec/gnubin(N-/) # grep
+          ${path}
+        )
+        manpath=(
+          /usr/local/opt/coreutils/libexec/gnuman(N-/) # coreutils
+          /usr/local/opt/ed/libexec/gnuman(N-/) # ed
+          /usr/local/opt/findutils/libexec/gnuman(N-/) # findutils
+          /usr/local/opt/gnu-sed/libexec/gnuman(N-/) # sed
+          /usr/local/opt/gnu-tar/libexec/gnuman(N-/) # tar
+          /usr/local/opt/grep/libexec/gnuman(N-/) # grep
+          ${manpath}
+        )
         ;;
     linux*)
         #Linux用の設定
@@ -258,7 +262,7 @@ function tmux_automatically_attach_session()
                 return 1
             fi
 
-            if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
+            if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -q 'created'; then
                 # detached session exists
                 tmux list-sessions
                 echo -n "Tmux: attach? (y/N/num) "
@@ -289,6 +293,7 @@ function tmux_automatically_attach_session()
         fi
     fi
 }
+tmux_automatically_attach_session
 
 eval "$(hub alias -s)"
 export PATH=/usr/local/opt/openssl/bin:$PATH
