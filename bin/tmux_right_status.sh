@@ -64,7 +64,7 @@ function network_level() {
       | tail -1 | tr -s ' ' | cut -d' ' -f4 | sed 's/\./dBm/') \
     || local -r signal='---'
 
-  echo "$(separator 'blue')#[fg=black,bg=yellow]network:$(output -n 'black' -s ${signal})"
+  echo "$(separator 'blue')#[fg=black,bg=yellow]wifi:$(output -n 'black' -s ${signal})"
 }
 
 # 音量
@@ -121,7 +121,7 @@ function hours_minutes() {
 # バッテリー残量
 function battery() {
   function online() {
-    [[ $(cat /sys/class/power_supply/ADP1/online) != '1' ]] \
+    [[ $(cat /sys/class/power_supply/ACAD/online) != '1' ]] \
       && return
     local -ar icons=('' '' '' '' '')
     local index
