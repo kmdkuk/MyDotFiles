@@ -31,6 +31,9 @@ if dein#load_state(s:dein_dir)
   if executable('typescript-langage-server')
     call dein#add('ryanolsonx/vim-lsp-typescript')
   endif
+
+  " for go
+  call dein#add('fatih/vim-go')
   
   call dein#add('tpope/vim-endwise')
   
