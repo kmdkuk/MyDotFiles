@@ -113,6 +113,24 @@ if executable('typescript-language-server')
         \ })
 endif
 
+if executable('golsp')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+" 保存時に必要なimportを自動的に挿入
+let g:go_fmt_command = "goimports"
+" LSPに任せる機能をOFFにする
+let g:go_def_mapping_enabled = 0
+let g:go_doc_keywordprg_enabled = 0
+
 let g:ale_fixers = {
       \ 'ruby': ['rubocop'],
       \ }
