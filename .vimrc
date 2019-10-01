@@ -34,14 +34,64 @@ if dein#load_state(s:dein_dir)
 
   " for go
   call dein#add('fatih/vim-go')
-  
+
   call dein#add('tpope/vim-endwise')
-  
+
   call dein#add('w0rp/ale')
 
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('ryanoasis/vim-devicons')
+
+  " インデントの可視化
+  call dein#add( 'Yggdroot/indentLine')
+  " 末尾の全角半角空白文字を赤くハイライト
+  call dein#add( 'bronson/vim-trailing-whitespace')
+  " 多機能セレクタ
+  call dein#add( 'ctrlpvim/ctrlp.vim')
+  " CtrlPの拡張プラグイン. 関数検索
+  call dein#add( 'tacahiroy/ctrlp-funky')
+  " CtrlPの拡張プラグイン. コマンド履歴検索
+  call dein#add( 'suy/vim-ctrlp-commandline')
+  " CtrlPの検索にagを使う
+  call dein#add( 'rking/ag.vim')
+  " プロジェクトに入ってるESLintを読み込む
+  call dein#add( 'pmsorhaindo/syntastic-local-eslint.vim')
+
+  " ドキュメント参照
+  call dein#add( 'thinca/vim-ref')
+  call dein#add( 'yuku-t/vim-ref-ri')
+
+  " メソッド定義元へのジャンプ
+  call dein#add( 'szw/vim-tags')
+
+  " Rails向けのコマンドを提供する
+  call dein#add( 'tpope/vim-rails')
+  " Ruby向けにendを自動挿入してくれる
+  call dein#add( 'tpope/vim-endwise')
+
+  " インデントに色を付けて見やすくする
+  call dein#add( 'nathanaelkane/vim-indent-guides')
+
+  "ruby
+  call dein#add('vim-ruby/vim-ruby')
+
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+  call dein#add('KazuakiM/vim-qfstatusline')
+  call dein#add('mojako/ref-sources.vim')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+  call dein#add('thinca/vim-quickrun')
+  " call dein#add('vim-scripts/taglist.vim')
+  call dein#add('osyo-manga/shabadou.vim')
+  call dein#add('osyo-manga/vim-watchdogs')
+  call dein#add('mustardamus/jqapi', {'lazy':1})
+  call dein#add('tokuhirom/jsref',   {'lazy':1})
+
+  " C/C++コード補完
+  call dein#add('justmao945/vim-clang')
 
   call dein#end()
   call dein#save_state()
