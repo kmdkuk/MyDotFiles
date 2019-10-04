@@ -367,7 +367,7 @@ export PATH="${HOME}/bin:$PATH"
 alias sudo='sudo -E'
 
 # linux
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+# eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 ## setting for anyenv
 eval "$(anyenv init -)"
