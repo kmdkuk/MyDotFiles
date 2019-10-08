@@ -188,7 +188,7 @@ let g:ale_fix_on_save = 1
 
 " NERDTree settings
 let g:NERDTreeShowBookmarks=1
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 map <C-n> :NERDTreeToggle<CR>
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -309,3 +309,4 @@ vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 
 au BufNewFile,BufRead Dockerfile* setf Dockerfile
+set clipboard+=unnamed
