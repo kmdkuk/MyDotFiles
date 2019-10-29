@@ -31,6 +31,7 @@ if dein#load_state(s:dein_dir)
   if executable('typescript-langage-server')
     call dein#add('ryanolsonx/vim-lsp-typescript')
   endif
+  call dein#add('prettier/vim-prettier')
 
   " for go
   call dein#add('fatih/vim-go')
@@ -42,6 +43,10 @@ if dein#load_state(s:dein_dir)
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('ryanoasis/vim-devicons')
+
+  " for markdown
+  call dein#add('plasticboy/vim-markdown')
+  call dein#add('previm/previm')
 
   " インデントの可視化
   call dein#add( 'Yggdroot/indentLine')
@@ -58,13 +63,6 @@ if dein#load_state(s:dein_dir)
   " プロジェクトに入ってるESLintを読み込む
   call dein#add( 'pmsorhaindo/syntastic-local-eslint.vim')
 
-  " ドキュメント参照
-  call dein#add( 'thinca/vim-ref')
-  call dein#add( 'yuku-t/vim-ref-ri')
-
-  " メソッド定義元へのジャンプ
-  call dein#add( 'szw/vim-tags')
-
   " Rails向けのコマンドを提供する
   call dein#add( 'tpope/vim-rails')
   " Ruby向けにendを自動挿入してくれる
@@ -73,25 +71,11 @@ if dein#load_state(s:dein_dir)
   " インデントに色を付けて見やすくする
   call dein#add( 'nathanaelkane/vim-indent-guides')
 
-  "ruby
-  call dein#add('vim-ruby/vim-ruby')
-
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
-  call dein#add('KazuakiM/vim-qfstatusline')
-  call dein#add('mojako/ref-sources.vim')
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-  call dein#add('thinca/vim-quickrun')
-  " call dein#add('vim-scripts/taglist.vim')
-  call dein#add('osyo-manga/shabadou.vim')
-  call dein#add('osyo-manga/vim-watchdogs')
-  call dein#add('mustardamus/jqapi', {'lazy':1})
-  call dein#add('tokuhirom/jsref',   {'lazy':1})
-
-  " C/C++コード補完
-  call dein#add('justmao945/vim-clang')
+  " for clang-format
+  call dein#add('rhysd/vim-clang-format')
 
   call dein#end()
   call dein#save_state()
@@ -102,6 +86,20 @@ if dein#check_install()
   call dein#install()
 endif
 
+" language server protocol shortcut
+" leaderはデフォルトでバックスラッシュ,
+" let mapleader = ","
+" 自由に設定ができる
+nmap <silent> <Leader>d :LspDefinition<CR>
+nmap <silent> <Leader>p :LspHover<CR>
+nmap <silent> <Leader>r :LspReferences<CR>
+nmap <silent> <Leader>i :LspImplementation<CR>
+nmap <silent> <Leader>s :split \| :LspDefinition <CR>
+nmap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
+
+" asyncomplete
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " using icon
 let g:airline_theme = 'wombat'
@@ -135,6 +133,12 @@ if executable('clangd')
         autocmd FileType objcpp setlocal omnifunc=lsp#complete
     augroup end
 endif
+
+autocmd FileType c ClangFormatAutoEnable
+autocmd FileType cpp ClangFormatAutoEnable
+autocmd FileType objc ClangFormatAutoEnable
+autocmd FileType objcpp ClangFormatAutoEnable
+
 
 if executable('bash-language-server')
   au User lsp_setup call lsp#register_server({
@@ -310,3 +314,13 @@ vnoremap ' "zdi'<C-R>z'<ESC>
 
 au BufNewFile,BufRead Dockerfile* setf Dockerfile
 set clipboard+=unnamed
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+nmap <silent> <C-o> :PrevimOpen<CR>
+
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
