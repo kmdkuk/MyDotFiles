@@ -38,30 +38,19 @@ if dein#load_state(s:dein_dir)
 
   call dein#add('tpope/vim-endwise')
 
-  call dein#add('w0rp/ale')
-
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('ryanoasis/vim-devicons')
 
   " for markdown
   call dein#add('plasticboy/vim-markdown')
+  " mardown preview
   call dein#add('previm/previm')
 
   " インデントの可視化
   call dein#add( 'Yggdroot/indentLine')
   " 末尾の全角半角空白文字を赤くハイライト
   call dein#add( 'bronson/vim-trailing-whitespace')
-  " 多機能セレクタ
-  call dein#add( 'ctrlpvim/ctrlp.vim')
-  " CtrlPの拡張プラグイン. 関数検索
-  call dein#add( 'tacahiroy/ctrlp-funky')
-  " CtrlPの拡張プラグイン. コマンド履歴検索
-  call dein#add( 'suy/vim-ctrlp-commandline')
-  " CtrlPの検索にagを使う
-  call dein#add( 'rking/ag.vim')
-  " プロジェクトに入ってるESLintを読み込む
-  call dein#add( 'pmsorhaindo/syntastic-local-eslint.vim')
 
   " Rails向けのコマンドを提供する
   call dein#add( 'tpope/vim-rails')
@@ -71,11 +60,15 @@ if dein#load_state(s:dein_dir)
   " インデントに色を付けて見やすくする
   call dein#add( 'nathanaelkane/vim-indent-guides')
 
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
-
   " for clang-format
   call dein#add('rhysd/vim-clang-format')
+
+  " for git
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
+
+  " 閉じカッコなど補完
+  call dein#add('cohama/lexima.vim')
 
   call dein#end()
   call dein#save_state()
@@ -91,15 +84,18 @@ endif
 " let mapleader = ","
 " 自由に設定ができる
 nmap <silent> <Leader>d :LspDefinition<CR>
-nmap <silent> <Leader>p :LspHover<CR>
+nmap <silent> <Leader>h :LspHover<CR>
 nmap <silent> <Leader>r :LspReferences<CR>
 nmap <silent> <Leader>i :LspImplementation<CR>
 nmap <silent> <Leader>s :split \| :LspDefinition <CR>
 nmap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
 
+" ファイルバッファの前後に行く
+nnoremap <silent> bp :bprevious<CR>
+nnoremap <silent> bn :bnext<CR>
+
 " asyncomplete
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" set completeopt+=preview
 
 " using icon
 let g:airline_theme = 'wombat'
@@ -110,15 +106,20 @@ let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
 let g:airline_section_c = '%t'
 let g:airline_section_x = '%{&filetype}'
-let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
-let g:airline#extensions#ale#error_symbol = ' '
-let g:airline#extensions#ale#warning_symbol = ' '
+" let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
+" let g:airline#extensions#ale#error_symbol = ' '
+" let g:airline#extensions#ale#warning_symbol = ' '
 let g:airline#extensions#default#section_truncate_width = {}
 let g:airline#extensions#whitespace#enabled = 1
 
 " lsp clangd settings
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_signs_error = {'text': ' '}
+let g:lsp_signs_warning = {'text': ' '}
+let g:lsp_signs_hint = {'text': ''}
 if executable('clangd')
     augroup lsp_clangd
         autocmd!
@@ -153,7 +154,6 @@ if executable('solargraph')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'solargraph',
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'initialization_options': {"diagnostics": "true"},
         \ 'whitelist': ['ruby'],
         \ })
 endif
@@ -184,11 +184,6 @@ let g:go_fmt_command = "goimports"
 " LSPに任せる機能をOFFにする
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
-
-let g:ale_fixers = {
-      \ 'ruby': ['rubocop'],
-      \ }
-let g:ale_fix_on_save = 1
 
 " NERDTree settings
 let g:NERDTreeShowBookmarks=1
@@ -300,17 +295,6 @@ if has('vim_starting')
   " 置換モード時に非点滅の下線タイプのカーソル
   let &t_SR .= "\e[4 q"
 endif
-" カッコ、クォート補完
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-vnoremap { "zdi^V{<C-R>z}<ESC>
-vnoremap [ "zdi^V[<C-R>z]<ESC>
-vnoremap ( "zdi^V(<C-R>z)<ESC>
-vnoremap " "zdi^V"<C-R>z^V"<ESC>
-vnoremap ' "zdi'<C-R>z'<ESC>
 
 au BufNewFile,BufRead Dockerfile* setf Dockerfile
 set clipboard+=unnamed
