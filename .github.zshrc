@@ -27,7 +27,17 @@ zstyle ':zle:*' word-style unspecified
 ########################################
 # 補完
 # 補完機能を有効にする
-autoload -Uz compinit
+
+# 補完ロード
+if [ -e ~/.zsh/completions ]; then
+  fpath=(~/.zsh/completions $fpath)
+fi
+
+if [ -e /usr/local/share/zsh-completions ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+
+autoload -U compinit
 compinit
 
 # 補完で小文字でも大文字にマッチさせる
@@ -299,32 +309,41 @@ eval "$(hub alias -s)"
 export PATH=/usr/local/opt/openssl/bin:$PATH
 
 ## setting for go
-export GO_VERSION="`goenv version`"
-export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export GOENV_DISABLE_GOPATH=1
 export GO111MODULE=on
-export PATH=$GOBIN:/usr/local/go/bin:${PATH}
-export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
-export PATH=$GOROOT/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-echo Now using golang v$GO_VERSION
-export PATH=$HOME/.anyenv/envs/nodenv/shims/bin:$PATH
 
 ## setting for anyenv
-if [ -f /usr/local/bin/anyenv ]; then
-    eval "$(anyenv init -)"
+export ANYENV_ROOT="${HOME}/.anyenv"
+if [ -d $ANYENV_ROOT ]; then
+  export PATH="$ANYENV_ROOT/bin:$PATH"
+  for D in `command ls $ANYENV_ROOT/envs`
+  do
+    export PATH="$ANYENV_ROOT/envs/$D/shims:$PATH"
+  done
 fi
 
-if [ -d $HOME/.anyenv ]; then
-    export PATH="$HOME/.anyenv/bin:$PATH"
-    eval "$(anyenv init -)"
-fi
+function anyenv_init() {
+  eval "$(anyenv init - --no-rehash)"
+}
+function anyenv_unset() {
+  unset -f ndenv
+  unset -f rbenv
+}
+function nodenv() {
+  anyenv_unset
+  anyenv_init
+  nodenv "$@"
+}
+function rbenv() {
+  anyenv_unset
+  anyenv_init
+  rbenv "$@"
+}
 
-if [ -e /usr/local/share/zsh-completions ]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
-fi
+function goenv() {
+  anyenv_unset
+  anyenv_init
+  goenv "$2"
+}
 
 function ghq-new() {
     local REPONAME=$1
@@ -354,13 +373,6 @@ function ghq-new() {
     rm -rf $TMPREPODIR
 }
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-# 補完ロード
-if [ -e ~/.zsh/completions ]; then
-  fpath=(~/.zsh/completions $fpath)
-fi
-
-autoload -U compinit
-compinit
 
 export EDITOR=vim
 export PATH="${HOME}/bin:$PATH"
@@ -368,9 +380,6 @@ alias sudo='sudo -E'
 
 # linux
 # eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-## setting for anyenv
-eval "$(anyenv init -)"
 
 #peco
 function peco-history-selection() {
@@ -380,3 +389,4 @@ function peco-history-selection() {
 }
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
+
