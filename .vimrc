@@ -21,23 +21,15 @@ if dein#load_state(s:dein_dir)
   " ファイル構造見れるやつ
   call dein#add('scrooloose/nerdtree')
   " 補完
-  call dein#add('prabirshrestha/async.vim')
   call dein#add('prabirshrestha/vim-lsp')
+  call dein#add('prabirshrestha/async.vim')
   call dein#add('prabirshrestha/asyncomplete.vim')
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
-
-  " for typescript
-  call dein#add('leafgarland/typescript-vim')
-  if executable('typescript-langage-server')
-    call dein#add('ryanolsonx/vim-lsp-typescript')
-  endif
-  call dein#add('prettier/vim-prettier')
 
   " for go
   call dein#add('fatih/vim-go')
 
-  call dein#add('tpope/vim-endwise')
-
+  " status line
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('ryanoasis/vim-devicons')
@@ -51,14 +43,14 @@ if dein#load_state(s:dein_dir)
   call dein#add( 'Yggdroot/indentLine')
   " 末尾の全角半角空白文字を赤くハイライト
   call dein#add( 'bronson/vim-trailing-whitespace')
+  " インデントに色を付けて見やすくする
+  call dein#add( 'nathanaelkane/vim-indent-guides')
+
 
   " Rails向けのコマンドを提供する
   call dein#add( 'tpope/vim-rails')
   " Ruby向けにendを自動挿入してくれる
   call dein#add( 'tpope/vim-endwise')
-
-  " インデントに色を付けて見やすくする
-  call dein#add( 'nathanaelkane/vim-indent-guides')
 
   " for clang-format
   call dein#add('rhysd/vim-clang-format')
@@ -186,26 +178,7 @@ let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
 
 " NERDTree settings
-let g:NERDTreeShowBookmarks=1
-" autocmd vimenter * NERDTree
 map <C-n> :NERDTreeToggle<CR>
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
-call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
-call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
-call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable  = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
@@ -250,10 +223,7 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-set t_Co=256
-set background=dark
 colorscheme solarized
-" colorscheme molokai
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
