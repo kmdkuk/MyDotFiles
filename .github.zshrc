@@ -311,6 +311,8 @@ export PATH=/usr/local/opt/openssl/bin:$PATH
 ## setting for go
 export GO111MODULE=on
 
+export PATH=$HOME/bin:$PATH
+
 ## setting for anyenv
 export ANYENV_ROOT="${HOME}/.anyenv"
 if [ -d $ANYENV_ROOT ]; then
@@ -374,7 +376,7 @@ function ghq-new() {
 }
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
-export EDITOR=vim
+export EDITOR="vim"
 export PATH="${HOME}/bin:$PATH"
 alias sudo='sudo -E'
 
