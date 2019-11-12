@@ -18,6 +18,9 @@ SYSROOT='/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk'
 # alias clang++="clang++ --sysroot=${SYSROOT}"
 # alias clangd="clangd --sysroot=${SYSROOT}"
 
+# android studio
+export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+
 export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
