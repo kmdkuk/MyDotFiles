@@ -33,6 +33,10 @@ if [ -e ~/.zsh/completions ]; then
   fpath=(~/.zsh/completions $fpath)
 fi
 
+if [ -e ~/.zsh/zsh-completions/src ]; then
+  fpath=(~/.zsh/zsh-completions/src $fpath)
+fi
+
 if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
