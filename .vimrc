@@ -202,6 +202,7 @@ set showcmd
 " 見た目系
 " 行番号を表示
 set number
+set relativenumber
 " カーソル位置の行数と列を表示
 set ruler
 " 現在の行を強調表示

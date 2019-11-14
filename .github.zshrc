@@ -381,6 +381,12 @@ function ghq-new() {
 }
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
+function ghq-cd() {
+  cd $(ghq list -e -p $@)
+}
+
+compdef __ghq_repositories ghq-cd
+
 export EDITOR="vim"
 export PATH="${HOME}/bin:$PATH"
 alias sudo='sudo -E'

@@ -2093,6 +2093,7 @@ end
 # Better GDB defaults ----------------------------------------------------------
 
 set history save
+set history remove-duplicates 1
 set verbose off
 set print pretty on
 set print array off
