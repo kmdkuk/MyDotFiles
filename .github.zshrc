@@ -334,6 +334,7 @@ function anyenv_unset() {
   unset -f nodenv
   unset -f rbenv
   unset -f goenv
+  unset -f pyenv
 }
 function nodenv() {
   anyenv_unset
@@ -344,6 +345,12 @@ function rbenv() {
   anyenv_unset
   anyenv_init
   rbenv "$@"
+}
+
+function pyenv() {
+  anyenv_unset
+  anyenv_init
+  pyenv "$2"
 }
 
 function goenv() {
