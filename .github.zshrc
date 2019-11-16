@@ -307,7 +307,7 @@ function tmux_automatically_attach_session()
         fi
     fi
 }
-tmux_automatically_attach_session
+# tmux_automatically_attach_session
 
 eval "$(hub alias -s)"
 export PATH=/usr/local/opt/openssl/bin:$PATH
