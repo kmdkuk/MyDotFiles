@@ -62,6 +62,8 @@ if dein#load_state(s:dein_dir)
   " 閉じカッコなど補完
   call dein#add('cohama/lexima.vim')
 
+  call dein#add('pseewald/vim-anyfold')
+
   call dein#end()
   call dein#save_state()
 endif
@@ -173,9 +175,11 @@ endif
 
 " 保存時に必要なimportを自動的に挿入
 let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 0
 " LSPに任せる機能をOFFにする
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
+let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 
 " NERDTree settings
 map <C-n> :NERDTreeToggle<CR>
@@ -280,3 +284,15 @@ nmap <silent> <C-o> :PrevimOpen<CR>
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
+
+autocmd Filetype * AnyFoldActivate
+
+" Save fold settings.
+autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+" Don't save options.
+set viewoptions-=options
+
+" ノーマルモード時だけ ; と : を入れ替える
+nnoremap ; :
+nnoremap : ;

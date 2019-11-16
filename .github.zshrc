@@ -330,34 +330,36 @@ fi
 function anyenv_init() {
   eval "$(anyenv init - --no-rehash)"
 }
-function anyenv_unset() {
-  unset -f nodenv
-  unset -f rbenv
-  unset -f goenv
-  unset -f pyenv
-}
-function nodenv() {
-  anyenv_unset
-  anyenv_init
-  nodenv "$@"
-}
-function rbenv() {
-  anyenv_unset
-  anyenv_init
-  rbenv "$@"
-}
-
-function pyenv() {
-  anyenv_unset
-  anyenv_init
-  pyenv "$2"
-}
-
-function goenv() {
-  anyenv_unset
-  anyenv_init
-  goenv "$2"
-}
+eval "$(anyenv init -)"
+export PATH="$PATH:`yarn global bin`"
+# function anyenv_unset() {
+#   unset -f nodenv
+#   unset -f rbenv
+#   unset -f goenv
+#   unset -f pyenv
+# }
+# function nodenv() {
+#   anyenv_unset
+#   anyenv_init
+#   nodenv "$@"
+# }
+# function rbenv() {
+#   anyenv_unset
+#   anyenv_init
+#   rbenv "$@"
+# }
+# 
+# function pyenv() {
+#   anyenv_unset
+#   anyenv_init
+#   pyenv "$2"
+# }
+# 
+# function goenv() {
+#   anyenv_unset
+#   anyenv_init
+#   goenv "$2"
+# }
 
 function ghq-new() {
     local REPONAME=$1
