@@ -62,7 +62,11 @@ if dein#load_state(s:dein_dir)
   " 閉じカッコなど補完
   call dein#add('cohama/lexima.vim')
 
+  " 畳み込み
   call dein#add('pseewald/vim-anyfold')
+
+  " テキストを囲む
+  call dein#add('tpope/vim-surround')
 
   call dein#end()
   call dein#save_state()
@@ -75,14 +79,14 @@ endif
 
 " language server protocol shortcut
 " leaderはデフォルトでバックスラッシュ,
-" let mapleader = ","
 " 自由に設定ができる
-nmap <silent> <Leader>d :LspDefinition<CR>
-nmap <silent> <Leader>h :LspHover<CR>
-nmap <silent> <Leader>r :LspReferences<CR>
-nmap <silent> <Leader>i :LspImplementation<CR>
-nmap <silent> <Leader>s :split \| :LspDefinition <CR>
-nmap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
+nnoremap <silent> <Leader>d :LspDefinition<CR>
+nnoremap <silent> <Leader>h :LspHover<CR>
+nnoremap <silent> <Leader>r :LspReferences<CR>
+nnoremap <silent> <Leader>i :LspImplementation<CR>
+nnoremap <silent> <Leader>n :LspNextError<CR>
+nnoremap <silent> <Leader>s :split \| :LspDefinition <CR>
+nnoremap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
 
 " ファイルバッファの前後に行く
 nnoremap <silent> bp :bprevious<CR>
@@ -175,7 +179,7 @@ endif
 
 " 保存時に必要なimportを自動的に挿入
 let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 0
+let g:go_fmt_autosave = 1
 " LSPに任せる機能をOFFにする
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
@@ -292,6 +296,7 @@ autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | e
 autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
 " Don't save options.
 set viewoptions-=options
+autocmd BufWritePost *.go normal! zv
 
 " ノーマルモード時だけ ; と : を入れ替える
 nnoremap ; :

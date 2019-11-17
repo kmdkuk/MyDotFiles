@@ -332,6 +332,8 @@ function anyenv_init() {
 }
 eval "$(anyenv init -)"
 export PATH="$PATH:`yarn global bin`"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 # function anyenv_unset() {
 #   unset -f nodenv
 #   unset -f rbenv
