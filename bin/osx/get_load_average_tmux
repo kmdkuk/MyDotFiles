@@ -1,3 +1,5 @@
 #!/bin/sh
-
-echo "(#[fg=red]$(uptime | awk '{print $(NF-2)}' | sed 's/,//g')#[default]) "
+# core=$(system_profiler SPHardwareDataType | grep -e "Total Number of Cores:" | tr -cd '0123456789\n')
+core=$(sysctl -n hw.logicalcpu_max)
+result=$(uptime | awk '{print $(NF-2)}' | sed 's/,//g')/${core}
+echo "CPU: #[fg=red]$(printf "%.2f" $(echo "scale=5;${result}*100"|bc))#[default]"

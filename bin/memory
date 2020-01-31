@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# メモリ使用量
+function memory() {
+  local src
+  wired=$(vm_stat | grep -e "wired down" | tr -cd '0123456789\n')
+  compressed=$(vm_stat | grep -e "occupied by compressor" | tr -cd '0123456789\n')
+  purgeable=$(vm_stat | grep -e "Pages purgeable" | tr -cd '0123456789\n')
+  filebacked=$(vm_stat | grep -e "File-backed pages" | tr -cd '0123456789\n')
+  cached=$((${purgeable}+${filebacked}))
+  purgeable=$(vm_stat | grep -e "purgeable" | tr -cd '0123456789\n')
+  active=$(vm_stat | grep -e "Pages active" | tr -cd '0123456789\n')
+  inactive=$(vm_stat | grep -e "Pages inactive" | tr -cd '0123456789\n')
+  speculative=$(vm_stat | grep -e "Pages speculative" | tr -cd '0123456789\n')
+  src=$(((${wired}+${compressed}+${active}+${inactive}+${speculative}-${cached})*4096))
+  result=$(echo "scale=5;${src} / 1000.0 / 1000.0 / 1000.0" | bc)
+  printf "memory: %.1fG" ${result}
+}
+memory
+
