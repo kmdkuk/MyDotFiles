@@ -15,7 +15,7 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#add('Shougo/dein.vim')
-  " call dein#add('tomasr/molokai')
+  call dein#add('tomasr/molokai')
   call dein#add('altercation/vim-colors-solarized')
   call dein#add('mechatroner/rainbow_csv')
   " ファイル構造見れるやつ
@@ -60,13 +60,11 @@ if dein#load_state(s:dein_dir)
   call dein#add('tpope/vim-fugitive')
 
   " 閉じカッコなど補完
-  call dein#add('cohama/lexima.vim')
+  " call dein#add('cohama/lexima.vim')
+  call dein#add('mattn/vim-lexiv')
 
   " テキストを囲む
   call dein#add('tpope/vim-surround')
-
-  " latex
-  call dein#add('lervag/vimtex')
 
   call dein#end()
   call dein#save_state()
@@ -80,13 +78,15 @@ endif
 " language server protocol shortcut
 " leaderはデフォルトでバックスラッシュ,
 " 自由に設定ができる
-nnoremap <silent> <Leader>d :LspDefinition<CR>
-nnoremap <silent> <Leader>h :LspHover<CR>
-nnoremap <silent> <Leader>r :LspReferences<CR>
-nnoremap <silent> <Leader>i :LspImplementation<CR>
-nnoremap <silent> <Leader>n :LspNextError<CR>
-nnoremap <silent> <Leader>s :split \| :LspDefinition <CR>
-nnoremap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
+let mapleader=","
+nnoremap <Leader>a :echo "Hello"<CR>
+nnoremap <silent> <Leader>d ;LspDefinition<CR>
+nnoremap <silent> <Leader>h ;LspHover<CR>
+nnoremap <silent> <Leader>r ;LspReferences<CR>
+nnoremap <silent> <Leader>i ;LspImplementation<CR>
+nnoremap <silent> <Leader>n ;LspNextError<CR>
+nnoremap <silent> <Leader>s ;split \| ;LspDefinition <CR>
+nnoremap <silent> <Leader>v ;vsplit \| ;LspDefinition <CR>
 
 " ファイルバッファの前後に行く
 nnoremap <silent> bp :bprevious<CR>
@@ -182,14 +182,14 @@ endif
 let g:go_fmt_command = "goimports"
 " on(1)にしてると，畳み込みが変になるのでオフ
 let g:go_fmt_autosave = 0
-nnoremap <silent> <Leader>f :GoFmt<CR>
+nnoremap <silent> <Leader>f ;GoFmt<CR>
 " LSPに任せる機能をOFFにする
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 
 " NERDTree settings
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> ;NERDTreeToggle<CR>
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable  = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
@@ -235,8 +235,7 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-set background=dark
-colorscheme solarized
+colorscheme molokai
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
@@ -261,7 +260,7 @@ set wrapscan
 " 検索語をハイライト表示
 set hlsearch
 " ESC連打でハイライト解除
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+nmap <Esc><Esc> ;nohlsearch<CR><Esc>
 
 set backspace=indent,eol,start
 
@@ -286,7 +285,7 @@ augroup PrevimSettings
     autocmd!
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
-nmap <silent> <C-o> :PrevimOpen<CR>
+nmap <silent> <C-o> ;PrevimOpen<CR>
 
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_auto_insert_bullets = 0
