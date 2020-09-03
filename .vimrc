@@ -16,7 +16,6 @@ if dein#load_state(s:dein_dir)
 
   call dein#add('Shougo/dein.vim')
   call dein#add('tomasr/molokai')
-  call dein#add('altercation/vim-colors-solarized')
   call dein#add('mechatroner/rainbow_csv')
   " ファイル構造見れるやつ
   call dein#add('scrooloose/nerdtree')
@@ -33,11 +32,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('ryanoasis/vim-devicons')
-
-  " for markdown
-  call dein#add('plasticboy/vim-markdown')
-  " mardown preview
-  call dein#add('previm/previm')
 
   " インデントの可視化
   call dein#add( 'Yggdroot/indentLine')
@@ -60,7 +54,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('tpope/vim-fugitive')
 
   " 閉じカッコなど補完
-  " call dein#add('cohama/lexima.vim')
   call dein#add('mattn/vim-lexiv')
 
   " テキストを囲む
@@ -74,6 +67,11 @@ endif
 if dein#check_install()
   call dein#install()
 endif
+
+" ノーマルモード時だけ ; と : を入れ替える
+nnoremap ; :
+nnoremap : ;
+
 
 " language server protocol shortcut
 " leaderはデフォルトでバックスラッシュ,
@@ -280,38 +278,3 @@ endif
 
 au BufNewFile,BufRead Dockerfile* setf Dockerfile
 set clipboard+=unnamed
-let g:previm_open_cmd = 'open -a Google\ Chrome'
-augroup PrevimSettings
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-augroup END
-nmap <silent> <C-o> ;PrevimOpen<CR>
-
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_new_list_item_indent = 0
-
-" ノーマルモード時だけ ; と : を入れ替える
-nnoremap ; :
-nnoremap : ;
-
-set conceallevel=0
-let g:vim_markdown_conceal = 0
-au FileType markdown setl conceallevel=0
-
-let g:vimtex_compiler_latexmk = {
-      \ 'background': 1,
-      \ 'build_dir': '',
-      \ 'continuous': 1,
-      \ 'options': [
-      \    '-pdfdvi',
-      \    '-verbose',
-      \    '-file-line-error',
-      \    '-synctex=1',
-      \    '-interaction=nonstopmode',
-      \],
-      \}
-
-let g:vimtex_view_general_viewer
-      \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-let g:vimtex_view_general_options = '-r @line @pdf @tex'
