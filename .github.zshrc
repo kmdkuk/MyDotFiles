@@ -413,3 +413,6 @@ function peco-history-selection() {
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 
+if type "nvim" > /dev/null 2>&1; then
+  alias vim="nvim"
+fi

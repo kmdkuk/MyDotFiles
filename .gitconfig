@@ -3,7 +3,7 @@
 	name = kouki
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = vim -c \"set fenc=utf-8\"
+	editor = nvim -c \"set fenc=utf-8\"
 	autocrlf = input
 [ghq]
 	root = ~/go/src
