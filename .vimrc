@@ -25,9 +25,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('prabirshrestha/asyncomplete.vim')
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
 
-  " for go
-  call dein#add('fatih/vim-go')
-
   " status line
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
@@ -73,16 +70,16 @@ nnoremap ; :
 nnoremap : ;
 
 " Split window
-nmap ss ;split<Return><C-w>w
-nmap sv ;vsplit<Return><C-w>w
+nnoremap ss :split<Return><C-w>w
+nnoremap sv :vsplit<Return><C-w>w
 " Move window
-map sh <C-w>h
-map sk <C-w>k
-map sj <C-w>j
-map sl <C-w>l
+noremap sh <C-w>h
+noremap sk <C-w>k
+noremap sj <C-w>j
+noremap sl <C-w>l
 " Switch tab
-nmap <S-Tab> ;tabprev<Return>
-nmap <Tab> ;tabnext<Return>
+nnoremap <S-Tab> :tabprev<Return>
+nnoremap <Tab> :tabnext<Return>
 
 
 " language server protocol shortcut
@@ -90,17 +87,17 @@ nmap <Tab> ;tabnext<Return>
 " 自由に設定ができる
 let mapleader=","
 nnoremap <Leader>a :echo "Hello"<CR>
-nnoremap <silent> <Leader>d ;LspDefinition<CR>
-nnoremap <silent> <Leader>h ;LspHover<CR>
-nnoremap <silent> <Leader>r ;LspReferences<CR>
-nnoremap <silent> <Leader>i ;LspImplementation<CR>
-nnoremap <silent> <Leader>n ;LspNextError<CR>
-nnoremap <silent> <Leader>s ;split \| ;LspDefinition <CR>
-nnoremap <silent> <Leader>v ;vsplit \| ;LspDefinition <CR>
-
+nnoremap <Leader>d :LspDefinition<CR>
+nnoremap <Leader>h :LspHover<CR>
+nnoremap <Leader>r :LspReferences<CR>
+nnoremap <Leader>i :LspImplementation<CR>
+nnoremap <Leader>n :LspNextError<CR>
+nnoremap <Leader>s :split \| :LspDefinition <CR>
+nnoremap <Leader>v :vsplit \| :LspDefinition <CR>
+"
 " ファイルバッファの前後に行く
-nnoremap <silent> bp :bprevious<CR>
-nnoremap <silent> bn :bnext<CR>
+nnoremap bp :bprevious<CR>
+nnoremap bn :bnext<CR>
 
 " asyncomplete
 " set completeopt+=preview
@@ -188,18 +185,8 @@ if executable('gopls')
   augroup END
 endif
 
-" 保存時に必要なimportを自動的に挿入
-let g:go_fmt_command = "goimports"
-" on(1)にしてると，畳み込みが変になるのでオフ
-let g:go_fmt_autosave = 0
-nnoremap <silent> <Leader>f ;GoFmt<CR>
-" LSPに任せる機能をOFFにする
-let g:go_def_mapping_enabled = 0
-let g:go_doc_keywordprg_enabled = 0
-let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
-
 " NERDTree settings
-map <C-n> ;NERDTreeToggle<CR>
+noremap <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable  = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
