@@ -190,7 +190,7 @@ case ${OSTYPE} in
     darwin*)
         #Mac用の設定
         export CLICOLOR=1
-        alias ls='gls -G -F --color=auto'
+        alias ls='exa -G -F --color=auto'
         path=(
           /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
           /usr/local/opt/ed/libexec/gnubin(N-/) # ed

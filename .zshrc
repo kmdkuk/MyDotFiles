@@ -21,6 +21,9 @@ SYSROOT='/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk'
 # android studio
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 
+# flutter
+export PATH="$PATH:/Users/kmdkuk/go/src/github.com/flutter/flutter/bin"
+
 export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
