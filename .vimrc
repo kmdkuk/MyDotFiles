@@ -5,9 +5,10 @@ endif
 " dein.vimのディレクトリ
 let s:dein_dir = expand('~/.vim/bundle')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let g:dein#types#git#clone_dept = 1
 
 if !isdirectory(s:dein_repo_dir)
-  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  execute '!git clone --depth=1 https://github.com/Shougo/dein.vim' s:dein_repo_dir
 endif
 execute 'set  runtimepath^=' . s:dein_repo_dir
 
