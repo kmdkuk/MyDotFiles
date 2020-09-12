@@ -62,7 +62,7 @@ endif
 
 " もし、未インストールものものがあったらインストール
 if dein#check_install()
-  call dein#install()
+  silent! call dein#install()
 endif
 
 " ノーマルモード時だけ ; と : を入れ替える
