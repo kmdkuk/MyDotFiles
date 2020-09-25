@@ -192,12 +192,12 @@ case ${OSTYPE} in
         export CLICOLOR=1
         alias ls='exa -G -F --color=auto'
         path=(
-          /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
-          /usr/local/opt/ed/libexec/gnubin(N-/) # ed
-          /usr/local/opt/findutils/libexec/gnubin(N-/) # findutils
+          # /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
+          # /usr/local/opt/ed/libexec/gnubin(N-/) # ed
+          # /usr/local/opt/findutils/libexec/gnubin(N-/) # findutils
           # /usr/local/opt/gnu-sed/libexec/gnubin(N-/) # sed
-          /usr/local/opt/gnu-tar/libexec/gnubin(N-/) # tar
-          /usr/local/opt/grep/libexec/gnubin(N-/) # grep
+          # /usr/local/opt/gnu-tar/libexec/gnubin(N-/) # tar
+          # /usr/local/opt/grep/libexec/gnubin(N-/) # grep
           ${path}
         )
         manpath=(

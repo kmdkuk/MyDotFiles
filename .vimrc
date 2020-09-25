@@ -47,6 +47,10 @@ if dein#load_state(s:dein_dir)
   " for clang-format
   call dein#add('rhysd/vim-clang-format')
 
+  " for dart and flutter
+  call dein#add('dart-lang/dart-vim-plugin')
+  call dein#add('thosakwe/vim-flutter')
+
   " for git
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')

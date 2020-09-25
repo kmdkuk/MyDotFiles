@@ -35,6 +35,8 @@ export PATH="$PATH:/Users/kmdkuk/go/src/github.com/flutter/flutter/bin"
 
 export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
 
+export PATH="$HOME/go/src/github.com/kmdkuk/fuchsia_playground/fuchsia/.jiri_root/bin:$PATH"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
