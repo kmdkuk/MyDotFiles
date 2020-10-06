@@ -16,7 +16,8 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#add('Shougo/dein.vim')
-  call dein#add('tomasr/molokai')
+  call dein#add('cocopon/iceberg.vim')
+  call dein#add('gkeep/iceberg-dark')
   call dein#add('mechatroner/rainbow_csv')
   " ファイル構造見れるやつ
   call dein#add('scrooloose/nerdtree')
@@ -108,7 +109,7 @@ nnoremap bn :bnext<CR>
 " set completeopt+=preview
 
 " using icon
-let g:airline_theme = 'wombat'
+let g:airline_theme = 'icebergDark'
 set laststatus=2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -237,7 +238,7 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-colorscheme molokai
+colorscheme iceberg
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
