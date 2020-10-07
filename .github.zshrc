@@ -29,6 +29,12 @@ zstyle ':zle:*' word-style unspecified
 # 補完機能を有効にする
 
 # 補完ロード
+if [ -e /usr/local/share/zsh-completions ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+if [ -e /usr/local/share/zsh/site-functions ]; then
+    fpath=(/usr/local/share/zsh/site-functions $fpath)
+fi
 if [ -e ~/.zsh/completions ]; then
   fpath=(~/.zsh/completions $fpath)
 fi
@@ -37,9 +43,6 @@ if [ -e ~/.zsh/zsh-completions/src ]; then
   fpath=(~/.zsh/zsh-completions/src $fpath)
 fi
 
-if [ -e /usr/local/share/zsh-completions ]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
-fi
 
 autoload -U compinit
 compinit
