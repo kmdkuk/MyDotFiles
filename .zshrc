@@ -43,3 +43,5 @@ export PATH="$HOME/go/src/github.com/kmdkuk/fuchsia_playground/fuchsia/.jiri_roo
 if (which zprof > /dev/null 2>&1) ;then
     zprof
 fi
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/bitcomplete bit
