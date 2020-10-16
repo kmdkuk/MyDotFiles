@@ -1,1 +1,0 @@
-/Users/kmdkuk/MyDotFiles/.tmux

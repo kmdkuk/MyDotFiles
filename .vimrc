@@ -238,7 +238,7 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-colorscheme iceberg
+" colorscheme iceberg
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
