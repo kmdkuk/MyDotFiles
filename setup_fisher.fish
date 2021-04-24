@@ -1,3 +1,3 @@
-curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
-fisher add oh-my-fish/theme-bobthefish
+fisher install oh-my-fish/theme-bobthefish
