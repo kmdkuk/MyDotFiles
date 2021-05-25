@@ -1,7 +1,7 @@
 alias d="docker"
 alias dc="docker-compose"
 alias git='hub'
-alias vim='nvim'
+# alias vim='nvim'
 alias flutter='fvm flutter'
 set -x EDITOR "vim"
 set -x PATH $HOME/.anyenv/bin $PATH
@@ -21,5 +21,6 @@ set -g theme_display_git_stashed_verbose yes
 set -g theme_title_display_process yes
 set -g theme_color_scheme nord
 
-status --is-interactive; and source (anyenv init -|psub)
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+source ~/.asdf/asdf.fish
+
