@@ -5,8 +5,9 @@ echo "汎用ファイルを配置"
 # fish
 echo "fish"
 mkdir -p $HOME/.config/fish/functions
-ln -sf $HOME/MyDotFiles/.config/fish/config.fish $HOME/.config/fish/config.fish
-ln -sf $HOME/MyDotFiles/.config/fish/functions/ghq-cd.fish $HOME/.config/fish/functions/ghq-cd.fish
+ln -sf $HOME/MyDotFiles/fish/.config/fish/config.fish $HOME/.config/fish/config.fish
+ln -sf $HOME/MyDotFiles/fish/.config/fish/functions/ghq-cd.fish $HOME/.config/fish/functions/ghq-cd.fish
+ln -sf $HOME/MyDotFiles/fish/.config/fish/functions/check-update-dotfiles.fish $HOME/.config/fish/functions/check-update-dotfiles.fish
 
 # vim
 echo "vim"

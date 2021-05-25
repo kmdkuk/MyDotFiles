@@ -18,3 +18,4 @@ set -g theme_color_scheme nord
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
 source ~/.asdf/asdf.fish
 
+check-update-dotfiles
