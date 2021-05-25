@@ -8,11 +8,6 @@ function check-update-dotfiles
     if test "$s" = "0"; or test "$d" = "0"
         echo -e "\e[36m=== DOTFILES IS DIRTY ===\e[m"
         echo -e "\e[33mThe dotfiles have been changed.\e[m"
-        echo -e "\e[33mPlease update them with the following command.\e[m"
-        echo "  cd $dotfiles_home"
-        echo "  git add -A"
-        echo "  git commit"
-        echo "  git push origin master"
         echo -e "\e[36m=========================\e[m"
     end
 end
