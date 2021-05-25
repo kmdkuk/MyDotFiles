@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ln -s ~/MyDotFiles/.tmux.osx.conf ~/.tmux.local.conf
 mkdir -p ~/bin
 ln -s ~/MyDotFiles/bin/osx/get_battery_tmux ~/bin/get_battery_tmux

@@ -1,14 +1,8 @@
 alias d="docker"
 alias dc="docker-compose"
 alias git='hub'
-# alias vim='nvim'
-alias flutter='fvm flutter'
 set -x EDITOR "vim"
-set -x PATH $HOME/.anyenv/bin $PATH
 set -x PATH $HOME/bin $PATH
-set -x PATH $HOME/.pub-cache/bin $PATH
-set -x PATH $HOME/fvm/default/bin $PATH
-
 
 # theme-bobthefish
 set -g theme_nerd_fonts yes
