@@ -26,6 +26,10 @@ mkdir -p $HOME/.tmux
 ln -sf $HOME/MyDotFiles/tmux/.tmux/iceberg.tmux.conf $HOME/.tmux/iceberg.tmux.conf
 ln -sf $HOME/MyDotFiles/tmux/.tmux.conf $HOME/.tmux.conf
 
+echo "asdf"
+ln -sf $HOME/MyDotfiles/asdf/.asdfrc $HOME/.asdfrc
+ln -sf $HOME/MyDotfiles/asdf/.tool-versions $HOME/.tool-versions
+
 # OSごとの分岐
 if [ "$(uname)" == 'Darwin' ]; then
     # Mac
