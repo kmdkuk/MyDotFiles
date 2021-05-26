@@ -21,7 +21,7 @@ if [ (uname) = Darwin ]
     # OSX
     echo "Welcom OSX"
     source /usr/local/opt/asdf/asdf.fish
-else if [ (expr substr (uname -s) 1 5) == Linux ]
+else if [ (expr substr (uname -s) 1 5) = Linux ]
     # Linux
     echo "Welcom Linux"
     source ~/.asdf/asdf.fish
