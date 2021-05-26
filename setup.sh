@@ -16,7 +16,7 @@ ln -sf $HOME/MyDotFiles/vim/.vimrc $HOME/.vimrc
 # git
 echo "git"
 mkdir -p $HOME/.config/git
-ln -sf $HOME/MyDotFiles/git/.gitconfig $HOME/.gitconfig
+ln -sf $HOME/MyDotFiles/git/.config/git/config $HOME/.config/git/config
 ln -sf $HOME/MyDotFiles/git/.config/git/template $HOME/.config/git/template
 ln -sf $HOME/MyDotFiles/git/.config/git/ignore $HOME/.config/git/ignore
 
@@ -27,8 +27,8 @@ ln -sf $HOME/MyDotFiles/tmux/.tmux/iceberg.tmux.conf $HOME/.tmux/iceberg.tmux.co
 ln -sf $HOME/MyDotFiles/tmux/.tmux.conf $HOME/.tmux.conf
 
 echo "asdf"
-ln -sf $HOME/MyDotfiles/asdf/.asdfrc $HOME/.asdfrc
-ln -sf $HOME/MyDotfiles/asdf/.tool-versions $HOME/.tool-versions
+ln -sf $HOME/MyDotFiles/asdf/.asdfrc $HOME/.asdfrc
+ln -sf $HOME/MyDotFiles/asdf/.tool-versions $HOME/.tool-versions
 
 # OSごとの分岐
 if [ "$(uname)" == 'Darwin' ]; then
@@ -46,9 +46,13 @@ if [ "$(uname)" == 'Darwin' ]; then
     fi
     # tmux
     ln -sf $HOME/MyDotFiles/tmux/.tmux/osx.tmux.conf $HOME/.tmux/local.tmux.conf
+    # git
+    ln -sf $HOME/MyDotFiles/git/.config/git/osx.config $HOME/.config/git/local.config
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     # Linux
     echo "Linux用のファイルを配置"
     ln -sf $HOME/MyDotFiles/tmux/.tmux/linux.tmux.conf $HOME/.tmux/local.tmux.conf
+    # git
+    ln -sf $HOME/MyDotFiles/git/.config/git/linux.config $HOME/.config/git/local.config
 fi
 

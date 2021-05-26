@@ -17,8 +17,7 @@
 	rebase = true
 [http]
 	postBuffer = 524288000
-[credential]
-	# helper = store
-	helper = osxkeychain
+[include]
+	path = ~/.config/git/local.gitconfig
 [includeIf "gitdir:~/go/src/github.dev.cybozu.co.jp/"]
-	path = ~/work.gitconfig
+	path = ~/.config/git/work.gitconfig
