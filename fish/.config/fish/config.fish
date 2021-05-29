@@ -1,5 +1,5 @@
 alias d="docker"
-alias dc="docker-compose"
+alias dc="docker compose"
 alias git='hub'
 set -x EDITOR vim
 set -x PATH $HOME/bin $PATH
