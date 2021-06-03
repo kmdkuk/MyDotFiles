@@ -18,6 +18,6 @@
 [http]
 	postBuffer = 524288000
 [include]
-	path = ~/.config/git/local.gitconfig
+	path = ~/.config/git/local.config
 [includeIf "gitdir:~/go/src/github.dev.cybozu.co.jp/"]
-	path = ~/.config/git/work.gitconfig
+	path = ~/.config/git/work.config

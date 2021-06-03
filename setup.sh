@@ -21,6 +21,8 @@ mkdir -p $HOME/.config/git
 ln -sf $HOME/MyDotFiles/git/.config/git/config $HOME/.config/git/config
 ln -sf $HOME/MyDotFiles/git/.config/git/template $HOME/.config/git/template
 ln -sf $HOME/MyDotFiles/git/.config/git/ignore $HOME/.config/git/ignore
+ln -sf $HOME/MyDotFiles/git/.config/git/work.config $HOME/.config/git/work.config
+
 
 # vim
 echo "vim"
