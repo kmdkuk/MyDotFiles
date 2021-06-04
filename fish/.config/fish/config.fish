@@ -3,6 +3,7 @@ alias dc="docker compose"
 alias git='hub'
 set -x EDITOR vim
 set -x PATH $HOME/bin $PATH
+set -x PATH /usr/local/opt/openssl@1.1/bin $PATH
 
 # theme-bobthefish
 set -g theme_nerd_fonts yes
@@ -27,6 +28,9 @@ if [ (uname) = Darwin ]
     # OSX
     echo "Welcom OSX"
     source /usr/local/opt/asdf/asdf.fish
+
+    # ruby入れる時にbrew でいれたopensslを使ってもらうoption
+    set -x RUBY_CONFIGURE_OPTS "--with-openssl-dir="(brew --prefix openssl)
 else if [ (expr substr (uname -s) 1 5) = Linux ]
     # Linux
     echo "Welcom Linux"
