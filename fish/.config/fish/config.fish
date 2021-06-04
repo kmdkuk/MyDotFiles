@@ -35,27 +35,31 @@ end
 
 # Hook direnv into your shell.
 # eval (asdf exec direnv hook fish)
-direnv hook fish | source
+if type direnv >/dev/null 2>&1
+    direnv hook fish | source
+else
+    echo "not install direnv"
+end
 
 check-update-dotfiles
 
 # Ctrl + Rで履歴検索
 function peco_select_history_order
-  if test (count $argv) = 0
-    set peco_flags --layout=top-down
-  else
-    set peco_flags --layout=bottom-up --query "$argv"
-  end
+    if test (count $argv) = 0
+        set peco_flags --layout=top-down
+    else
+        set peco_flags --layout=bottom-up --query "$argv"
+    end
 
-  history|peco $peco_flags|read foo
+    history | peco $peco_flags | read foo
 
-  if [ $foo ]
-    commandline $foo
-  else
-    commandline ''
-  end
+    if [ $foo ]
+        commandline $foo
+    else
+        commandline ''
+    end
 end
 
 function fish_user_key_bindings
-  bind \cr 'peco_select_history_order' # Ctrl + R
+    bind \cr peco_select_history_order # Ctrl + R
 end
