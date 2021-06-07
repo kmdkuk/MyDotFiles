@@ -11,6 +11,15 @@ ln -sf ~/.asdf/completions/asdf.fish ~/.config/fish/completions
 ln -sf $HOME/MyDotFiles/fish/.config/fish/functions/ghq-cd.fish $HOME/.config/fish/functions/ghq-cd.fish
 ln -sf $HOME/MyDotFiles/fish/.config/fish/functions/check-update-dotfiles.fish $HOME/.config/fish/functions/check-update-dotfiles.fish
 
+# zsh/bash
+ln -sf $HOME/MyDotFiles/.bashrc $HOME/.bashrc
+ln -sf $HOME/MyDotFiles/.zshrc $HOME/.zshrc
+
+
+# starship
+echo "starship"
+ln -sf $HOME/MyDotFiles/starship.toml $HOME/.config/starship.toml
+
 # vim
 echo "vim"
 ln -sf $HOME/MyDotFiles/vim/.vimrc $HOME/.vimrc
