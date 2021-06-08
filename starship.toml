@@ -55,7 +55,7 @@ style = "bold dimmed white"
 disabled = false
 
 [package]
-disabled = true
+disabled = false
 
 [username]
 style_user = "bold dimmed blue"

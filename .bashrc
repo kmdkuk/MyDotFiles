@@ -117,4 +117,10 @@ if ! shopt -oq posix; then
 fi
 
 # ここまでUbuntuデフォルト
+# for GO
+export GO111MODULE=on
+export GOPATH=$HOME/go
+export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
+
+# for starship
 eval "$(starship init bash)"
