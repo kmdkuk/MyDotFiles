@@ -15,7 +15,6 @@ ln -sf $HOME/MyDotFiles/fish/.config/fish/functions/check-update-dotfiles.fish $
 ln -sf $HOME/MyDotFiles/.bashrc $HOME/.bashrc
 ln -sf $HOME/MyDotFiles/.zshrc $HOME/.zshrc
 
-
 # starship
 echo "starship"
 ln -sf $HOME/MyDotFiles/starship.toml $HOME/.config/starship.toml
@@ -31,7 +30,6 @@ ln -sf $HOME/MyDotFiles/git/.config/git/config $HOME/.config/git/config
 ln -sf $HOME/MyDotFiles/git/.config/git/template $HOME/.config/git/template
 ln -sf $HOME/MyDotFiles/git/.config/git/ignore $HOME/.config/git/ignore
 ln -sf $HOME/MyDotFiles/git/.config/git/work.config $HOME/.config/git/work.config
-
 
 # vim
 echo "vim"
@@ -51,10 +49,8 @@ if [ "$(uname)" == 'Darwin' ]; then
     ln -sf $HOME/MyDotFiles/Brewfile $HOME/Brewfile
     if [ -z "$(command -v brew)" ]; then
         echo "--- Install Homebrew is Start! ---"
-
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         brew bundle
-
         echo "--- Install Homebrew is Done!  ---"
     fi
     # tmux
