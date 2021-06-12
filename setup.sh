@@ -31,8 +31,8 @@ ln -sf $HOME/MyDotFiles/git/.config/git/template $HOME/.config/git/template
 ln -sf $HOME/MyDotFiles/git/.config/git/ignore $HOME/.config/git/ignore
 ln -sf $HOME/MyDotFiles/git/.config/git/work.config $HOME/.config/git/work.config
 
-# vim
-echo "vim"
+# tmux
+echo "tmux"
 mkdir -p $HOME/.tmux
 ln -sf $HOME/MyDotFiles/tmux/.tmux/iceberg.tmux.conf $HOME/.tmux/iceberg.tmux.conf
 ln -sf $HOME/MyDotFiles/tmux/.tmux.conf $HOME/.tmux.conf
