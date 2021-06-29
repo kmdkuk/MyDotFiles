@@ -6,3 +6,4 @@ nodejs 14.17.0
 direnv 2.28.0
 ruby 3.0.1
 ghq 1.2.1
+gcloud 346.0.0
