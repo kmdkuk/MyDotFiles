@@ -4,6 +4,9 @@ alias git='hub'
 set -x EDITOR vim
 set -x PATH $HOME/bin $PATH
 set -x PATH /usr/local/opt/openssl@1.1/bin $PATH
+set -x PATH /usr/local/go/bin $PATH
+set -x GOPATH $HOME/go
+set -x PATH $GOPATH/bin $PATH
 
 set -g fish_user_paths /usr/local/sbin $fish_user_paths
 
