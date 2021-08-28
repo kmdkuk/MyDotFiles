@@ -21,3 +21,5 @@
 	path = ~/.config/git/local.config
 [includeIf "gitdir:~/go/src/github.dev.cybozu.co.jp/"]
 	path = ~/.config/git/work.config
+[credential]
+	helper = store
