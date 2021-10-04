@@ -10,14 +10,10 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoredups:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -117,10 +113,63 @@ if ! shopt -oq posix; then
 fi
 
 # ここまでUbuntuデフォルト
-# for GO
-export GO111MODULE=on
-export GOPATH=$HOME/go
-export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+export PATH="/home/vagrant/.local/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+alias kc='kubectl ctx | peco | xargs kubectl ctx'
+alias kn='kubectl ns | peco | xargs kubectl ns'
+
+alias git-delete-squashed-main='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias git-delete-squashed-master='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+
+peco_search_history() {
+    local l=$(HISTTIMEFORMAT= history | \
+                  sed -e 's/^[0-9\| ]\+//' -e 's/ \+$//' | \
+                  sort | uniq | \
+                  peco --query "$READLINE_LINE")
+    READLINE_LINE="$l"
+    READLINE_POINT=${#l}
+}
+bind -x '"\C-r": peco_search_history'
+
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+
+ghq-cd() {
+  cd "$( ghq list --full-path | peco)"
+}
+
+function tshlogin () {
+  tsh login --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github
+  source <(kubectl completion bash)
+}
+
+function tshssh () {
+  tsh ssh --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github cybozu@${1:-stage0}-${2:-boot-0}
+}
+
+function argocdlogin () {
+  argocd login argocd.${1:-stage0}.cybozu-ne.co --sso
+}
+
+function neco-dev-ssh () {
+  gcloud beta compute ssh --zone "asia-northeast1-c" "${1}" --project "neco-test"
+}
+
+source <(kubectl accurate completion bash)
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
+GOV=$(asdf where golang)
+export GOROOT=$GOV/go
+export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH=$(go env GOPATH)
 
 # for starship
 eval "$(starship init bash)"
+

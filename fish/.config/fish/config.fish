@@ -54,3 +54,7 @@ function fish_user_key_bindings
     bind \cr peco_select_history_order # Ctrl + R
 end
 starship init fish | source
+
+# Generated for envman. Do not edit.
+test -s "$HOME/.config/envman/load.fish"; and source "$HOME/.config/envman/load.fish"
+
