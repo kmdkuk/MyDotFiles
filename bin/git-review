@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+target_branch=$1
+base_branch=${2:-main}
+echo "base = ${base_branch}"
+echo "target = ${target_branch}"
+
+git checkout $base_branch
+git merge --no-commit --no-ff $target_branch
+git reset

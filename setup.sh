@@ -65,3 +65,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     ln -sf $HOME/MyDotFiles/git/.config/git/linux.config $HOME/.config/git/local.config
 fi
 
+echo "bin"
+mkdir -p $HOME/bin
+ln -sf $HOME/MyDotFiles/bin/git-review $HOME/bin/git-review
+
