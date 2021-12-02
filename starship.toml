@@ -63,3 +63,6 @@ show_always = true
 
 [kubernetes]
 disabled = false
+
+[kubernetes.context_aliases]
+"stage0.cybozu-ne.co" = "☠️ DANGER!! STAGE0 ☠️"

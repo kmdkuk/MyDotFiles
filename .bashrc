@@ -138,15 +138,18 @@ bind -x '"\C-r": peco_search_history'
 
 export HISTSIZE=10000
 export HISTFILESIZE=10000
+export HISTIGNORE="stage0-kubectl*"
 
 ghq-cd() {
   cd "$( ghq list --full-path | peco)"
 }
 
 function tshlogin () {
-  tsh login --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github
+  tsh login --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github --out $HOME/.kube/${1:-stage0}.config --format kubernetes
   source <(kubectl completion bash)
 }
+
+alias stage0-kubectl="kubectl --kubeconfig=$HOME/.kube/stage0.config"
 
 function tshssh () {
   tsh ssh --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github cybozu@${1:-stage0}-${2:-boot-0}
@@ -156,8 +159,12 @@ function argocdlogin () {
   argocd login argocd.${1:-stage0}.cybozu-ne.co --sso
 }
 
-function neco-dev-ssh () {
+function neco-test-ssh () {
   gcloud beta compute ssh --zone "asia-northeast1-c" "${1}" --project "neco-test"
+}
+
+function neco-dev-ssh () {
+  gcloud beta compute ssh --zone "asia-northeast1-c" "${1}" --project "neco-dev"
 }
 
 source <(kubectl accurate completion bash)
