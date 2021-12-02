@@ -126,6 +126,10 @@ alias kn='kubectl ns | peco | xargs kubectl ns'
 alias git-delete-squashed-main='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias git-delete-squashed-master='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 
+if [ "$(uname)" == 'Darwin' ]; then
+  alias sed='gsed'
+fi
+
 peco_search_history() {
     local l=$(HISTTIMEFORMAT= history | \
                   sed -e 's/^[0-9\| ]\+//' -e 's/ \+$//' | \
@@ -169,8 +173,8 @@ function neco-dev-ssh () {
 
 source <(kubectl accurate completion bash)
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/asdf.bash
 
 GOV=$(asdf where golang)
 export GOROOT=$GOV/go
