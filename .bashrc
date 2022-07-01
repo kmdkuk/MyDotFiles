@@ -117,8 +117,9 @@ fi
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-export PATH="/home/vagrant/.local/bin:$PATH"
+export PATH="${HOME}/.local/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="${HOME}/bin:${PATH}"
 
 alias kc='kubectl ctx | peco | xargs kubectl ctx'
 alias kn='kubectl ns | peco | xargs kubectl ns'
@@ -176,10 +177,16 @@ source <(kubectl accurate completion bash)
 # . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/asdf.bash
 
-GOV=$(asdf where golang)
-export GOROOT=$GOV/go
-export PATH=$PATH:$(go env GOPATH)/bin
-export GOPATH=$(go env GOPATH)
+export GOPATH=${HOME}/go
+export PATH="/usr/local/go/bin:${PATH}"
+export PATH="${GOPATH}/bin:${PATH}"
+
+# kubebuilder autocompletion
+if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+. /usr/local/share/bash-completion/bash_completion
+fi
+. <(kubebuilder completion bash)
+. <(kubectl completion bash)
 
 # for starship
 eval "$(starship init bash)"
