@@ -172,21 +172,33 @@ function neco-dev-ssh () {
   gcloud beta compute ssh --zone "asia-northeast1-c" "${1}" --project "neco-dev"
 }
 
-source <(kubectl accurate completion bash)
-
-# . $HOME/.asdf/asdf.sh
-# . $HOME/.asdf/completions/asdf.bash
+if type asdf >/dev/null 2&1; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+fi
 
 export GOPATH=${HOME}/go
 export PATH="/usr/local/go/bin:${PATH}"
 export PATH="${GOPATH}/bin:${PATH}"
 
-# kubebuilder autocompletion
 if [ -f /usr/local/share/bash-completion/bash_completion ]; then
 . /usr/local/share/bash-completion/bash_completion
 fi
-. <(kubebuilder completion bash)
-. <(kubectl completion bash)
+
+
+if type kubebuilder >/dev/null 2&1; then
+  source <(kubebuilder completion bash)
+fi
+
+if type kubectl-accurate >/dev/null 2&1; then
+  source <(kubectl accurate completion bash)
+fi
+
+if type kubectl >/dev/null 2&1; then
+  source <(kubectl completion bash)
+fi
+
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
 
 # for starship
 eval "$(starship init bash)"
