@@ -117,12 +117,20 @@ fi
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-export PATH="${HOME}/.local/bin:$PATH"
+export GOPATH=${HOME}/go
+export PATH="/usr/local/go/bin:${PATH}"
+export PATH="${GOPATH}/bin:${PATH}"
+
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+
+export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="${HOME}/bin:${PATH}"
 
 alias kc='kubectl ctx | peco | xargs kubectl ctx'
 alias kn='kubectl ns | peco | xargs kubectl ns'
+
+alias stage0-kubectl="kubectl --kubeconfig=$HOME/.kube/stage0.config"
 
 alias git-delete-squashed-main='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias git-delete-squashed-master='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
@@ -154,8 +162,6 @@ function tshlogin () {
   source <(kubectl completion bash)
 }
 
-alias stage0-kubectl="kubectl --kubeconfig=$HOME/.kube/stage0.config"
-
 function tshssh () {
   tsh ssh --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github cybozu@${1:-stage0}-${2:-boot-0}
 }
@@ -172,33 +178,30 @@ function neco-dev-ssh () {
   gcloud beta compute ssh --zone "asia-northeast1-c" "${1}" --project "neco-dev"
 }
 
-if type asdf >/dev/null 2&1; then
+if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+  . /usr/local/share/bash-completion/bash_completion
+fi
+
+if which asdf > /dev/null 2>&1; then
   . $HOME/.asdf/asdf.sh
   . $HOME/.asdf/completions/asdf.bash
 fi
 
-export GOPATH=${HOME}/go
-export PATH="/usr/local/go/bin:${PATH}"
-export PATH="${GOPATH}/bin:${PATH}"
-
-if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-. /usr/local/share/bash-completion/bash_completion
+if which aqua > /dev/null 2>&1; then
+  source <(aqua completion bash)
 fi
 
-
-if type kubebuilder >/dev/null 2&1; then
-  source <(kubebuilder completion bash)
-fi
-
-if type kubectl-accurate >/dev/null 2&1; then
-  source <(kubectl accurate completion bash)
-fi
-
-if type kubectl >/dev/null 2&1; then
+if which kubectl > /dev/null 2>&1; then
   source <(kubectl completion bash)
 fi
 
-export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+if which kubebuilder > /dev/null 2>&1; then
+  source <(kubebuilder completion bash)
+fi
+
+if which kubectl-accurate > /dev/null 2>&1; then
+  source <(kubectl accurate completion bash)
+fi
 
 # for starship
 eval "$(starship init bash)"
