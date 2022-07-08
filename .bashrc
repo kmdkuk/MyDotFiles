@@ -205,6 +205,22 @@ load_completion kubebuilder "kubebuilder completion bash"
 load_completion kubectl-accurate "kubectl-accurate completion bash"
 load_completion gh "gh completion -s bash"
 
+# check dotfiles
+
+function check_dirty () {
+  dotfiles_home="$HOME/MyDotFiles"
+  status="$(git -C ${dotfiles_home} status --porcelain)"
+  diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
+  if [ -n "$status" -a -n "$diff" ]; then
+    return
+  fi
+  echo -e "\e[36m=== DOTFILES IS DIRTY ===\e[m"
+  echo -e "\e[33mThe dotfiles have been changed.\e[m"
+  echo -e "\e[36m=========================\e[m"
+}
+
+check_dirty
+
 # for starship
 eval "$(starship init bash)"
 
