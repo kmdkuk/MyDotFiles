@@ -16,7 +16,6 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#add('Shougo/dein.vim')
-  call dein#add('tomasr/molokai')
   call dein#add('cocopon/iceberg.vim')
   call dein#add('gkeep/iceberg-dark')
   call dein#add('mechatroner/rainbow_csv')
@@ -238,7 +237,7 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-colorscheme molokai
+colorscheme iceberg
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
