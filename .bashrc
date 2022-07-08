@@ -189,7 +189,7 @@ function neco-dev-ssh () {
 
 function load_completion () {
   if which $1 > /dev/null 2>&1; then
-    source $2
+    source <($2)
   fi
   if [ -f $1 ]; then
     source $1
@@ -199,11 +199,11 @@ function load_completion () {
 load_completion /usr/local/share/bash-completion/bash_completion
 load_completion $HOME/.asdf/asdf.sh
 load_completion $HOME/.asdf/completions/asdf.bash
-load_completion aqua <(aqua completion bash)
-load_completion kubectl <(kubectl completion bash)
-load_completion kubebuilder <(kubebuilder completion bash)
-load_completion kubectl-accurate <(kubectl-accurate completion bash)
-load_completion gh <(gh completion -s bash)
+load_completion aqua "aqua completion bash"
+load_completion kubectl "kubectl completion bash"
+load_completion kubebuilder "kubebuilder completion bash"
+load_completion kubectl-accurate "kubectl-accurate completion bash"
+load_completion gh "gh completion -s bash"
 
 # for starship
 eval "$(starship init bash)"
