@@ -138,9 +138,7 @@ alias git-delete-squashed-master='git checkout -q master && git for-each-ref ref
 alias exec-ubuntu="docker run --rm -it --name=ubuntu quay.io/cybozu/ubuntu:20.04 bash"
 alias exec-ubuntu-debug="docker run --rm -it --name=ubuntu quay.io/cybozu/ubuntu-debug:20.04 bash"
 
-if which hub > /dev/null 2>&1; then
-  alias git='hub'
-fi
+eval "$(hub alias -s)"
 
 if [ "$(uname)" == 'Darwin' ]; then
   alias sed='gsed'
@@ -197,6 +195,7 @@ function load_completion () {
 }
 
 load_completion /usr/local/share/bash-completion/bash_completion
+load_completion /usr/local/etc/bash_completion
 load_completion $HOME/.asdf/asdf.sh
 load_completion $HOME/.asdf/completions/asdf.bash
 load_completion aqua "aqua completion bash"
