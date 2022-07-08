@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
 git add -A
+msg = $1
+if [ msg == "" ]; then
+    msg = "update"
+fi
 git commit -s -m "update"
 git push origin master
