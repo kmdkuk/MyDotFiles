@@ -135,6 +135,9 @@ alias stage0-kubectl="kubectl --kubeconfig=$HOME/.kube/stage0.config"
 alias git-delete-squashed-main='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias git-delete-squashed-master='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 
+alias exec-ubuntu="docker run --rm -it --name=ubuntu quay.io/cybozu/ubuntu:20.04 bash"
+alias exec-ubuntu-debug="docker run --rm -it --name=ubuntu quay.io/cybozu/ubuntu-debug:20.04 bash"
+
 if [ "$(uname)" == 'Darwin' ]; then
   alias sed='gsed'
 fi
@@ -171,37 +174,32 @@ function argocdlogin () {
 }
 
 function neco-test-ssh () {
-  gcloud beta compute ssh --zone "asia-northeast1-c" "${1}" --project "neco-test"
+  gcloud beta compute ssh --zone "asia-northeast1-c" "cybozu@${1}" --project "neco-test"
 }
 
 function neco-dev-ssh () {
-  gcloud beta compute ssh --zone "asia-northeast1-c" "${1}" --project "neco-dev"
+  gcloud beta compute ssh --zone "asia-northeast1-c" "cybozu@${1}" --project "neco-dev"
 }
 
-if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-  . /usr/local/share/bash-completion/bash_completion
-fi
+# load completion
 
-if which asdf > /dev/null 2>&1; then
-  . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
-fi
+function load_completion () {
+  if which $1 > /dev/null 2>&1; then
+    source $2
+  fi
+  if [ -f $1 ]; then
+    source $1
+  fi
+}
 
-if which aqua > /dev/null 2>&1; then
-  source <(aqua completion bash)
-fi
-
-if which kubectl > /dev/null 2>&1; then
-  source <(kubectl completion bash)
-fi
-
-if which kubebuilder > /dev/null 2>&1; then
-  source <(kubebuilder completion bash)
-fi
-
-if which kubectl-accurate > /dev/null 2>&1; then
-  source <(kubectl accurate completion bash)
-fi
+load_completion /usr/local/share/bash-completion/bash_completion
+load_completion $HOME/.asdf/asdf.sh
+load_completion $HOME/.asdf/completions/asdf.bash
+load_completion aqua <(aqua completion bash)
+load_completion kubectl <(kubectl completion bash)
+load_completion kubebuilder <(kubebuilder completion bash)
+load_completion kubectl-accurate <(kubectl-accurate completion bash)
+load_completion gh <(gh completion -s bash)
 
 # for starship
 eval "$(starship init bash)"
