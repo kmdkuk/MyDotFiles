@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dotfiles_home=${HOME}/MyDotfiles
+dotfiles_home=${HOME}/MyDotFiles
 if [ ! -d ${dotfiles_home} ]; then
     git clone https://github.com/kmdkuk/MyDotFiles.git ${dotfiles_home}
 fi
