@@ -144,21 +144,21 @@ if [ "$(uname)" == 'Darwin' ]; then
   alias sed='gsed'
 fi
 
-peco_search_history() {
-    local l=$(HISTTIMEFORMAT= history | \
-                  sed -e 's/^[0-9\| ]\+//' -e 's/ \+$//' | \
-                  sort | uniq | \
-                  peco --query "$READLINE_LINE")
-    READLINE_LINE="$l"
-    READLINE_POINT=${#l}
-}
-bind -x '"\C-r": peco_search_history'
-
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 export HISTIGNORE="stage0-kubectl*"
 
 # utility
+
+peco_search_history() {
+    local l=$(HISTTIMEFORMAT= history | \
+                  sort -r | \
+                  sed -e 's/^[0-9\| ]\+//' -e 's/ \+$//' | \
+                  peco --query "$READLINE_LINE")
+    READLINE_LINE="$l"
+    READLINE_POINT=${#l}
+}
+bind -x '"\C-r": peco_search_history'
 
 function ghq-cd() {
   cd "$( ghq list --full-path | sort | peco)"
@@ -232,6 +232,10 @@ function check_dirty () {
 }
 
 check_dirty
+
+# for sharing history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+shopt -u histappend
 
 # for starship
 eval "$(starship init bash)"
