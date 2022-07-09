@@ -56,6 +56,9 @@ if [ "$(uname)" == 'Darwin' ]; then
         echo "--- Install Homebrew is Start! ---"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         echo "--- Install Homebrew is Done!  ---"
+    fi
+    brew bundle check | grep -q "brew bundle can't satisfy your Brewfile's dependencies."
+    if [ $? = 0 ]; then
         echo "Start bundle install"
         brew bundle
         echo "Done bundle install"
