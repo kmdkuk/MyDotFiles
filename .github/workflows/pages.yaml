@@ -13,6 +13,11 @@ jobs:
         name: setup.sh
         path: setup.sh
         retention-days: 1
+    - uses: actions/upload-artifact@v3
+      with:
+        name: setup.ps1
+        path: setup.ps1
+        retention-days: 1
   publish:
     name: Publish setup.sh on GitHub Pages
     runs-on: ubuntu-latest
@@ -24,6 +29,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: setup.sh
+    - uses: actions/download-artifact@v3
+      with:
+        name: setup.ps1
     - run: rm index.html
     - run: mv setup.sh index.html
     - run: git add .
