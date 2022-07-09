@@ -1,5 +1,8 @@
 # MyDotFiles
 
+```bash
+$ curl setup.kmdk.uk | bash
+```
 ## Other tools
 
 - gh
