@@ -8,4 +8,4 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - run: curl setup.kmdk.uk | bash
+      - run: curl -sSLf setup.kmdk.uk | bash

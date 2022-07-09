@@ -1,7 +1,7 @@
 # MyDotFiles
 
 ```bash
-$ curl setup.kmdk.uk | bash
+$ curl -sSLf setup.kmdk.uk | bash
 ```
 ## Other tools
 
