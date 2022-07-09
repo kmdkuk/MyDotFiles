@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-git add -A
-msg=$1
-if [ -z "$msg" ]; then
-    msg="update"
-fi
-git commit -s -m "$msg"
-git push origin master
