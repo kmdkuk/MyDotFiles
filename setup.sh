@@ -6,8 +6,6 @@ if [ ! -d ${dotfiles_home} ]; then
 fi
 
 echo "ファイルのシンボリックリンクを準備"
-echo "汎用ファイルを配置"
-# fish
 echo "fish"
 mkdir -p ${HOME}/.config/fish/functions
 ln -sf ${dotfiles_home}/fish/.config/fish/config.fish ${HOME}/.config/fish/config.fish
@@ -16,19 +14,16 @@ ln -sf ${HOME}/.asdf/completions/asdf.fish ${HOME}/.config/fish/completions
 ln -sf ${dotfiles_home}/fish/.config/fish/functions/ghq-cd.fish ${HOME}/.config/fish/functions/ghq-cd.fish
 ln -sf ${dotfiles_home}/fish/.config/fish/functions/check-update-dotfiles.fish ${HOME}/.config/fish/functions/check-update-dotfiles.fish
 
-# zsh/bash
+echo "bash/zsh"
 ln -sf ${dotfiles_home}/.bashrc ${HOME}/.bashrc
 ln -sf ${dotfiles_home}/.zshrc ${HOME}/.zshrc
 
-# starship
 echo "starship"
 ln -sf ${dotfiles_home}/starship.toml ${HOME}/.config/starship.toml
 
-# vim
 echo "vim"
 ln -sf ${dotfiles_home}/vim/.vimrc ${HOME}/.vimrc
 
-# git
 echo "git"
 mkdir -p ${HOME}/.config/git
 ln -sf ${dotfiles_home}/git/.config/git/config ${HOME}/.config/git/config
@@ -36,7 +31,6 @@ ln -sf ${dotfiles_home}/git/.config/git/template ${HOME}/.config/git/template
 ln -sf ${dotfiles_home}/git/.config/git/ignore ${HOME}/.config/git/ignore
 ln -sf ${dotfiles_home}/git/.config/git/work.config ${HOME}/.config/git/work.config
 
-# tmux
 echo "tmux"
 mkdir -p ${HOME}/.tmux
 ln -sf ${dotfiles_home}/tmux/.tmux/iceberg.tmux.conf ${HOME}/.tmux/iceberg.tmux.conf
@@ -48,8 +42,7 @@ ln -sf ${dotfiles_home}/asdf/.tool-versions ${HOME}/.tool-versions
 
 # OSごとの分岐
 if [ "$(uname)" == 'Darwin' ]; then
-    # Mac
-    echo "Mac用のファイルを配置"
+    echo "Mac"
     # brew
     ln -sf ${dotfiles_home}/Brewfile ${HOME}/Brewfile
     if [ -z "$(command -v brew)" ]; then
@@ -72,8 +65,7 @@ if [ "$(uname)" == 'Darwin' ]; then
     defaults write com.apple.finder CreateDesktop -boolean false
     killAll Finder
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-    # Linux
-    echo "Linux用のファイルを配置"
+    echo "Linux"
     ln -sf ${dotfiles_home}/tmux/.tmux/linux.tmux.conf ${HOME}/.tmux/local.tmux.conf
     # git
     ln -sf ${dotfiles_home}/git/.config/git/linux.config ${HOME}/.config/git/local.config
