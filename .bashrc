@@ -158,8 +158,21 @@ export HISTSIZE=10000
 export HISTFILESIZE=10000
 export HISTIGNORE="stage0-kubectl*"
 
-ghq-cd() {
+# utility
+
+function ghq-cd() {
   cd "$( ghq list --full-path | peco)"
+}
+
+function ghq-get() {
+  name="kmdkuk"
+  if [ -n "$1" ]; then
+    name=$1
+  fi
+  url="$(gh repo list $name -L 1000 --json url --jq '.[].url' | peco)"
+  if [ -n "$url" ]; then
+    ghq get $url
+  fi
 }
 
 function tshlogin () {
