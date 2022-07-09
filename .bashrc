@@ -228,6 +228,7 @@ function check_dirty () {
   status="$(git -C ${dotfiles_home} status --porcelain)"
   diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
   if [ -z "$status" ] && [ -z "$diff" ]; then
+    git -C ${dotfiles_home} pull origin master
     return
   fi
   echo -e "\e[36m=== DOTFILES IS DIRTY ===\e[m"
