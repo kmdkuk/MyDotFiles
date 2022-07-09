@@ -161,7 +161,7 @@ export HISTIGNORE="stage0-kubectl*"
 # utility
 
 function ghq-cd() {
-  cd "$( ghq list --full-path | peco)"
+  cd "$( ghq list --full-path | sort | peco)"
 }
 
 function ghq-get() {
@@ -169,7 +169,7 @@ function ghq-get() {
   if [ -n "$1" ]; then
     name=$1
   fi
-  url="$(gh repo list $name -L 1000 --json url --jq '.[].url' | peco)"
+  url="$(gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco)"
   if [ -n "$url" ]; then
     ghq get $url
   fi
