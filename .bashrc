@@ -230,7 +230,7 @@ function check_dirty () {
   if [ -z "$status" ] && [ -z "$diff" ]; then
     git -C ${dotfiles_home} fetch origin > /dev/null
     origin_diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
-    if [ -z "$origin_diff" ]; then
+    if [ -n "$origin_diff" ]; then
       git -C ${dotfiles_home} pull origin master
     fi
     return
