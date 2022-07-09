@@ -26,14 +26,14 @@ jobs:
     - uses: actions/checkout@v3
       with:
         ref: gh-pages
+    - run: rm index.html setup.ps1 setup.sh
     - uses: actions/download-artifact@v3
       with:
         name: setup.sh
     - uses: actions/download-artifact@v3
       with:
         name: setup.ps1
-    - run: rm index.html setup.ps1
-    - run: mv setup.sh index.html
+    - run: cp setup.sh index.html
     - run: git add .
     - name: Check diff
       run: |
