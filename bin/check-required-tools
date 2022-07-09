@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function check_command() {
+    if which $1 > /dev/null 2>&1; then
+        echo "required $1, please install"
+    fi
+}
+
+function check_file() {
+    if [ -f $1 ]; then
+        echo "not found $1"
+    fi
+}
+
+check_command ghq
+check_command peco
+check_command starship

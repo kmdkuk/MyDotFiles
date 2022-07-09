@@ -67,5 +67,8 @@ fi
 
 echo "bin"
 mkdir -p $HOME/bin
-ln -sf $HOME/MyDotFiles/bin/git-review $HOME/bin/git-review
+bins="$(ls $HOME/MyDotfiles/bin)"
+for b in ${bins[@]}; do
+    ln -sf $HOME/MyDotFiles/bin/$b $HOME/bin/$b
+done
 
