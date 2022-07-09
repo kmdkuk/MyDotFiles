@@ -32,7 +32,7 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: setup.ps1
-    - run: rm index.html
+    - run: rm index.html setup.ps1
     - run: mv setup.sh index.html
     - run: git add .
     - name: Check diff
