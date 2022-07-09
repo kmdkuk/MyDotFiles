@@ -231,7 +231,9 @@ function check_dirty_and_update () {
     git -C ${dotfiles_home} fetch origin > /dev/null
     origin_diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
     if [ -n "$origin_diff" ]; then
-      git -C ${dotfiles_home} pull origin master
+      echo "found MyDotFiles updated"
+      echo "git -C ${dotfiles_home} pull origin master"
+      git -C ${dotfiles_home} pull origin master > /dev/null
     fi
     return
   fi
