@@ -16,7 +16,7 @@ jobs:
   publish:
     name: Publish setup.sh on GitHub Pages
     runs-on: ubuntu-latest
-    needs: build
+    needs: prepare
     steps:
     - uses: actions/checkout@v3
       with:
@@ -24,6 +24,7 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: setup.sh
+    - run: rm index.html
     - run: mv setup.sh index.html
     - run: git add .
     - name: Check diff
