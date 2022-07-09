@@ -66,3 +66,4 @@ disabled = false
 
 [kubernetes.context_aliases]
 "stage0.cybozu-ne.co" = "☠️ DANGER!! STAGE0 ☠️"
+"kubernetes-admin@kubernetes" = "k8s-admin"
