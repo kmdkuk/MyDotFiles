@@ -6,4 +6,5 @@ else
   echo "not found go"
 fi
 
+curl -sS https://starship.rs/install.sh | sh
 curl -sS https://webinstall.dev/k9s | bash
