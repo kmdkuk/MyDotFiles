@@ -2,14 +2,16 @@
 
 function check_command() {
     if which $1 > /dev/null 2>&1; then
-        echo "required $1, please install"
+        return
     fi
+    echo "required $1, please install"
 }
 
 function check_file() {
     if [ -f $1 ]; then
-        echo "not found $1"
+        return
     fi
+    echo "not found $1"
 }
 
 check_command ghq
