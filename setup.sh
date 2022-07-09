@@ -55,13 +55,19 @@ if [ "$(uname)" == 'Darwin' ]; then
     if [ -z "$(command -v brew)" ]; then
         echo "--- Install Homebrew is Start! ---"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        brew bundle
         echo "--- Install Homebrew is Done!  ---"
+        echo "Start bundle install"
+        brew bundle
+        echo "Done bundle install"
     fi
     # tmux
     ln -sf ${dotfiles_home}/tmux/.tmux/osx.tmux.conf ${HOME}/.tmux/local.tmux.conf
     # git
     ln -sf ${dotfiles_home}/git/.config/git/osx.config ${HOME}/.config/git/local.config
+
+    # set defaults
+    defaults write com.apple.finder CreateDesktop -boolean false
+    killAll Finder
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     # Linux
     echo "Linux用のファイルを配置"
@@ -77,3 +83,4 @@ for b in ${bins[@]}; do
     ln -sf ${dotfiles_home}/bin/$b ${HOME}/bin/$b
 done
 
+echo "install tools (TODO)"
