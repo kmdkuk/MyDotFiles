@@ -52,12 +52,6 @@ if [ "$(uname)" == 'Darwin' ]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         : "--- Install Homebrew is Done!  ---"
     fi
-    brew bundle check --global | grep -q "brew bundle can't satisfy your Brewfile's dependencies."
-    if [ $? = 0 ]; then
-        : "Start bundle install"
-        brew bundle --global
-        : "Done bundle install"
-    fi
     # tmux
     ln -sf ${dotfiles_home}/tmux/.tmux/osx.tmux.conf ${HOME}/.tmux/local.tmux.conf
     # git
@@ -81,3 +75,18 @@ for b in ${bins[@]}; do
 done
 
 : "install tools (TODO)"
+if [ "$NO_INSTALL" = 1 ]; then
+    : "Skip install tools"
+    exit 0
+fi
+if [ "$(uname)" == 'Darwin' ]; then
+    : "Mac"
+    brew bundle check --global | grep -q "brew bundle can't satisfy your Brewfile's dependencies."
+    if [ $? = 0 ]; then
+        : "Start bundle install"
+        brew bundle --global
+        : "Done bundle install"
+    fi
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+    : "Linux"
+fi
