@@ -72,7 +72,7 @@ for b in ${bins[@]}; do
 done
 
 : "install tools"
-if [ $NO_INSTALL = "1"]; then
+if [ ${NO_INSTALL} = "1" ]; then
     : "Skip install tools"
     exit 0
 fi
