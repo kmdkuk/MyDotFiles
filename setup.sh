@@ -7,6 +7,8 @@ NO_INSTALL=${NO_INSTALL:-0}
 dotfiles_home=${HOME}/MyDotFiles
 if [ ! -d ${dotfiles_home} ]; then
     git clone https://github.com/kmdkuk/MyDotFiles.git ${dotfiles_home}
+else
+    git -C ${dotfiles_home} pull origin master
 fi
 
 : "prepare shimlink"
