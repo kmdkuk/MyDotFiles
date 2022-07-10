@@ -17,3 +17,6 @@ function check_file() {
 check_command ghq
 check_command peco
 check_command starship
+check_command hub
+check_command gh
+check_command docker

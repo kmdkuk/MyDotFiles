@@ -11,6 +11,11 @@ function check_command() {
 
 
 if [ "$(uname)" == 'Darwin' ]; then
+  if [ -z "$(command -v brew)" ]; then
+    : "--- Install Homebrew is Start! ---"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    : "--- Install Homebrew is Done!  ---"
+  fi
   brew bundle --global
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # Managed by brew on macOS
@@ -36,10 +41,24 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo \
         -so ${HOME}/bin/gibo && chmod +x ${HOME}/bin/gibo && gibo update
   fi
+
+  PACKAGE_MANAGER="apt-get"
+  UPDATE="${PACKAGE_MANAGER} update"
+  INSTALL="${PACKAGE_MANAGER} install -y"
+  if ! check_command gh; then
+    echo "install gh"
+    if ! [ -f /etc/apt/sources.list.d/github-cli.list ]; then
+      echo "not found /etc/apt/sources.list.d/github-cli.list"
+      curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+      sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    fi
+    sudo ${UPDATE}
+    sudo ${INSTALL} gh
+  fi
+  sudo ${INSTALL} peco
 fi
 
 go install github.com/b4b4r07/git-bump@master
 go install github.com/x-motemen/ghq@latest
 
-PACKAGE_MANAGER="apt-get install -y"
-sudo ${PACKAGE_MANAGER} peco
