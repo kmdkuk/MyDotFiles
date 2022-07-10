@@ -2,6 +2,8 @@ $OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')
 $OutputEncoding = [Text.Encoding]::Default
 $Env:HOME = $HOME
 
+$ENV:Path = "${HOME}\bin;" + $ENV:Path
+
 function ghq-cd {
   cd $(ghq list  --full-path | peco)
 }
