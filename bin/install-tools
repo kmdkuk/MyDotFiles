@@ -1,10 +1,45 @@
 #!/usr/bin/env bash
 
-if which go > /dev/null 2>&1; then
-  go install github.com/b4b4r07/git-bump@master
-else
-  echo "not found go"
+set -eu
+
+function check_command() {
+  if which $1 > /dev/null 2>&1; then
+    return 0
+  fi
+  return 1
+}
+
+
+if [ "$(uname)" == 'Darwin' ]; then
+  brew bundle --global
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  # Managed by brew on macOS
+  GO_VERSION="${GO_VERSION:-1.18.3}"
+  if ! check_command go; then
+    wget -O /tmp/go.tar.gz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/go.tar.gz
+    rm /tmp/go.tar.gz
+  fi
+
+  if ! check_command starship; then
+    # need sudo
+    curl -sS https://starship.rs/install.sh > /tmp/install.sh
+    sh install.sh --yes --bin-dir ${HOME}/bin
+    rm /tmp/install.sh
+  fi
+
+  if ! check_command k9s; then
+    curl -sS https://webinstall.dev/k9s | bash
+  fi
+
+  if ! check_command gibo; then
+    curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo \
+        -so ${HOME}/bin/gibo && chmod +x ${HOME}/bin/gibo && gibo update
+  fi
 fi
 
-curl -sS https://starship.rs/install.sh | sh
-curl -sS https://webinstall.dev/k9s | bash
+go install github.com/b4b4r07/git-bump@master
+go install github.com/x-motemen/ghq@latest
+
+PACKAGE_MANAGER="apt-get install -y"
+sudo ${PACKAGE_MANAGER} peco
