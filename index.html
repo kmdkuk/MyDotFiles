@@ -46,16 +46,16 @@ ln -sf ${dotfiles_home}/asdf/.tool-versions ${HOME}/.tool-versions
 if [ "$(uname)" == 'Darwin' ]; then
     : "Mac"
     # brew
-    ln -sf ${dotfiles_home}/Brewfile ${HOME}/Brewfile
+    ln -sf ${dotfiles_home}/.Brewfile ${HOME}/.Brewfile
     if [ -z "$(command -v brew)" ]; then
         : "--- Install Homebrew is Start! ---"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         : "--- Install Homebrew is Done!  ---"
     fi
-    brew bundle check | grep -q "brew bundle can't satisfy your Brewfile's dependencies."
+    brew bundle check --global | grep -q "brew bundle can't satisfy your Brewfile's dependencies."
     if [ $? = 0 ]; then
         : "Start bundle install"
-        brew bundle
+        brew bundle --global
         : "Done bundle install"
     fi
     # tmux
