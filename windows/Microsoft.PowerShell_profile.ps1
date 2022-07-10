@@ -1,5 +1,26 @@
 $OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')
+$OutputEncoding = [Text.Encoding]::Default
 $Env:HOME = $HOME
+
+function ghq-cd {
+  cd $(ghq list  --full-path | peco)
+}
+
+function ghq-get() {
+  $name = "kmdkuk"
+  if($1 -eq ""){
+    name=$1
+  }
+  $url = "$(gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco)"
+  if("$url" -ne ""){
+    ghq get $url
+  }
+}
+
+function ghq-update-all() {
+  ghq list | ghq get --update --parallel
+}
+
 Invoke-Expression (&starship init powershell)
 
 # Import the Chocolatey Profile that contains the necessary code to enable
