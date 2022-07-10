@@ -49,11 +49,6 @@ if [ "$(uname)" == 'Darwin' ]; then
     : "Mac"
     # brew
     ln -sf ${dotfiles_home}/.Brewfile ${HOME}/.Brewfile
-    if [ -z "$(command -v brew)" ]; then
-        : "--- Install Homebrew is Start! ---"
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        : "--- Install Homebrew is Done!  ---"
-    fi
     # tmux
     ln -sf ${dotfiles_home}/tmux/.tmux/osx.tmux.conf ${HOME}/.tmux/local.tmux.conf
     # git
@@ -77,4 +72,4 @@ for b in ${bins[@]}; do
 done
 
 : "install tools (TODO)"
-install-tools
+${dotfiles_home}/bin/install-tools
