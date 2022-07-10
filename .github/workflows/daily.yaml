@@ -14,3 +14,7 @@ jobs:
           - macos-latest
     steps:
       - run: curl -sSLf setup.kmdk.uk | bash
+  setup-win:
+    runs-on: windows-latest
+    steps:
+      - run: curl -sSLf setup.kmdk.uk/setup.ps1 | pwsh
