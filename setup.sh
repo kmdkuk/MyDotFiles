@@ -73,6 +73,8 @@ for b in ${bins[@]}; do
     ln -sf ${dotfiles_home}/bin/$b ${HOME}/bin/$b
 done
 
+source ${HOME}/.bashrc
+
 : "install tools"
 if [ ${NO_INSTALL} = "1" ]; then
     : "Skip install tools"
