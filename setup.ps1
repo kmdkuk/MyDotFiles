@@ -48,5 +48,9 @@ New-Item -Force -Type SymbolicLink $HOME\Documents\PowerShell\Microsoft.PowerShe
 New-Item -Force -Type SymbolicLink $HOME\Documents\WindowsPowerShell\Microsoft.Powershell_profile.ps1 -Value ${DOTFILES_HOME}\windows\Microsoft.PowerShell_profile.ps1
 
 Write-Output "install tools"
+if($NO_INSTALL -eq 1){
+    Write-Output "Skip install tools"
+    exit 0
+}
 pwsh "${DOTFILES_HOME}\rm-version.ps1"
 choco install -y "${DOTFILES_HOME}\choco-rm-version.config"

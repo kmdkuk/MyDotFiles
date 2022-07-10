@@ -4,6 +4,9 @@ on:
     - cron: '* */24 * * *'
   workflow_dispatch:
 
+env:
+  NO_INSTALL: 1
+
 jobs:
   setup:
     runs-on: ${{ matrix.os }}

@@ -3,6 +3,9 @@ name: CI
 on:
   push:
 
+env:
+  NO_INSTALL: 1
+
 jobs:
   run-setup:
     runs-on: ${{ matrix.os }}
