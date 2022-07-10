@@ -46,14 +46,11 @@ ln -sf ${dotfiles_home}/tmux/.tmux.conf ${HOME}/.tmux.conf
 ln -sf ${dotfiles_home}/asdf/.asdfrc ${HOME}/.asdfrc
 ln -sf ${dotfiles_home}/asdf/.tool-versions ${HOME}/.tool-versions
 
-# OSごとの分岐
+# each OS. support macOSOS or Linux
 if [ "$(uname)" == 'Darwin' ]; then
-    : "Mac"
-    # brew
+    : "macOS"
     ln -sf ${dotfiles_home}/.Brewfile ${HOME}/.Brewfile
-    # tmux
     ln -sf ${dotfiles_home}/tmux/.tmux/osx.tmux.conf ${HOME}/.tmux/local.tmux.conf
-    # git
     ln -sf ${dotfiles_home}/git/.config/git/osx.config ${HOME}/.config/git/local.config
 
     # set defaults
@@ -62,7 +59,6 @@ if [ "$(uname)" == 'Darwin' ]; then
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     : "Linux"
     ln -sf ${dotfiles_home}/tmux/.tmux/linux.tmux.conf ${HOME}/.tmux/local.tmux.conf
-    # git
     ln -sf ${dotfiles_home}/git/.config/git/linux.config ${HOME}/.config/git/local.config
 fi
 
