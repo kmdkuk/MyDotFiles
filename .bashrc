@@ -248,6 +248,12 @@ function check_dirty_and_update () {
 
 check_dirty_and_update
 
+# for WSL
+uname -a | grep -q "WSL"
+if [ $? = 0 ]; then
+  export BROWSER="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe"
+fi
+
 # for starship
 eval "$(starship init bash)"
 
