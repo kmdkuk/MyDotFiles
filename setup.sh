@@ -71,5 +71,9 @@ for b in ${bins[@]}; do
     ln -sf ${dotfiles_home}/bin/$b ${HOME}/bin/$b
 done
 
-: "install tools (TODO)"
+: "install tools"
+if [ $NO_INSTALL = "1"]; then
+    : "Skip install tools"
+    exit 0
+fi
 ${dotfiles_home}/bin/install-tools
