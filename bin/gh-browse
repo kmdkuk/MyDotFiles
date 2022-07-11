@@ -5,5 +5,5 @@ set -e
 name=${1:-kmdkuk}
 url="$(gh-remote-list ${name})"
 if [ -n "$url" ]; then
-    open ${url}
+    xdg-open ${url}
 fi
