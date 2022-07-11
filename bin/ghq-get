@@ -3,7 +3,7 @@
 set -e
 
 name=${1:-kmdkuk}
-url="$(gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco)"
+url="$(gh-remote-list ${name})"
 if [ -n "$url" ]; then
     ghq get $url
 fi
