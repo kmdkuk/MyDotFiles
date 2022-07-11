@@ -189,16 +189,18 @@ function neco-dev-ssh () {
 
 function load_completion () {
   if which $1 > /dev/null 2>&1; then
+    echo "load $2"
     source <($2)
   fi
   if [ -f $1 ]; then
+    echo "source $1"
     source $1
   fi
 }
 
-load_completion /usr/local/share/bash-completion/bash_completion
-load_completion /usr/local/etc/profile.d/bash_completion.sh
-load_completion /usr/local/etc/bash_completion
+if [ "$(uname)" == 'Darwin' ]; then
+  load_completion /usr/local/etc/profile.d/bash_completion.sh
+fi
 load_completion $HOME/.asdf/asdf.sh
 load_completion $HOME/.asdf/completions/asdf.bash
 load_completion aqua "aqua completion bash"
