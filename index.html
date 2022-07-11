@@ -37,6 +37,8 @@ ln -sf ${dotfiles_home}/git/.config/git/template ${HOME}/.config/git/template
 ln -sf ${dotfiles_home}/git/.config/git/ignore ${HOME}/.config/git/ignore
 ln -sf ${dotfiles_home}/git/.config/git/work.config ${HOME}/.config/git/work.config
 
+ln -sf ${dotfiles_home}/.ghqlist ${HOME}/.ghqlist
+
 : "tmux"
 mkdir -p ${HOME}/.tmux
 ln -sf ${dotfiles_home}/tmux/.tmux/iceberg.tmux.conf ${HOME}/.tmux/iceberg.tmux.conf
