@@ -12,14 +12,14 @@ set -g fish_user_paths /usr/local/sbin $fish_user_paths
 
 if [ (uname) = Darwin ]
     # OSX
-    echo "Welcom OSX"
+    echo "Welcome OSX"
     source /usr/local/opt/asdf/asdf.fish
 
     # ruby入れる時にbrew でいれたopensslを使ってもらうoption
     set -x RUBY_CONFIGURE_OPTS "--with-openssl-dir="(brew --prefix openssl)
 else if [ (expr substr (uname -s) 1 5) = Linux ]
     # Linux
-    echo "Welcom Linux"
+    echo "Welcome Linux"
     source ~/.asdf/asdf.fish
 end
 
