@@ -200,6 +200,8 @@ function load_completion () {
 
 if [ "$(uname)" == 'Darwin' ]; then
   load_completion /usr/local/etc/profile.d/bash_completion.sh
+  load_completion /usr/local/etc/bash_completion.d/git-prompt.sh
+  load_completion /usr/local/etc/bash_completion.d/git-completion.bash
 fi
 load_completion /usr/share/bash-completion/bash_completion
 load_completion $HOME/.asdf/asdf.sh
