@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 name=${1:-kmdkuk}
-gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco
+gh repo list $name -L 1000 --json url,nameWithOwner --jq ".[].url" | sort | peco
