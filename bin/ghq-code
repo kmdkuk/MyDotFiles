@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+code "$( ghq list --full-path | sort | peco)"

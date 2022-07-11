@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+name="kmdkuk"
+if [ -n "$1" ]; then
+name=$1
+fi
+url="$(gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco)"
+if [ -n "$url" ]; then
+ghq get $url
+fi

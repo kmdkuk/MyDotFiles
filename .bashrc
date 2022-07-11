@@ -164,25 +164,6 @@ peco_search_history() {
 }
 bind -x '"\C-r": peco_search_history'
 
-function ghq-cd() {
-  cd "$( ghq list --full-path | sort | peco)"
-}
-
-function ghq-get() {
-  name="kmdkuk"
-  if [ -n "$1" ]; then
-    name=$1
-  fi
-  url="$(gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco)"
-  if [ -n "$url" ]; then
-    ghq get $url
-  fi
-}
-
-function ghq-update-all() {
-  ghq list | ghq get --update --parallel
-}
-
 function tshlogin () {
   tsh login --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github --out $HOME/.kube/${1:-stage0}.config --format kubernetes
   source <(kubectl completion bash)
