@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+set -e
+
+function build_query() {
+    repos=$1
+    echo "query{"
+    i=0
+    for repo in ${repos[@]}; do
+        split=(${repo//\// })
+        if [[ "${split[0]}" != "github.com" ]]; then
+            continue
+        fi
+        owner=${split[1]}
+        name=${split[2]}
+        echo "  repo${i}: repository(owner: \"$owner\", name: \"$name\") {"
+        echo "    nameWithOwner"
+        echo "    isPrivate"
+        echo "    isArchived"
+        echo "  },"
+        i=$((i+1))
+    done
+    echo "}"
+}
+
+dump_file=${1:-"${HOME}/.ghqlist"}
+allow_domain="github.com"
+repos=$(ghq list | sort)
+
+tmp_query="/tmp/list.graphql"
+tmp_json="/tmp/repoinfo.json"
+build_query "$repos" > ${tmp_query}
+gh api graphql -f query="$(cat ${tmp_query})" > ${tmp_json}
+repo_infos=$(cat ${tmp_json} | jq '.data | map(.)')
+
+rm ${dump_file} > /dev/null 2>&1 || true
+touch ${dump_file}
+for repo in $repos; do
+    split=(${repo//\// })
+    domain=${split[0]}
+    owner=${split[1]}
+    name=${split[2]}
+    if [[ "${domain}" != "${allow_domain}" ]]; then
+        continue
+    fi
+    repo_info=$(echo "${repo_infos}" | jq ".[] | select(.nameWithOwner == \"${owner}/${name}\" and .isPrivate == false and .isArchived == false)")
+    if [ -z "${repo_info}" ]; then
+        continue
+    fi
+    echo "${repo}" >> ${dump_file}
+done
