@@ -8,7 +8,7 @@ dotfiles_home=${HOME}/MyDotFiles
 if [ ! -d ${dotfiles_home} ]; then
     git clone https://github.com/kmdkuk/MyDotFiles.git ${dotfiles_home}
 else
-    git -C ${dotfiles_home} pull origin master
+    git -C ${dotfiles_home} pull origin master || true
 fi
 
 : "prepare shimlink"
@@ -62,6 +62,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     : "Linux"
     ln -sf ${dotfiles_home}/tmux/.tmux/linux.tmux.conf ${HOME}/.tmux/local.tmux.conf
     ln -sf ${dotfiles_home}/git/.config/git/linux.config ${HOME}/.config/git/local.config
+    /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash /usr/local/etc/bash_completion.d/git-completion.bash
 fi
 
 : "bin"
