@@ -197,6 +197,7 @@ function load_completion () {
 }
 
 load_completion /usr/local/share/bash-completion/bash_completion
+load_completion /usr/local/etc/profile.d/bash_completion.sh
 load_completion /usr/local/etc/bash_completion
 load_completion $HOME/.asdf/asdf.sh
 load_completion $HOME/.asdf/completions/asdf.bash
