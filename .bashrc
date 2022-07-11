@@ -201,6 +201,7 @@ function load_completion () {
 if [ "$(uname)" == 'Darwin' ]; then
   load_completion /usr/local/etc/profile.d/bash_completion.sh
 fi
+load_completion /usr/share/bash-completion/bash_completion
 load_completion $HOME/.asdf/asdf.sh
 load_completion $HOME/.asdf/completions/asdf.bash
 load_completion aqua "aqua completion bash"
