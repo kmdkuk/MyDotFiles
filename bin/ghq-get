@@ -2,11 +2,8 @@
 
 set -e
 
-name="kmdkuk"
-if [ -n "$1" ]; then
-name=$1
-fi
+name=${1:-kmdkuk}
 url="$(gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco)"
 if [ -n "$url" ]; then
-ghq get $url
+    ghq get $url
 fi
