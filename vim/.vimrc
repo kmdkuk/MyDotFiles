@@ -131,6 +131,7 @@ let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal 
 let g:lsp_signs_error = {'text': ' '}
 let g:lsp_signs_warning = {'text': ' '}
 let g:lsp_signs_hint = {'text': ''}
+
 if executable('clangd')
     augroup lsp_clangd
         autocmd!
@@ -150,7 +151,6 @@ autocmd FileType c ClangFormatAutoEnable
 autocmd FileType cpp ClangFormatAutoEnable
 autocmd FileType objc ClangFormatAutoEnable
 autocmd FileType objcpp ClangFormatAutoEnable
-
 
 if executable('bash-language-server')
   au User lsp_setup call lsp#register_server({
