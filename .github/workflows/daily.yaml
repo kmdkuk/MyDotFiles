@@ -4,11 +4,11 @@ on:
     - cron: '* */24 * * *'
   workflow_dispatch:
 
-env:
-  NO_INSTALL: 1
 
 jobs:
   setup:
+    env:
+      NO_INSTALL: 1
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -18,6 +18,21 @@ jobs:
     steps:
       - run: curl -sSLf setup.kmdk.uk | bash
   setup-win:
+    env:
+      NO_INSTALL: 1
+    runs-on: windows-latest
+    steps:
+      - run: curl -sSLf setup.kmdk.uk/setup.ps1 | pwsh
+  install:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    steps:
+      - run: curl -sSLf setup.kmdk.uk | bash
+  install-win:
     runs-on: windows-latest
     steps:
       - run: curl -sSLf setup.kmdk.uk/setup.ps1 | pwsh
