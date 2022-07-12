@@ -39,7 +39,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
 
   if ! check_command gibo; then
     curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo \
-        -so ${HOME}/bin/gibo && chmod +x ${HOME}/bin/gibo && gibo update
+        -so ${HOME}/bin/gibo && chmod +x ${HOME}/bin/gibo && $HOME/bin/gibo update
   fi
 
   PACKAGE_MANAGER="apt-get"
