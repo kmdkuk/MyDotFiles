@@ -154,6 +154,10 @@ export HISTIGNORE="stage0-kubectl*"
 
 # utility
 
+function ghq-cd() {
+  cd "$( ghq list --full-path | sort | peco)"
+}
+
 peco_search_history() {
     local l=$(HISTTIMEFORMAT= history | \
                   sort -r | \
