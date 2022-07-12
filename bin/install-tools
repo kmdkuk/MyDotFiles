@@ -59,6 +59,6 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   sudo ${INSTALL} peco
 fi
 
-go install github.com/b4b4r07/git-bump@master
-go install github.com/x-motemen/ghq@latest
+/usr/local/go/bin/go install github.com/b4b4r07/git-bump@master
+/usr/local/go/bin/go install github.com/x-motemen/ghq@latest
 
