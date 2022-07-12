@@ -1,5 +1,7 @@
 # MyDotFiles
 
+[![daily](https://github.com/kmdkuk/MyDotFiles/actions/workflows/daily.yaml/badge.svg)](https://github.com/kmdkuk/MyDotFiles/actions/workflows/daily.yaml)
+
 Linux
 
 ```bash
