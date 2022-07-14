@@ -215,6 +215,7 @@ load_completion kubectl "kubectl completion bash"
 load_completion kubebuilder "kubebuilder completion bash"
 load_completion kubectl-accurate "kubectl-accurate completion bash"
 load_completion gh "gh completion -s bash"
+load_completion necogcp "necogcp completion"
 
 # check dotfiles
 
