@@ -193,11 +193,11 @@ function neco-dev-ssh () {
 
 function load_completion () {
   if which $1 > /dev/null 2>&1; then
-    echo "load $2"
+    : "load $2"
     source <($2)
   fi
   if [ -f $1 ]; then
-    echo "source $1"
+    : "source $1"
     source $1
   fi
 }
