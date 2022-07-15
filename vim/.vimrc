@@ -16,11 +16,16 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#add('Shougo/dein.vim')
+
+  call dein#add('tomasr/molokai')
   call dein#add('cocopon/iceberg.vim')
   call dein#add('gkeep/iceberg-dark')
+
   call dein#add('mechatroner/rainbow_csv')
+
   " ファイル構造見れるやつ
   call dein#add('scrooloose/nerdtree')
+
   " 補完
   call dein#add('prabirshrestha/vim-lsp')
   call dein#add('prabirshrestha/async.vim')
@@ -117,9 +122,9 @@ let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
 let g:airline_section_c = '%t'
 let g:airline_section_x = '%{&filetype}'
-" let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
-" let g:airline#extensions#ale#error_symbol = ' '
-" let g:airline#extensions#ale#warning_symbol = ' '
+let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
+let g:airline#extensions#ale#error_symbol = ' '
+let g:airline#extensions#ale#warning_symbol = ' '
 let g:airline#extensions#default#section_truncate_width = {}
 let g:airline#extensions#whitespace#enabled = 1
 
@@ -237,7 +242,9 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-colorscheme iceberg
+colorscheme molokai
+" colorscheme iceberg
+set t_Co=256
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
