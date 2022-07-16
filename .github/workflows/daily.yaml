@@ -16,13 +16,13 @@ jobs:
           - ubuntu-latest
           - macos-latest
     steps:
-      - run: curl -sSLf setup.kmdk.uk | bash
+      - run: curl -L setup.kmdk.uk | bash
   setup-win:
     env:
       NO_INSTALL: 1
     runs-on: windows-latest
     steps:
-      - run: curl -sSLf setup.kmdk.uk/setup.ps1 | pwsh
+      - run: curl setup.kmdk.uk/setup.ps1 | pwsh
   install:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -31,8 +31,8 @@ jobs:
           - ubuntu-latest
           - macos-latest
     steps:
-      - run: curl -sSLf setup.kmdk.uk | bash
+      - run: curl -L setup.kmdk.uk | bash
   install-win:
     runs-on: windows-latest
     steps:
-      - run: curl -sSLf setup.kmdk.uk/setup.ps1 | pwsh
+      - run: curl setup.kmdk.uk/setup.ps1 | pwsh
