@@ -16,7 +16,7 @@ if [ "$(uname)" == 'Darwin' ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     : "--- Install Homebrew is Done!  ---"
   fi
-  brew bundle --global
+  brew bundle --global || true
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # Managed by brew on macOS
   GO_VERSION="${GO_VERSION:-1.18.4}"
