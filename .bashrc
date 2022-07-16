@@ -158,6 +158,10 @@ function ghq-cd() {
   cd "$( ghq list --full-path | sort | peco)"
 }
 
+function git-cd-root() {
+  cd "$(git rev-parse --show-superproject-working-tree --show-toplevel | head -1)"
+}
+
 function peco_search_history() {
     local l=$(HISTTIMEFORMAT= history | \
                   sort -r | \
