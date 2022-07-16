@@ -11,64 +11,72 @@ else
     git -C ${dotfiles_home} pull origin master || true
 fi
 
+function add-link() {
+    if [ -z $1 -a -z $2 ]; then
+        : "invalid args 1: ${1}, 2: ${2}"
+        exit 1
+    fi
+    ln -sf ${dotfiles_home}/${1} ${HOME}/${2}
+}
+
 : "prepare shimlink"
 : "fish"
 mkdir -p ${HOME}/.config/fish/functions
-ln -sf ${dotfiles_home}/fish/.config/fish/config.fish ${HOME}/.config/fish/config.fish
+add-link fish/.config/fish/config.fish .config/fish/config.fish
 mkdir -p ${HOME}/.config/fish/completions;
-ln -sf ${HOME}/.asdf/completions/asdf.fish ${HOME}/.config/fish/completions
-ln -sf ${dotfiles_home}/fish/.config/fish/functions/ghq-cd.fish ${HOME}/.config/fish/functions/ghq-cd.fish
-ln -sf ${dotfiles_home}/fish/.config/fish/functions/check-update-dotfiles.fish ${HOME}/.config/fish/functions/check-update-dotfiles.fish
+add-link .asdf/completions/asdf.fish .config/fish/completions
+add-link fish/.config/fish/functions/ghq-cd.fish .config/fish/functions/ghq-cd.fish
+add-link fish/.config/fish/functions/check-update-dotfiles.fish .config/fish/functions/check-update-dotfiles.fish
 
 : "bash/zsh"
-ln -sf ${dotfiles_home}/.bashrc ${HOME}/.bashrc
-ln -sf ${dotfiles_home}/.zshrc ${HOME}/.zshrc
+add-link .bashrc .bashrc
+add-link .zshrc .zshrc
 
 : "starship"
-ln -sf ${dotfiles_home}/starship.toml ${HOME}/.config/starship.toml
+add-link starship.toml .config/starship.toml
 
 : "vim"
-ln -sf ${dotfiles_home}/vim/.vimrc ${HOME}/.vimrc
+add-link vim/.vimrc .vimrc
 
 : "git"
 mkdir -p ${HOME}/.config/git
-ln -sf ${dotfiles_home}/git/.config/git/config ${HOME}/.config/git/config
-ln -sf ${dotfiles_home}/git/.config/git/template ${HOME}/.config/git/template
-ln -sf ${dotfiles_home}/git/.config/git/ignore ${HOME}/.config/git/ignore
-ln -sf ${dotfiles_home}/git/.config/git/work.config ${HOME}/.config/git/work.config
+add-link git/.config/git/config .config/git/config
+add-link git/.config/git/template .config/git/template
+add-link git/.config/git/ignore .config/git/ignore
+add-link git/.config/git/work.config .config/git/work.config
 
-ln -sf ${dotfiles_home}/.ghqlist ${HOME}/.ghqlist
+add-link .ghqlist .ghqlist
 
 : "tmux"
 mkdir -p ${HOME}/.tmux
-ln -sf ${dotfiles_home}/tmux/.tmux/iceberg.tmux.conf ${HOME}/.tmux/iceberg.tmux.conf
-ln -sf ${dotfiles_home}/tmux/.tmux.conf ${HOME}/.tmux.conf
+add-link tmux/.tmux/iceberg.tmux.conf .tmux/iceberg.tmux.conf
+add-link tmux/.tmux.conf .tmux.conf
 
 : "asdf"
-ln -sf ${dotfiles_home}/asdf/.asdfrc ${HOME}/.asdfrc
-ln -sf ${dotfiles_home}/asdf/.tool-versions ${HOME}/.tool-versions
+add-link asdf/.asdfrc .asdfrc
+add-link asdf/.tool-versions .tool-versions
 
 # each OS. support macOSOS or Linux
 if [ "$(uname)" == 'Darwin' ]; then
     : "macOS"
-    ln -sf ${dotfiles_home}/.Brewfile ${HOME}/.Brewfile
-    ln -sf ${dotfiles_home}/tmux/.tmux/osx.tmux.conf ${HOME}/.tmux/local.tmux.conf
-    ln -sf ${dotfiles_home}/git/.config/git/osx.config ${HOME}/.config/git/local.config
+    add-link .Brewfile .Brewfile
+    add-link tmux/.tmux/osx.tmux.conf .tmux/local.tmux.conf
+    add-link git/.config/git/osx.config .config/git/local.config
 
     # set defaults
     defaults write com.apple.finder CreateDesktop -boolean false
     killAll Finder
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     : "Linux"
-    ln -sf ${dotfiles_home}/tmux/.tmux/linux.tmux.conf ${HOME}/.tmux/local.tmux.conf
-    ln -sf ${dotfiles_home}/git/.config/git/linux.config ${HOME}/.config/git/local.config
+    add-link tmux/.tmux/linux.tmux.conf .tmux/local.tmux.conf
+    add-link git/.config/git/linux.config .config/git/local.config
 fi
 
 : "bin"
 mkdir -p ${HOME}/bin
 bins="$(ls ${dotfiles_home}/bin)"
 for b in ${bins[@]}; do
-    ln -sf ${dotfiles_home}/bin/$b ${HOME}/bin/$b
+    add-link bin/$b bin/$b
 done
 
 : "install tools"
