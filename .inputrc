@@ -1,0 +1,26 @@
+set completion-ignore-case on
+set colored-stats on
+set colored-completion-prefix on
+set visible-stats on
+
+$if bash
+  set editing-mode vi
+  set keyseq-timeout 5
+
+  set show-mode-in-prompt on
+  set vi-cmd-mode-string "\1\e[36m\2NORMAL\1\e[0m\2 "
+  set vi-ins-mode-string "\1\e[32m\2INSERT\1\e[0m\2 "
+
+  set keymap vi-command
+  "v": ""
+  "\ev": edit-and-execute-command
+  "\C-p": history-search-backward
+  "\C-n": history-search-forward
+
+  set keymap vi-insert
+  "\ev": edit-and-execute-command
+  "\C-r": peco_search_history
+  "\C-l": clear-screen
+  "\C-p": history-search-backward
+  "\C-n": history-search-forward
+$endif

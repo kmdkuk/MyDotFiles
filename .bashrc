@@ -10,7 +10,8 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoredups:erasedups
+export HISTCONTROL="ignoredups:erasedups"
+export HISTIGNORE="history:ls:ll:la:stage0-kubectl*"
 
 # for sharing history(not default)
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
@@ -34,6 +35,9 @@ shopt -s checkwinsize
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
+
+export TERM=xterm-256color
+export EDITOR=vim
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -150,7 +154,6 @@ fi
 
 export HISTSIZE=10000
 export HISTFILESIZE=10000
-export HISTIGNORE="stage0-kubectl*"
 
 # utility
 
