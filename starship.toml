@@ -25,6 +25,7 @@ format = "[$path]($style)[$lock_symbol]($lock_style) "
 [git_commit]
 commit_hash_length = 8
 style = "bold white"
+tag_disabled = false
 
 [git_state]
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
@@ -43,12 +44,15 @@ deleted = "🗑️×${count} "
 style = "bright-white"
 format = "$all_status$ahead_behind"
 
+[git_metrics]
+disabled = false
+
 [hostname]
-ssh_only = false
+ssh_only = true
 format = "<[$hostname]($style)>"
 trim_at = "-"
 style = "bold dimmed white"
-disabled = true
+disabled = false
 
 [memory_usage]
 format = "$symbol[${ram}( | ${swap})]($style) "
@@ -65,7 +69,18 @@ show_always = true
 
 [kubernetes]
 disabled = false
-
 [kubernetes.context_aliases]
 "stage0.cybozu-ne.co" = "☠️ DANGER!! STAGE0 ☠️"
 "kubernetes-admin@kubernetes" = "k8s-admin"
+
+[status]
+disabled = false
+
+[sudo]
+allow_windows = true
+disabled = false
+
+[time]
+disabled = false
+format = "[$time]($style) "
+
