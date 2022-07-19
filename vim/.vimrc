@@ -113,20 +113,50 @@ nnoremap bn :bnext<CR>
 " asyncomplete
 " set completeopt+=preview
 
-" using icon
+" setting for airline
 let g:airline_theme = 'icebergDark'
 set laststatus=2
+let g:airline_mode_map = {
+  \ 'n'  : 'Normal',
+  \ 'i'  : 'Insert',
+  \ 'R'  : 'Replace',
+  \ 'c'  : 'Command',
+  \ 'v'  : 'Visual',
+  \ 'V'  : 'V-Line',
+  \ '⌃V' : 'V-Block',
+  \ }
+
+" airline symbols
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.crypt = '🔒'
+
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_idx_format = {
+  \ '0': '0 ',
+  \ '1': '1 ',
+  \ '2': '2 ',
+  \ '3': '3 ',
+  \ '4': '4 ',
+  \ '5': '5 ',
+  \ '6': '6 ',
+  \ '7': '7 ',
+  \ '8': '8 ',
+  \ '9': '9 '
+  \}
 let g:airline#extensions#wordcount#enabled = 0
-let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
-let g:airline_section_c = '%t'
-let g:airline_section_x = '%{&filetype}'
-let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z', 'error', 'warning']]
+" let g:airline_section_c = '%t'
+" let g:airline_section_x = '%{&filetype}'
+" let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
 let g:airline#extensions#ale#error_symbol = ' '
 let g:airline#extensions#ale#warning_symbol = ' '
 let g:airline#extensions#default#section_truncate_width = {}
 let g:airline#extensions#whitespace#enabled = 1
+let g:airline_powerline_fonts = 1
 
 " lsp clangd settings
 " let g:lsp_log_verbose = 1
@@ -289,3 +319,10 @@ endif
 
 au BufNewFile,BufRead Dockerfile* setf Dockerfile
 set clipboard+=unnamed
+
+" undo 永続化
+silent !mkdir ~/.vim/undo -p >/dev/null 2>&1
+if has('persistent_undo')
+  set undodir=~/.vim/undo
+  set undofile
+endif
