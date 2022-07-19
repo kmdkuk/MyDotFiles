@@ -45,6 +45,7 @@ add-link git/.config/git/config .config/git/config
 add-link git/.config/git/template .config/git/template
 add-link git/.config/git/ignore .config/git/ignore
 add-link git/.config/git/work.config .config/git/work.config
+add-link git/.config/git/alias.config .config/git/alias.config
 
 add-link .ghqlist .ghqlist
 
@@ -63,11 +64,11 @@ if [ "$(uname)" == 'Darwin' ]; then
     add-link .Brewfile .Brewfile
     add-link tmux/.tmux/osx.tmux.conf .tmux/local.tmux.conf
     add-link git/.config/git/osx.config .config/git/local.config
-
     # set defaults
     defaults write com.apple.finder CreateDesktop -boolean false
     killAll Finder
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+fi
+if [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     : "Linux"
     add-link tmux/.tmux/linux.tmux.conf .tmux/local.tmux.conf
     add-link git/.config/git/linux.config .config/git/local.config
