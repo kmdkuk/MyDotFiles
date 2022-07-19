@@ -30,6 +30,7 @@ add-link fish/.config/fish/functions/check-update-dotfiles.fish .config/fish/fun
 
 : "bash/zsh"
 add-link .bashrc .bashrc
+add-link .inputrc .inputrc
 add-link .zshrc .zshrc
 
 : "starship"
