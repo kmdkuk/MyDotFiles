@@ -29,7 +29,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   if ! check_command starship; then
     # need sudo
     curl -sS https://starship.rs/install.sh > /tmp/install.sh
-    sh /tmp/install.sh --yes --bin-dir ${HOME}/bin
+    sh /tmp/install.sh --yes
     rm /tmp/install.sh
   fi
 
