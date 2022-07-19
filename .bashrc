@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-      *) return;;
+    *) return ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -39,50 +39,13 @@ fi
 export TERM=xterm-256color
 export EDITOR=vim
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -113,11 +76,11 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+        elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
 
 # ここまでUbuntuデフォルト
@@ -146,10 +109,31 @@ alias git-delete-squashed-master='git checkout -q master && git for-each-ref ref
 alias exec-ubuntu="docker run --rm -it --name=ubuntu quay.io/cybozu/ubuntu:20.04 bash"
 alias exec-ubuntu-debug="docker run --rm -it --name=ubuntu quay.io/cybozu/ubuntu-debug:20.04 bash"
 
-eval "$(hub alias -s)"
+function check-cmd() {
+    if which $1 > /dev/null 2>&1;then
+        return 0
+    fi
+    return 1
+}
+
+if check-cmd hub;then
+    eval "$(hub alias -s)"
+fi
+
+if check-cmd exa;then
+    alias ls='exa'
+fi
+
+if check-cmd bat;then
+    alias cat='bat'
+fi
+
+if check-cmd batcat;then
+    alias cat='batcat'
+fi
 
 if [ "$(uname)" == 'Darwin' ]; then
-  alias sed='gsed'
+    alias sed='gsed'
 fi
 
 export HISTSIZE=10000
@@ -158,61 +142,63 @@ export HISTFILESIZE=10000
 # utility
 
 function ghq-cd() {
-  cd "$( ghq list --full-path | sort | peco)"
+    cd "$(ghq list --full-path | sort | peco)"
 }
 
 function git-cd-root() {
-  cd "$(git rev-parse --show-superproject-working-tree --show-toplevel | head -1)"
+    cd "$(git rev-parse --show-superproject-working-tree --show-toplevel | head -1)"
 }
 
 function peco_search_history() {
-    local l=$(HISTTIMEFORMAT= history | \
-                  sort -r | \
-                  sed -e 's/^[0-9\| ]\+//' -e 's/ \+$//' | \
-                  peco --query "$READLINE_LINE")
+    local l=$(HISTTIMEFORMAT= history |
+        sort -r |
+        sed -e 's/^[0-9\| ]\+//' -e 's/ \+$//' |
+    peco --query "$READLINE_LINE")
     READLINE_LINE="$l"
     READLINE_POINT=${#l}
 }
 bind -x '"\C-r": peco_search_history'
 
-function tshlogin () {
-  tsh login --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github --out $HOME/.kube/${1:-stage0}.config --format kubernetes
-  source <(kubectl completion bash)
+function tshlogin() {
+    tsh login --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github --out $HOME/.kube/${1:-stage0}.config --format kubernetes
+    source <(kubectl completion bash)
 }
 
-function tshssh () {
-  tsh ssh --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github cybozu@${1:-stage0}-${2:-boot-0}
+function tshssh() {
+    tsh ssh --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github cybozu@${1:-stage0}-${2:-boot-0}
 }
 
-function argocdlogin () {
-  argocd login argocd.${1:-stage0}.cybozu-ne.co --sso
+function argocdlogin() {
+    argocd login argocd.${1:-stage0}.cybozu-ne.co --sso
 }
 
-function neco-test-ssh () {
-  gcloud beta compute ssh --zone "asia-northeast1-c" "cybozu@${1}" --project "neco-test"
+function neco-test-ssh() {
+    gcloud beta compute ssh --zone "asia-northeast1-c" "cybozu@${1}" --project "neco-test"
 }
 
-function neco-dev-ssh () {
-  gcloud beta compute ssh --zone "asia-northeast1-c" "cybozu@${1}" --project "neco-dev"
+function neco-dev-ssh() {
+    gcloud beta compute ssh --zone "asia-northeast1-c" "cybozu@${1}" --project "neco-dev"
 }
 
 # load completion
 
-function load_completion () {
-  if which $1 > /dev/null 2>&1; then
-    : "load $2"
-    source <($2)
-  fi
-  if [ -f $1 ]; then
-    : "source $1"
-    source $1
-  fi
+function load_completion() {
+    if check-cmd $1; then
+        : "load $2"
+        source <($2)
+    fi
+    if [ -f $1 ]; then
+        : "source $1"
+        source $1
+    fi
 }
 
 if [ "$(uname)" == 'Darwin' ]; then
-  load_completion /usr/local/etc/profile.d/bash_completion.sh
-  load_completion /usr/local/etc/bash_completion.d/git-prompt.sh
-  load_completion /usr/local/etc/bash_completion.d/git-completion.bash
+    load_completion /usr/local/etc/profile.d/bash_completion.sh
+    load_completion /usr/local/etc/bash_completion.d/git-prompt.sh
+    load_completion /usr/local/etc/bash_completion.d/git-completion.bash
+else
+    load_completion /usr/share/bash-completion/completions/git
 fi
 load_completion /usr/share/bash-completion/bash_completion
 load_completion $HOME/.asdf/asdf.sh
@@ -223,26 +209,28 @@ load_completion kubebuilder "kubebuilder completion bash"
 load_completion kubectl-accurate "kubectl-accurate completion bash"
 load_completion gh "gh completion -s bash"
 load_completion necogcp "necogcp completion"
+alias g='git'
+__git_complete g __git_main
 
 # check dotfiles
 
-function check_dirty_and_update () {
-  dotfiles_home="$HOME/MyDotFiles"
-  status="$(git -C ${dotfiles_home} status --porcelain)"
-  diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
-  if [ -z "$status" ] && [ -z "$diff" ]; then
-    git -C ${dotfiles_home} fetch origin > /dev/null
-    origin_diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
-    if [ -n "$origin_diff" ]; then
-      echo "found MyDotFiles updated"
-      echo "git -C ${dotfiles_home} pull origin master"
-      git -C ${dotfiles_home} pull origin master > /dev/null
+function check_dirty_and_update() {
+    dotfiles_home="$HOME/MyDotFiles"
+    status="$(git -C ${dotfiles_home} status --porcelain)"
+    diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
+    if [ -z "$status" ] && [ -z "$diff" ]; then
+        git -C ${dotfiles_home} fetch origin >/dev/null
+        origin_diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
+        if [ -n "$origin_diff" ]; then
+            echo "found MyDotFiles updated"
+            echo "git -C ${dotfiles_home} pull origin master"
+            git -C ${dotfiles_home} pull origin master >/dev/null
+        fi
+        return
     fi
-    return
-  fi
-  echo -e "\e[36m=== DOTFILES IS DIRTY ===\e[m"
-  echo -e "\e[33mThe dotfiles have been changed.\e[m"
-  echo -e "\e[36m=========================\e[m"
+    echo -e "\e[36m=== DOTFILES IS DIRTY ===\e[m"
+    echo -e "\e[33mThe dotfiles have been changed.\e[m"
+    echo -e "\e[36m=========================\e[m"
 }
 
 check_dirty_and_update
@@ -250,9 +238,8 @@ check_dirty_and_update
 # for WSL
 uname -a | grep -q "WSL"
 if [ $? = 0 ]; then
-  export BROWSER="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe"
+    export BROWSER="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe"
 fi
 
 # for starship
 eval "$(starship init bash)"
-

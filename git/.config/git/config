@@ -1,25 +1,49 @@
-[user]
-	email = kouworld0123@gmail.com
-	name = kouki
 [core]
 	editor = vim -c \"set fenc=utf-8\"
 	autocrlf = input
-[ghq]
-	root = ~/go/src
-[fetch]
-	prune = true
-[alias]
-	tree = log --graph --all --format=\"%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s\"
-	delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+[user]
+	email = kouworld0123@gmail.com
+	name = kouki
+[init]
+	defaultBranch = main
 [commit]
 	template = ~/.config/git/template
+	verbose = true
+[fetch]
+	prune = true
+[push]
+	default = current
 [pull]
 	rebase = true
+	ff = only
+[grep]
+	lineNumber = true
+[ghq]
+	root = ~/go/src
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = auto
+[color "branch"]
+	current = green bold
+	local = green
+	remote = red bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red
 [http]
 	postBuffer = 524288000
 [include]
 	path = ~/.config/git/local.config
+	path = ~/.config/git/alias.config
 [includeIf "gitdir:~/go/src/github.dev.cybozu.co.jp/"]
 	path = ~/.config/git/work.config
-[credential]
-	helper = store
