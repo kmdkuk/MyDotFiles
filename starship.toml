@@ -49,7 +49,7 @@ disabled = false
 
 [hostname]
 ssh_only = true
-format = "<[$hostname]($style)>"
+format = "<[$hostname]($style)> "
 trim_at = "-"
 style = "bold dimmed white"
 disabled = false
