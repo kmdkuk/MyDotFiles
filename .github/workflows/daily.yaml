@@ -22,7 +22,7 @@ jobs:
       NO_INSTALL: 1
     runs-on: windows-latest
     steps:
-      - run: curl setup.kmdk.uk/setup.ps1 | pwsh
+      - run: curl -L setup.kmdk.uk/setup.ps1 | pwsh
   install:
     runs-on: ${{ matrix.os }}
     strategy:
