@@ -321,7 +321,7 @@ au BufNewFile,BufRead Dockerfile* setf Dockerfile
 set clipboard+=unnamed
 
 " undo 永続化
-silent !mkdir ~/.vim/undo -p >/dev/null 2>&1
+silent !mkdir -p ~/.vim/undo >/dev/null 2>&1
 if has('persistent_undo')
   set undodir=~/.vim/undo
   set undofile

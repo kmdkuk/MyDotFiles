@@ -59,10 +59,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -140,7 +136,6 @@ export HISTSIZE=10000
 export HISTFILESIZE=10000
 
 # utility
-
 function ghq-cd() {
     cd "$(ghq list --full-path | sort | peco)"
 }
@@ -164,6 +159,31 @@ function tshlogin() {
     source <(kubectl completion bash)
 }
 
+function build() {
+    case "$1" in
+        # *.c ) run_c $1 ;;
+        *.cpp ) build_cpp $1 ;;
+        # *.java ) run_java $1 ;;
+        # *.py ) run_py $1 ;;
+    esac
+}
+
+function build_cpp() {
+    g++ -std=gnu++17 -Wall -Wextra -O2 -DONLINE_JUDGE -I/opt/boost/gcc/include -L/opt/boost/gcc/lib -I/opt/ac-library -o ./a.out $1
+    
+    result=$?
+    if [ $result -ne 0 ];then
+        echo -e "[\e[31m-\e[0m] compile failed"
+    else
+        echo -e "[\e[32m+\e[0m] successful complie"
+    fi
+}
+
+function tshlogin () {
+    tsh login --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github --out $HOME/.kube/${1:-stage0}.config --format kubernetes
+    source <(kubectl completion bash)
+}
+
 function tshssh() {
     tsh ssh --proxy=teleport.${1:-stage0}.cybozu-ne.co:443 --auth=github cybozu@${1:-stage0}-${2:-boot-0}
 }
@@ -181,7 +201,6 @@ function neco-dev-ssh() {
 }
 
 # load completion
-
 function load_completion() {
     if check-cmd $1; then
         : "load $2"
@@ -213,7 +232,6 @@ alias g='git'
 __git_complete g __git_main
 
 # check dotfiles
-
 function check_dirty_and_update() {
     dotfiles_home="$HOME/MyDotFiles"
     status="$(git -C ${dotfiles_home} status --porcelain)"
@@ -234,12 +252,6 @@ function check_dirty_and_update() {
 }
 
 check_dirty_and_update
-
-# for WSL
-uname -a | grep -q "WSL"
-if [ $? = 0 ]; then
-    export BROWSER="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe"
-fi
 
 # for starship
 eval "$(starship init bash)"

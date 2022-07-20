@@ -14,6 +14,7 @@ $if bash
   set keymap vi-command
   "v": ""
   "\ev": edit-and-execute-command
+  "\C-r": peco_search_history
   "\C-p": history-search-backward
   "\C-n": history-search-forward
 

@@ -72,6 +72,11 @@ disabled = false
 "stage0.cybozu-ne.co" = "☠️ DANGER!! STAGE0 ☠️"
 "kubernetes-admin@kubernetes" = "k8s-admin"
 
+[gcloud]
+format = 'on [$symbol($project) ($domain)(\($region\))]($style) '
+[gcloud.region_aliases]
+asia-northeast1 = "tokyo"
+
 [status]
 disabled = false
 
