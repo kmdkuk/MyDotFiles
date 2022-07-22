@@ -272,8 +272,8 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-colorscheme molokai
-" colorscheme iceberg
+" colorscheme molokai
+colorscheme iceberg
 set t_Co=256
 
 " Tab系

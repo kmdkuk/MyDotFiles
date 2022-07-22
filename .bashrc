@@ -94,6 +94,8 @@ export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="${HOME}/bin:${PATH}"
 
+alias sudo='sudo -E '
+
 alias kc='kubectl ctx | peco | xargs kubectl ctx'
 alias kn='kubectl ns | peco | xargs kubectl ns'
 
