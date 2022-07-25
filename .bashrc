@@ -88,11 +88,12 @@ export GOPATH=${HOME}/go
 export PATH="/usr/local/go/bin:${PATH}"
 export PATH="${GOPATH}/bin:${PATH}"
 
-export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
 
 export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="${HOME}/bin:${PATH}"
+
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
 
 alias sudo='sudo -E '
 
