@@ -272,6 +272,7 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
+set background=dark
 " colorscheme molokai
 colorscheme iceberg
 set t_Co=256
