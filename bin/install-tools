@@ -19,7 +19,7 @@ if [ "$(uname)" == 'Darwin' ]; then
   brew bundle --global || true
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # Managed by brew on macOS
-  GO_VERSION="${GO_VERSION:-1.18.4}"
+  GO_VERSION="${GO_VERSION:-1.18.5}"
   if ! check_command go; then
     rm /tmp/go.tar.gz || true
     wget -O /tmp/go.tar.gz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
