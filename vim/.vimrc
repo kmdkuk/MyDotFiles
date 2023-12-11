@@ -45,18 +45,6 @@ if dein#load_state(s:dein_dir)
   call dein#add( 'nathanaelkane/vim-indent-guides')
 
 
-  " Rails向けのコマンドを提供する
-  call dein#add( 'tpope/vim-rails')
-  " Ruby向けにendを自動挿入してくれる
-  call dein#add( 'tpope/vim-endwise')
-
-  " for clang-format
-  call dein#add('rhysd/vim-clang-format')
-
-  " for dart and flutter
-  call dein#add('dart-lang/dart-vim-plugin')
-  call dein#add('thosakwe/vim-flutter')
-
   " for git
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
