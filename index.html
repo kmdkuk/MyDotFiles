@@ -39,6 +39,11 @@ add-link starship.toml .config/starship.toml
 : "vim"
 add-link vim/.vimrc .vimrc
 
+: "nvim"
+mkdir -p ${HOME}/.config/nvim
+add-link nvim/init.lua .config/nvim/init.lua
+add-link nvim/lua .config/nvim/lua
+
 : "git"
 mkdir -p ${HOME}/.config/git
 add-link git/.config/git/config .config/git/config
