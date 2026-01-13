@@ -1,6 +1,6 @@
 
 # Load common configs
-DOTFILES_ROOT="${HOME}/MyDotFiles"
+export DOTFILES_ROOT="${HOME}/MyDotFiles"
 source "${DOTFILES_ROOT}/shell/exports.sh"
 source "${DOTFILES_ROOT}/shell/utils.sh"
 source "${DOTFILES_ROOT}/shell/aliases.sh"

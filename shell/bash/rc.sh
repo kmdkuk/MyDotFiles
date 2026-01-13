@@ -2,10 +2,12 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-    *) return ;;
-esac
+if [ -z "$FORCE_LOAD" ]; then
+    case $- in
+        *i*) ;;
+        *) return ;;
+    esac
+fi
 
 # Check window size
 shopt -s checkwinsize
@@ -19,7 +21,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # Load common configs
-DOTFILES_ROOT="${HOME}/MyDotFiles"
+export DOTFILES_ROOT="${HOME}/MyDotFiles"
 source "${DOTFILES_ROOT}/shell/exports.sh"
 source "${DOTFILES_ROOT}/shell/utils.sh"
 source "${DOTFILES_ROOT}/shell/aliases.sh"

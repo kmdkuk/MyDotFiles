@@ -12,16 +12,19 @@ jobs:
     strategy:
       matrix:
         os:
-        - ubuntu-latest
-        - macos-latest
+          - ubuntu-latest
+          - macos-latest
     steps:
       - uses: actions/checkout@v6
       - name: Install dotfiles
         run: ./setup.sh
+      - name: Verify setup
+        run: ./scripts/verify.sh
   run-setup-win:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
       - name: Install dotfiles
         run: ./setup.ps1
-
+      - name: Verify setup
+        run: ./scripts/verify.ps1
