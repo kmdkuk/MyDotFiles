@@ -52,4 +52,4 @@ if($env:NO_INSTALL -eq 1){
     Write-Output "Skip install tools"
     exit 0
 }
-choco install -y "${DOTFILES_HOME}\packages.config"
+choco install -y "${DOTFILES_HOME}\app\chocolatey\packages.config"
