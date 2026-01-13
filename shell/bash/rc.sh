@@ -78,4 +78,4 @@ bind -x '"\C-r": peco_search_history'
 eval "$(starship init bash)"
 
 # Check for updates
-# check_dirty_and_update
+check_dirty_and_update
