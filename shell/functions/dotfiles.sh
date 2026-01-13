@@ -5,7 +5,23 @@ function check_dirty_and_update() {
     status="$(git -C ${dotfiles_home} status --porcelain)"
     diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
     if [ -z "$status" ] && [ -z "$diff" ]; then
+        # Check last fetch time to avoid frequent fetching
+        local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}"
+        local last_fetch_file="$cache_dir/dotfiles_last_fetch"
+        local current_time=$(date +%s)
+        local fetch_interval=${DOTFILES_FETCH_INTERVAL:-3600} # Default 1 hour
+
+        if [ -f "$last_fetch_file" ]; then
+            local last_fetch=$(cat "$last_fetch_file")
+            if [ $((current_time - last_fetch)) -lt $fetch_interval ]; then
+                return
+            fi
+        fi
+
         git -C ${dotfiles_home} fetch origin >/dev/null
+        # Update last fetch time
+        echo "$current_time" > "$last_fetch_file"
+
         origin_diff="$(git -C ${dotfiles_home} diff --stat --cached origin/master)"
         if [ -n "$origin_diff" ]; then
             echo "found MyDotFiles updated"

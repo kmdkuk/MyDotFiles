@@ -1,12 +1,38 @@
 
 # load completion
 function load_completion() {
-    if check-cmd $1; then
-        : "load $2"
-        source <($2)
+    local target=$1
+    local gen_cmd=$2
+    local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/bash_completion"
+
+    # If generation command is provided, use cache
+    if [ -n "$gen_cmd" ]; then
+        if ! check-cmd "$target"; then
+            return
+        fi
+
+        mkdir -p "$cache_dir"
+        local cache_file="$cache_dir/$target.bash"
+
+        if [ ! -f "$cache_file" ]; then
+            # echo "Generating completion for $target..."
+            # Use eval to execute the generation command string
+            if ! eval "$gen_cmd" > "$cache_file"; then
+                rm -f "$cache_file"
+                return
+            fi
+        fi
+        
+        source "$cache_file"
+        return
     fi
-    if [ -f $1 ]; then
-        : "source $1"
-        source $1
+
+    # Fallback to existing logic (sourcing file directly)
+    if [ -f "$target" ]; then
+        source "$target"
+    elif check-cmd "$target"; then
+        # This branch seems unused based on rc.sh usage but kept for compatibility just in case
+        : "load $target"
+        # source <($target) # This was the old eval-like behavior without gen_cmd
     fi
 }
