@@ -98,6 +98,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="${HOME}/bin:${PATH}"
 
 export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+export AQUA_GLOBAL_CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
 
 alias sudo='sudo -E '
 
@@ -155,6 +156,7 @@ function peco_search_history() {
     local l=$(HISTTIMEFORMAT= history |
         sort -r |
         sed -e 's/^[0-9\| ]\+//' -e 's/ \+$//' |
+        awk '!a[$0]++' |
     peco --query "$READLINE_LINE")
     READLINE_LINE="$l"
     READLINE_POINT=${#l}
@@ -259,6 +261,8 @@ function check_dirty_and_update() {
 }
 
 check_dirty_and_update
+
+export BROWSER="wslview"
 
 # for starship
 eval "$(starship init bash)"
