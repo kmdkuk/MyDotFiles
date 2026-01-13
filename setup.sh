@@ -24,61 +24,61 @@ function add-link() {
 
 : "fish"
 mkdir -p ${HOME}/.config/fish/functions
-add-link config/fish/.config/fish/config.fish .config/fish/config.fish
+add-link .config/fish/config.fish .config/fish/config.fish
 mkdir -p ${HOME}/.config/fish/completions;
-add-link config/asdf/completions/asdf.fish .config/fish/completions
-add-link config/fish/.config/fish/functions/ghq-cd.fish .config/fish/functions/ghq-cd.fish
-add-link config/fish/.config/fish/functions/check-update-dotfiles.fish .config/fish/functions/check-update-dotfiles.fish
+add-link home/completions/asdf.fish .config/fish/completions
+add-link .config/fish/functions/ghq-cd.fish .config/fish/functions/ghq-cd.fish
+add-link .config/fish/functions/check-update-dotfiles.fish .config/fish/functions/check-update-dotfiles.fish
 
 : "bash/zsh"
-add-link .bashrc .bashrc
-add-link .inputrc .inputrc
-add-link .zshrc .zshrc
+add-link home/.bashrc .bashrc
+add-link home/.inputrc .inputrc
+add-link home/.zshrc .zshrc
 
 : "starship"
-add-link config/starship.toml .config/starship.toml
+add-link .config/starship.toml .config/starship.toml
 
 : "vim"
-add-link config/vim/.vimrc .vimrc
+add-link home/.vimrc .vimrc
 
 : "nvim"
 mkdir -p ${HOME}/.config/nvim
-add-link config/nvim/init.lua .config/nvim/init.lua
-add-link config/nvim/lua .config/nvim/lua
+add-link .config/nvim/init.lua .config/nvim/init.lua
+add-link .config/nvim/lua .config/nvim/lua
 
 : "git"
 mkdir -p ${HOME}/.config/git
-add-link config/git/.config/git/config .config/git/config
-add-link config/git/.config/git/template .config/git/template
-add-link config/git/.config/git/ignore .config/git/ignore
-add-link config/git/.config/git/work.config .config/git/work.config
-add-link config/git/.config/git/alias.config .config/git/alias.config
+add-link .config/git/config .config/git/config
+add-link .config/git/template .config/git/template
+add-link .config/git/ignore .config/git/ignore
+add-link .config/git/work.config .config/git/work.config
+add-link .config/git/alias.config .config/git/alias.config
 
-add-link .ghqlist .ghqlist
+add-link home/.ghqlist .ghqlist
 
 : "tmux"
 mkdir -p ${HOME}/.tmux
-add-link config/tmux/.tmux/iceberg.tmux.conf .tmux/iceberg.tmux.conf
-add-link config/tmux/.tmux.conf .tmux.conf
+add-link home/.tmux/iceberg.tmux.conf .tmux/iceberg.tmux.conf
+add-link home/.tmux.conf .tmux.conf
 
 : "asdf"
-add-link config/asdf/.asdfrc .asdfrc
-add-link config/asdf/.tool-versions .tool-versions
+add-link home/.asdfrc .asdfrc
+add-link home/.tool-versions .tool-versions
 
 # each OS. support macOSOS or Linux
 if [ "$(uname)" == 'Darwin' ]; then
     : "macOS"
-    add-link .Brewfile .Brewfile
-    add-link config/tmux/.tmux/osx.tmux.conf .tmux/local.tmux.conf
-    add-link config/git/.config/git/osx.config .config/git/local.config
+    add-link home/.Brewfile .Brewfile
+    add-link home/.tmux/osx.tmux.conf .tmux/local.tmux.conf
+    add-link .config/git/osx.config .config/git/local.config
     # set defaults
     defaults write com.apple.finder CreateDesktop -boolean false
     killAll Finder
 fi
 if [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     : "Linux"
-    add-link config/tmux/.tmux/linux.tmux.conf .tmux/local.tmux.conf
-    add-link config/git/.config/git/linux.config .config/git/local.config
+    add-link home/.tmux/linux.tmux.conf .tmux/local.tmux.conf
+    add-link .config/git/linux.config .config/git/local.config
 fi
 
 : "bin"
