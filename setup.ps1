@@ -18,23 +18,23 @@ if(!(Test-Path -Path ${DOTFILES_HOME} )) {
 Write-Output "prepare symlink"
 # starship
 Write-Output "starship"
-New-Item -Force -Type SymbolicLink $HOME\.config\starship.toml -Value ${DOTFILES_HOME}\starship.toml
+New-Item -Force -Type SymbolicLink $HOME\.config\starship.toml -Value ${DOTFILES_HOME}\config\starship.toml
 
 # vim
 Write-Output "vim"
-New-Item -Force -Type SymbolicLink $HOME\.vimrc -Value ${DOTFILES_HOME}\vim\.vimrc
+New-Item -Force -Type SymbolicLink $HOME\.vimrc -Value ${DOTFILES_HOME}\config\vim\.vimrc
 
 # git
 Write-Output "git"
 if(!(Test-Path -Path $HOME\.config\git)){
     mkdir -p $HOME\.config\git
 }
-New-Item -Force -Type SymbolicLink $HOME\.config\git\config -Value ${DOTFILES_HOME}\git\.config\git\config
-New-Item -Force -Type SymbolicLink C:\ProgramData\Git\config -Value ${DOTFILES_HOME}\git\.config\git\config
-New-Item -Force -Type SymbolicLink $HOME\.config\git\template -Value ${DOTFILES_HOME}\git\.config\git\template
-New-Item -Force -Type SymbolicLink $HOME\.config\git\ignore -Value ${DOTFILES_HOME}\git\.config\git\ignore
-New-Item -Force -Type SymbolicLink $HOME\.config\git\local.config -Value ${DOTFILES_HOME}\git\.config\git\win.config
-New-Item -Force -Type SymbolicLink $HOME\.config\git\work.config -Value ${DOTFILES_HOME}\git\.config\git\work.config
+New-Item -Force -Type SymbolicLink $HOME\.config\git\config -Value ${DOTFILES_HOME}\config\git\.config\git\config
+New-Item -Force -Type SymbolicLink C:\ProgramData\Git\config -Value ${DOTFILES_HOME}\config\git\.config\git\config
+New-Item -Force -Type SymbolicLink $HOME\.config\git\template -Value ${DOTFILES_HOME}\config\git\.config\git\template
+New-Item -Force -Type SymbolicLink $HOME\.config\git\ignore -Value ${DOTFILES_HOME}\config\git\.config\git\ignore
+New-Item -Force -Type SymbolicLink $HOME\.config\git\local.config -Value ${DOTFILES_HOME}\config\git\.config\git\win.config
+New-Item -Force -Type SymbolicLink $HOME\.config\git\work.config -Value ${DOTFILES_HOME}\config\git\.config\git\work.config
 
 # zsh/bash
 Write-Output "zsh/bash"
