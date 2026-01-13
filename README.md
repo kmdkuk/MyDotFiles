@@ -35,8 +35,14 @@ Total entries: 884
 Total duration: 0.4139s
 ```
 
-## Other tools
+## ディレクトリ構成
 
-- gh
-    - linux
-      https://github.com/cli/cli/blob/trunk/docs/install_linux.md#debian-ubuntu-linux-raspberry-pi-os-apt
+このリポジトリは以下のルールでディレクトリを構成しています。
+
+- **home**: ホームディレクトリ直下に配置される設定ファイル（dotfiles）。`setup.sh` 等で `$HOME` にシンボリックリンクが作成される設定ファイル群です（例: `.bashrc`, `.vimrc`）。
+- **.config**: XDG Base Directory Specification に準拠した設定ファイル群（例: `nvim`, `fish`, `starship`）。`$HOME/.config` に展開されます。
+- **bin**: 自作スクリプトやユーティリティツール。パスを通すことでコマンドとして更に使用できます。
+- **shell**: シェル（Bash/Zsh）の共通設定、エイリアス、関数定義など分散管理されたシェルスクリプト群。
+- **app**: アプリケーションごとの固有設定やインストール関連ファイル（例: `iterm2` のプロファイル, `autohotkey` のスクリプト）。
+- **scripts**: このリポジトリ自体の管理やセットアップ、ベンチマークに使用するスクリプト。
+- **windows**: Windows 環境固有の設定ファイル。
