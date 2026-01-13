@@ -52,5 +52,4 @@ if($env:NO_INSTALL -eq 1){
     Write-Output "Skip install tools"
     exit 0
 }
-pwsh "${DOTFILES_HOME}\rm-version.ps1"
-choco install -y "${DOTFILES_HOME}\choco-rm-version.config"
+choco install -y "${DOTFILES_HOME}\packages.config"

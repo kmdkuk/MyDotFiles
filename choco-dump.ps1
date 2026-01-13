@@ -1,1 +1,0 @@
-choco export .\choco.config
