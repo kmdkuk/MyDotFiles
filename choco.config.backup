@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packages>
-  <package id="anki" />
-  <package id="antigravity" />
-  <package id="autohotkey" />
-  <package id="autohotkey.install" />
-  <package id="autohotkey.portable" />
   <package id="chocolatey" />
   <package id="chocolatey-compatibility.extension" />
   <package id="chocolatey-core.extension" />
@@ -28,8 +23,8 @@
   <package id="KB3033929" />
   <package id="KB3035131" />
   <package id="nodejs-lts" />
-  <package id="notion" />
-  <package id="obsidian" />
+  <package id="obs-studio" />
+  <package id="obs-studio.install" />
   <package id="peco" />
   <package id="slack" />
   <package id="spotify" />
@@ -41,9 +36,7 @@
   <package id="vagrant" />
   <package id="vcredist140" />
   <package id="vcredist2017" />
-  <package id="vim" />
   <package id="virtualbox" />
   <package id="vscode" />
   <package id="vscode.install" />
-  <package id="wiztree" />
 </packages>

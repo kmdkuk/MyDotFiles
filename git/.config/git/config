@@ -3,7 +3,7 @@
 	autocrlf = input
 [user]
 	email = kouworld0123@gmail.com
-	name = kouki
+	name = kouki kamada
 [init]
 	defaultBranch = main
 [commit]
@@ -45,5 +45,8 @@
 [include]
 	path = ~/.config/git/local.config
 	path = ~/.config/git/alias.config
-[includeIf "gitdir:~/go/src/github.dev.cybozu.co.jp/"]
-	path = ~/.config/git/work.config
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
