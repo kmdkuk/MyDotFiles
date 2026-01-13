@@ -84,18 +84,34 @@ $Space::
     if GetKeyState("LShift")
         return
 
-    ; Shiftを押下
-    Send "{LShift down}"
-}
+    ; Space押下直後の入力を監視 (0.15秒)
+    ; この間に他のキーが押されたら、ShiftではなくSpace+そのキーとして扱う
+    ih := InputHook("L1 T0.15") 
+    ih.KeyOpt("{All}", "E")
+    ih.Start()
 
-$Space Up::
-{
-    ; Shiftを解除
-    Send "{LShift up}"
+    ; Spaceが離されるのを監視
+    while (ih.InProgress) {
+        if !GetKeyState("Space", "P") {
+            ih.Stop()
+            break
+        }
+        Sleep 1
+    }
 
-    ; Spaceを押してから離すまでの間に、他のキーを押していなければSpaceを入力
-    ; (A_PriorKey は直前に押された物理キーを記憶しています)
-    if (A_PriorKey = "Space") {
+    if (ih.EndKey != "") {
+        ; 待機中にキー入力あり -> Space + そのキー
+        Send "{Space}"
+        Send "{Blind}{" ih.EndKey "}"
+    } 
+    else if (ih.Reason = "Timeout") {
+        ; タイムアウト＝長押し判定 -> Shiftモード
+        Send "{LShift Down}"
+        KeyWait "Space"
+        Send "{LShift Up}"
+    } 
+    else {
+        ; Space単打ち
         Send "{Space}"
     }
 }
