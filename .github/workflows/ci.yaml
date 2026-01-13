@@ -15,13 +15,13 @@ jobs:
         - ubuntu-latest
         - macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Install dotfiles
         run: ./setup.sh
   run-setup-win:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Install dotfiles
         run: ./setup.ps1
 
