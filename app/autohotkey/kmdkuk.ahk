@@ -78,40 +78,53 @@ IME_SET(SetSts, WinTitle := "A") {
 ; 単押し: Space
 ; 長押し/同時押し: Shift
 ; --------------------------------------------------------------
-$Space::
-{
-    ; 既にShiftが押されている状態（＝キーリピート信号）なら何もしない
-    if GetKeyState("LShift")
+press := 0     ; スペースキーを押しているかどうか。
+shifted := 0   ; スペースキー押下中に何かの印字可能文字を押したかどうか。
+pressedAt := 0 ; スペースキーを押した時間（msec）。
+timeout := 300 ; pressedAt からこの時間が経過したら、もはや離したときにもスペースを発射しない。
+
+hook := InputHook() ; スペースキー押下中に何かの印字可能文字を押したかどうか捕捉するフック。
+
+$*Space:: {
+    global
+    SendInput "{Shift Down}"
+    if (press = 1) {
         return
+    }
+    shifted := 0
+    press := 1
+    pressedAt := A_TickCount
 
-    ; Space押下直後の入力を監視 (0.15秒)
-    ; この間に他のキーが押されたら、ShiftではなくSpace+そのキーとして扱う
-    ih := InputHook("L1 T0.15") 
-    ih.KeyOpt("{All}", "E")
-    ih.Start()
+    ; 何かのキーが押されたことを検知する
+    ; L1 はフックする文字数の上限を 1 にする
+    ; V はフックした入力をブロックしない
+    ; デフォルトで印字可能文字のみフックされる
+    hook := InputHook("L1 V")
 
-    ; Spaceが離されるのを監視
-    while (ih.InProgress) {
-        if !GetKeyState("Space", "P") {
-            ih.Stop()
-            break
-        }
-        Sleep 1
+    ; 一文字待機し、待機中にスペースを離したとき以外、
+    ; シフト済みにする
+    hook.Start()
+    if (hook.Wait() != "Stopped") {
+        shifted := 1
+    }
+}
+
+$*Space up:: {
+    global
+    SendInput "{Shift Up}"
+    press := 0
+
+    ; 待機キャンセル
+    hook.Stop()
+
+    ; 一定時間経過していたらスペースを発射しない
+    if (A_TickCount - pressedAt > timeout) {
+        return
     }
 
-    if (ih.EndKey != "") {
-        ; 待機中にキー入力あり -> Space + そのキー
-        Send "{Space}"
-        Send "{Blind}{" ih.EndKey "}"
-    } 
-    else if (ih.Reason = "Timeout") {
-        ; タイムアウト＝長押し判定 -> Shiftモード
-        Send "{LShift Down}"
-        KeyWait "Space"
-        Send "{LShift Up}"
-    } 
-    else {
-        ; Space単打ち
-        Send "{Space}"
+    ; シフト済みでなければスペースを発射する
+    ; 先に押してあるモディファイアキーと組み合わせられるように {Blind} をつける
+    if (shifted == 0) {
+        SendInput "{Blind}{Space}"
     }
 }
