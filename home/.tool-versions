@@ -1,7 +1,7 @@
 python 3.10.5 2.7.18
 terraform 1.14.3
 awscli 2.32.34
-golang 1.18.3
+golang 1.25.5
 nodejs 24.13.0
 direnv 2.28.0
 ruby 4.0.1
