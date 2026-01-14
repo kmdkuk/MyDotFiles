@@ -4,17 +4,19 @@ $Env:HOME = $HOME
 
 $ENV:Path = "${HOME}\bin;" + $ENV:Path
 
+Set-Alias git hub
+
 function ghq-cd {
   cd $(ghq list  --full-path | peco)
 }
 
 function ghq-get() {
   $name = "kmdkuk"
-  if($1 -eq ""){
+  if ($1 -eq "") {
     name=$1
   }
   $url = "$(gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco)"
-  if("$url" -ne ""){
+  if ("$url" -ne "") {
     ghq get $url
   }
 }
