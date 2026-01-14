@@ -1,15 +1,5 @@
 $ErrorActionPreference = "Stop"
 
-if(!(where.exe choco)){
-    Write-Output "install choco"
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-}
-
-if(!(where.exe git)) {
-    Write-Output "install git"
-    choco install git
-}
-
 ${DOTFILES_HOME}="$HOME\MyDotFiles"
 if(!(Test-Path -Path ${DOTFILES_HOME} )) {
     git clone https://github.com/kmdkuk/MyDotFiles.git ${DOTFILES_HOME}
@@ -46,10 +36,3 @@ Write-Output "Powershell profile"
 New-Item -Force -Type SymbolicLink $HOME\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1 -Value ${DOTFILES_HOME}\windows\Microsoft.PowerShell_profile.ps1
 New-Item -Force -Type SymbolicLink $HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1 -Value ${DOTFILES_HOME}\windows\Microsoft.PowerShell_profile.ps1
 New-Item -Force -Type SymbolicLink $HOME\Documents\WindowsPowerShell\Microsoft.Powershell_profile.ps1 -Value ${DOTFILES_HOME}\windows\Microsoft.PowerShell_profile.ps1
-
-Write-Output "install tools"
-if($env:NO_INSTALL -eq 1){
-    Write-Output "Skip install tools"
-    exit 0
-}
-choco install -y "${DOTFILES_HOME}\app\chocolatey\packages.config"

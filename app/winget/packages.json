@@ -1,185 +1,149 @@
 {
-	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2026-01-14T01:00:24.434-00:00",
-	"Sources" : 
-	[
-		{
-			"Packages" : 
-			[
-				{
-					"PackageIdentifier" : "DMM.GamePlayer"
-				},
-				{
-					"PackageIdentifier" : "NexusMods.Vortex"
-				},
-				{
-					"PackageIdentifier" : "AutoHotkey.AutoHotkey"
-				},
-				{
-					"PackageIdentifier" : "CPUID.CPU-Z"
-				},
-				{
-					"PackageIdentifier" : "CrystalDewWorld.CrystalDiskMark"
-				},
-				{
-					"PackageIdentifier" : "Docker.DockerDesktop"
-				},
-				{
-					"PackageIdentifier" : "Mozilla.Firefox"
-				},
-				{
-					"PackageIdentifier" : "OBSProject.OBSStudio"
-				},
-				{
-					"PackageIdentifier" : "SteelSeries.GG"
-				},
-				{
-					"PackageIdentifier" : "Surfshark.Surfshark"
-				},
-				{
-					"PackageIdentifier" : "Unity.Unity.2020"
-				},
-				{
-					"PackageIdentifier" : "Unity.UnityHub"
-				},
-				{
-					"PackageIdentifier" : "AntibodySoftware.WizTree"
-				},
-				{
-					"PackageIdentifier" : "Google.JapaneseIME"
-				},
-				{
-					"PackageIdentifier" : "GitHub.cli"
-				},
-				{
-					"PackageIdentifier" : "Google.GoogleDrive"
-				},
-				{
-					"PackageIdentifier" : "NickeManarin.ScreenToGif"
-				},
-				{
-					"PackageIdentifier" : "Logitech.OptionsPlus"
-				},
-				{
-					"PackageIdentifier" : "Hashicorp.Vagrant"
-				},
-				{
-					"PackageIdentifier" : "SlackTechnologies.Slack"
-				},
-				{
-					"PackageIdentifier" : "Oracle.VirtualBox"
-				},
-				{
-					"PackageIdentifier" : "Starship.Starship"
-				},
-				{
-					"PackageIdentifier" : "Nvidia.PhysX"
-				},
-				{
-					"PackageIdentifier" : "wez.wezterm"
-				},
-				{
-					"PackageIdentifier" : "Google.Chrome"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VisualStudioCode"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.Edge"
-				},
-				{
-					"PackageIdentifier" : "Nvidia.VideoEffectsSDK.20xx-Turing"
-				},
-				{
-					"PackageIdentifier" : "Valve.Steam"
-				},
-				{
-					"PackageIdentifier" : "Ubisoft.Connect"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VisualStudio.2022.Community"
-				},
-				{
-					"PackageIdentifier" : "c-egg.tenhou"
-				},
-				{
-					"PackageIdentifier" : "EpicGames.EpicGamesLauncher"
-				},
-				{
-					"PackageIdentifier" : "Nota.Gyazo"
-				},
-				{
-					"PackageIdentifier" : "Mojang.MinecraftLauncher"
-				},
-				{
-					"PackageIdentifier" : "ppy.osu"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.PowerShell"
-				},
-				{
-					"PackageIdentifier" : "Blitz.Blitz"
-				},
-				{
-					"PackageIdentifier" : "HORI.DeviceManager"
-				},
-				{
-					"PackageIdentifier" : "Notion.Notion"
-				},
-				{
-					"PackageIdentifier" : "Amazon.Kindle"
-				},
-				{
-					"PackageIdentifier" : "Anki.Anki"
-				},
-				{
-					"PackageIdentifier" : "Discord.Discord"
-				},
-				{
-					"PackageIdentifier" : "Spotify.Spotify"
-				},
-				{
-					"PackageIdentifier" : "astral-sh.uv"
-				},
-				{
-					"PackageIdentifier" : "Obsidian.Obsidian"
-				},
-				{
-					"PackageIdentifier" : "Google.Antigravity"
-				},
-				{
-					"PackageIdentifier" : "Anysphere.Cursor"
-				},
-				{
-					"PackageIdentifier" : "AgileBits.1Password"
-				},
-				{
-					"PackageIdentifier" : "Canonical.Ubuntu.2404"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.AppInstaller"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.UI.Xaml.2.7"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.UI.Xaml.2.8"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VCLibs.Desktop.14"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.WindowsTerminal"
-				}
-			],
-			"SourceDetails" : 
-			{
-				"Argument" : "https://cdn.winget.microsoft.com/cache",
-				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
-				"Name" : "winget",
-				"Type" : "Microsoft.PreIndexed.Package"
-			}
-		}
-	],
-	"WinGetVersion" : "1.12.350"
+  "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+  "CreationDate": "2026-01-15T05:34:29.816+09:00",
+  "Sources": [
+    {
+      "Packages": [
+        {
+          "PackageIdentifier": "AgileBits.1Password"
+        },
+        {
+          "PackageIdentifier": "Amazon.Kindle"
+        },
+        {
+          "PackageIdentifier": "Anki.Anki"
+        },
+        {
+          "PackageIdentifier": "AntibodySoftware.WizTree"
+        },
+        {
+          "PackageIdentifier": "AutoHotkey.AutoHotkey"
+        },
+        {
+          "PackageIdentifier": "Canonical.Ubuntu.2404"
+        },
+        {
+          "PackageIdentifier": "Chocolatey.Chocolatey"
+        },
+        {
+          "PackageIdentifier": "CPUID.CPU-Z"
+        },
+        {
+          "PackageIdentifier": "CrystalDewWorld.CrystalDiskMark"
+        },
+        {
+          "PackageIdentifier": "Discord.Discord"
+        },
+        {
+          "PackageIdentifier": "Docker.DockerDesktop"
+        },
+        {
+          "PackageIdentifier": "Google.Antigravity"
+        },
+        {
+          "PackageIdentifier": "Google.Chrome"
+        },
+        {
+          "PackageIdentifier": "Google.GoogleDrive"
+        },
+        {
+          "PackageIdentifier": "Google.JapaneseIME"
+        },
+        {
+          "PackageIdentifier": "Logitech.OptionsPlus"
+        },
+        {
+          "PackageIdentifier": "MartiCliment.UniGetUI"
+        },
+        {
+          "PackageIdentifier": "Microsoft.AppInstaller"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.6"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.SDK.10"
+        },
+        {
+          "PackageIdentifier": "Microsoft.Edge"
+        },
+        {
+          "PackageIdentifier": "Microsoft.EdgeWebView2Runtime"
+        },
+        {
+          "PackageIdentifier": "Microsoft.PowerShell"
+        },
+        {
+          "PackageIdentifier": "Microsoft.PowerToys"
+        },
+        {
+          "PackageIdentifier": "Microsoft.UI.Xaml.2.8"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VCLibs.Desktop.14"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VCRedist.2010.x64"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VCRedist.2013.x64"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VCRedist.2015+.x64"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VCRedist.2015+.x86"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VisualStudioCode"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WindowsTerminal"
+        },
+        {
+          "PackageIdentifier": "Mojang.MinecraftLauncher"
+        },
+        {
+          "PackageIdentifier": "Mozilla.Firefox"
+        },
+        {
+          "PackageIdentifier": "Notion.Notion"
+        },
+        {
+          "PackageIdentifier": "Nvidia.PhysX"
+        },
+        {
+          "PackageIdentifier": "Obsidian.Obsidian"
+        },
+        {
+          "PackageIdentifier": "OBSProject.OBSStudio"
+        },
+        {
+          "PackageIdentifier": "Spotify.Spotify"
+        },
+        {
+          "PackageIdentifier": "SteelSeries.GG"
+        },
+        {
+          "PackageIdentifier": "Surfshark.Surfshark"
+        },
+        {
+          "PackageIdentifier": "Unity.Unity.2020"
+        },
+        {
+          "PackageIdentifier": "Unity.UnityHub"
+        },
+        {
+          "PackageIdentifier": "Valve.Steam"
+        }
+      ],
+      "SourceDetails": {
+        "Argument": "https://cdn.winget.microsoft.com/cache",
+        "Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+        "Name": "winget",
+        "Type": "Microsoft.PreIndexed.Package"
+      }
+    }
+  ],
+  "WinGetVersion": "1.12.440"
 }

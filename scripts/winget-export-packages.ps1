@@ -20,4 +20,13 @@ Write-Output "Exporting Winget packages to $ConfigPath..."
 # --accept-source-agreements is important for automation
 winget export -o $ConfigPath --source winget --accept-source-agreements
 
+if (Test-Path $ConfigPath) {
+    Write-Output "Sorting packages by PackageIdentifier..."
+    $json = Get-Content $ConfigPath | ConvertFrom-Json
+    foreach ($source in $json.Sources) {
+        $source.Packages = $source.Packages | Sort-Object PackageIdentifier
+    }
+    $json | ConvertTo-Json -Depth 10 | Set-Content $ConfigPath -Encoding UTF8
+}
+
 Write-Output "Done. Generated $ConfigPath"

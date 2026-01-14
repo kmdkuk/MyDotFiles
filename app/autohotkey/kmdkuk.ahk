@@ -73,6 +73,10 @@ IME_SET(SetSts, WinTitle := "A") {
     return
 }
 
+; for win+space off now use powertoys
+; LWin & Space:: return
+; RWin & Space:: return
+
 ; --------------------------------------------------------------
 ; SandS (Space and Shift)
 ; 単押し: Space
