@@ -81,6 +81,10 @@ if [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     add-link .config/git/linux.config .config/git/local.config
 fi
 
+: "aqua"
+mkdir -p ${HOME}/.config/aquaproj-aqua
+add-link .config/aquaproj-aqua/aqua.yaml .config/aquaproj-aqua/aqua.yaml
+
 : "bin"
 mkdir -p ${HOME}/bin
 # bins="$(ls ${dotfiles_home}/bin)"
