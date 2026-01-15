@@ -19,48 +19,16 @@ if [ "$(uname)" == 'Darwin' ]; then
   brew bundle --global || true
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # Managed by brew on macOS
-  GO_VERSION="${GO_VERSION:-1.24.2}"
-  if ! check_command go; then
-    rm /tmp/go.tar.gz || true
-    wget -O /tmp/go.tar.gz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
-    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/go.tar.gz
-    rm /tmp/go.tar.gz
+  # Managed by aqua
+  if ! check_command aqua; then
+    echo "aqua is not found. Install aqua..."
+    # https://aquaproj.github.io/docs/products/aqua-installer#shell-script
+    curl -sSfL -O https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.2/aqua-installer
+    echo "98b883756cdd0a6807a8c7623404bfc3bc169275ad9064dc23a6e24ad398f43d  aqua-installer" | sha256sum -c -
+    chmod +x aqua-installer
+    ./aqua-installer
+    rm aqua-installer
   fi
-
-  if ! check_command starship; then
-    # need sudo
-    curl -sS https://starship.rs/install.sh > /tmp/install.sh
-    sudo sh /tmp/install.sh --yes
-    rm /tmp/install.sh
-  fi
-
-  if ! check_command k9s; then
-    curl -sS https://webinstall.dev/k9s | bash
-  fi
-
-  if ! check_command gibo; then
-    curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo \
-        -so ${HOME}/bin/gibo && chmod +x ${HOME}/bin/gibo && $HOME/bin/gibo update
-  fi
-
-  PACKAGE_MANAGER="apt-get"
-  UPDATE="${PACKAGE_MANAGER} update"
-  INSTALL="${PACKAGE_MANAGER} install -y"
-  if ! check_command gh; then
-    echo "install gh"
-    if ! [ -f /etc/apt/sources.list.d/github-cli.list ]; then
-      echo "not found /etc/apt/sources.list.d/github-cli.list"
-      curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-      sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-    fi
-    sudo ${UPDATE}
-    sudo ${INSTALL} gh
-  fi
-  sudo ${INSTALL} peco
+  echo "Install tools by aqua..."
+  aqua i -l -a
 fi
-
-go=$(which go)
-go=${go:-/usr/local/go/bin/go}
-${go} install github.com/b4b4r07/git-bump@master
-${go} install github.com/x-motemen/ghq@latest

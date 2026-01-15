@@ -73,9 +73,6 @@ fi
 # Bindings
 bind -x '"\C-r": peco_search_history'
 
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-
 # Starship
 eval "$(starship init bash)"
 
