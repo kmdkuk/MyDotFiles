@@ -1,9 +1,8 @@
 name: daily
 on:
   schedule:
-    - cron: '* */24 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch:
-
 
 jobs:
   setup:
@@ -22,7 +21,7 @@ jobs:
       NO_INSTALL: 1
     runs-on: windows-latest
     steps:
-      - run: curl -L setup.kmdk.uk/setup.ps1 | pwsh
+      - run: Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://setup.kmdk.uk/setup.ps1'))
   install:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -35,4 +34,4 @@ jobs:
   install-win:
     runs-on: windows-latest
     steps:
-      - run: curl -L setup.kmdk.uk/setup.ps1 | pwsh
+      - run: Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://setup.kmdk.uk/setup.ps1'))
