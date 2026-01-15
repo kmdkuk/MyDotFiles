@@ -27,4 +27,4 @@ jobs:
       - name: Install dotfiles
         run: ./setup.ps1
       - name: Verify setup
-        run: ./scripts/verify.ps1
+        run: ./windows/scripts/verify.ps1

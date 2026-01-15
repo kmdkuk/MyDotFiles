@@ -1,8 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $ScriptRoot = $PSScriptRoot
-$RepoRoot = Split-Path -Parent $ScriptRoot
-$ConfigPath = Join-Path $RepoRoot "app\winget\packages.json"
+$ConfigPath = Join-Path $ScriptRoot "packages.json"
 
 if (!(Get-Command winget -ErrorAction SilentlyContinue)) {
     Write-Error "Winget command is not found. Please update App Installer from Microsoft Store."

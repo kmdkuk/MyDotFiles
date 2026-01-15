@@ -1,9 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $ScriptRoot = $PSScriptRoot
-$RepoRoot = Split-Path -Parent $ScriptRoot
-$ChocoDir = Join-Path $RepoRoot "app\chocolatey"
-$ConfigPath = Join-Path $ChocoDir "packages.config"
+$ConfigPath = Join-Path $ScriptRoot "packages.config"
 
 if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
     Write-Warning "Chocolatey command is not found. Skipping."

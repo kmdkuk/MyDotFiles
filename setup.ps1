@@ -56,7 +56,7 @@ if ($NO_INSTALL -eq "0") {
     }
 
     # Import packages
-    $ImportScript = Join-Path ${DOTFILES_HOME} "scripts\import-packages.ps1"
+    $ImportScript = Join-Path ${DOTFILES_HOME} "windows\scripts\import-packages.ps1"
     if (Test-Path $ImportScript) {
         Write-Output "Running import-packages.ps1..."
         & $ImportScript

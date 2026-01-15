@@ -1,9 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $ScriptRoot = $PSScriptRoot
-$RepoRoot = Split-Path -Parent $ScriptRoot
-$ScoopDir = Join-Path $RepoRoot "app\scoop"
-$ConfigPath = Join-Path $ScoopDir "packages.json"
+$ConfigPath = Join-Path $ScriptRoot "packages.json"
 
 if (!(Get-Command scoop -ErrorAction SilentlyContinue)) {
     Write-Warning "Scoop command is not found. Skipping."
