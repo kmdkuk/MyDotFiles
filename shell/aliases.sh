@@ -17,7 +17,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-if [ -z "$(command -v nvim)" ]; then
+echo "command -v nvim: $(command -v nvim)"
+if [ -n "$(command -v nvim)" ]; then
   alias vim='nvim'
 fi
 
