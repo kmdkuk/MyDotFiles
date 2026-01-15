@@ -61,10 +61,6 @@ mkdir -p ${HOME}/.tmux
 add-link home/.tmux/iceberg.tmux.conf .tmux/iceberg.tmux.conf
 add-link home/.tmux.conf .tmux.conf
 
-: "asdf"
-add-link home/.asdfrc .asdfrc
-add-link home/.tool-versions .tool-versions
-
 # each OS. support macOSOS or Linux
 if [ "$(uname)" == 'Darwin' ]; then
     : "macOS"
