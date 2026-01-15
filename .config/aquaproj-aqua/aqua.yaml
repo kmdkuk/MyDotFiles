@@ -1,6 +1,6 @@
 registries:
   - type: standard
-    ref: v4.150.0
+    ref: v4.454.0 # renovate: depName=aquaproj/aqua-registry
 
 packages:
   - name: peco/peco@v0.5.11
