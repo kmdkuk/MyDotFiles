@@ -64,6 +64,16 @@ if ($NO_INSTALL -eq "0") {
     else {
         Write-Warning "import-packages.ps1 not found at $ImportScript"
     }
+
+    # Register kmdkuk.ahk to Task Scheduler
+    $AhkRegisterScript = Join-Path ${DOTFILES_HOME} "windows\app\autohotkey\register-taskscheduler.ps1"
+    if (Test-Path $AhkRegisterScript) {
+        Write-Output "Running register-taskscheduler.ps1..."
+        & $AhkRegisterScript
+    }
+    else {
+        Write-Warning "register-taskscheduler.ps1 not found at $AhkRegisterScript"
+    }
 }
 else {
     Write-Output "Skipping tool installation (NO_INSTALL=$NO_INSTALL)"
