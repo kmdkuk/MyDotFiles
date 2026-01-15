@@ -56,14 +56,10 @@ if [ "$(uname)" == 'Darwin' ]; then
 else
     load_completion /usr/share/bash-completion/completions/git
 fi
-load_completion $HOME/.asdf/asdf.sh
-load_completion $HOME/.asdf/completions/asdf.bash
 load_completion aqua "aqua completion bash"
 load_completion kubectl "kubectl completion bash"
 load_completion kubebuilder "kubebuilder completion bash"
-load_completion kubectl-accurate "kubectl-accurate completion bash"
 load_completion gh "gh completion -s bash"
-load_completion necogcp "necogcp completion"
 
 alias g='git'
 if type __git_complete &>/dev/null; then
