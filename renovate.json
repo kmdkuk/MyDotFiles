@@ -3,7 +3,7 @@
   "extends": [
     "config:recommended",
     "github>aquaproj/aqua-renovate-config:file#2.9.0(\\.config/aquaproj-aqua/aqua.yaml)",
-    "github>aquaproj/aqua-renovate-config:installer-script#2.9.0(setup\\.sh)"
+    "github>aquaproj/aqua-renovate-config:installer-script#2.9.0(bin/install-tools)"
   ],
   "automerge": true
 }
