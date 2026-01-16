@@ -38,13 +38,17 @@ add-link home/.zshrc .zshrc
 : "starship"
 add-link .config/starship.toml .config/starship.toml
 
+: "erdtree"
+add-link .config/erdtree.toml .config/erdtree.toml
+
 : "vim"
 add-link home/.vimrc .vimrc
 
 : "nvim"
-mkdir -p ${HOME}/.config/nvim
+mkdir -p ${HOME}/.config/nvim/lua
 add-link .config/nvim/init.lua .config/nvim/init.lua
-add-link .config/nvim/lua .config/nvim/lua
+add-link .config/nvim/lua/lazy_nvim.lua .config/nvim/lua/lazy_nvim.lua
+add-link .config/nvim/lua/plugins.lua .config/nvim/lua/plugins.lua
 
 : "git"
 mkdir -p ${HOME}/.config/git
