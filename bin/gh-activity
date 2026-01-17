@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+
+# 引数の処理
+if [ -z "$1" ]; then
+  TARGET_DATE_STR="now"
+elif [[ "$1" =~ ^-?[0-9]+$ ]]; then
+  TARGET_DATE_STR="$1 day"
+else
+  TARGET_DATE_STR="$1"
+fi
+
+# 日付計算
+REPORT_DATE=$(date -d "$TARGET_DATE_STR - 4 hours" +%Y-%m-%d)
+NEXT_DATE=$(date -d "$REPORT_DATE + 1 day" +%Y-%m-%d)
+
+# 厳密なタイムスタンプを作成 (04:00 JST 区切り)
+FROM="${REPORT_DATE}T04:00:00+09:00"
+TO="${NEXT_DATE}T04:00:00+09:00"
+
+echo "Target Date: $REPORT_DATE (Range: $FROM ~ $TO)"
+
+# ---------------------------------------------------------
+# 1. コミットの取得 (gh search commits を使用)
+# ---------------------------------------------------------
+echo "Fetching commits..."
+COMMIT_DATA=$(gh search commits --author "@me" --committer-date "$FROM..$TO" --json repository --jq '
+  [.[] | .repository.name] 
+  | group_by(.) 
+  | map({name: .[0], count: length}) 
+  | sort_by(-.count)
+')
+
+TOTAL_COMMITS=$(echo "$COMMIT_DATA" | jq '[.[] | .count] | add // 0')
+COMMIT_LIST=$(echo "$COMMIT_DATA" | jq -r '.[] | "- \(.name): \(.count) commits"')
+
+# ---------------------------------------------------------
+# 2. IssueとPRの取得 (GraphQLを使用)
+# ---------------------------------------------------------
+echo "Fetching issues & PRs..."
+GRAPHQL_DATA=$(gh api graphql -f from="$FROM" -f to="$TO" -f query='
+  query($from: DateTime!, $to: DateTime!) {
+    viewer{
+      calendar: contributionsCollection(from: $from, to: $to) {
+        issueContributions(first: 10) {
+          nodes {
+            issue {
+              title
+              url
+              number
+              repository { nameWithOwner }
+            }
+          }
+        }
+        pullRequestContributions(first: 10) {
+          nodes {
+            pullRequest {
+              title
+              url
+              number
+              repository { nameWithOwner }
+            }
+          }
+        }
+      }
+    }
+  }
+' --jq '.')
+
+# ---------------------------------------------------------
+# 3. 出力
+# ---------------------------------------------------------
+echo ""
+echo "startedAt: $FROM"
+echo "endedAt: $TO"
+echo ""
+echo "### 📊 Total Contributions: $TOTAL_COMMITS"
+echo ""
+echo "### 💻 Commits by Repository"
+if [ -z "$COMMIT_LIST" ]; then
+  echo "No commits found."
+else
+  echo "$COMMIT_LIST"
+fi
+
+echo ""
+echo "### 🐛 Issues Created"
+# 変更点: [] の中に (repo#num) を入れました
+echo "$GRAPHQL_DATA" | jq -r '
+  .data.viewer.calendar.issueContributions.nodes[] | 
+  "- [\(.issue.title) (\(.issue.repository.nameWithOwner)#\(.issue.number))](\(.issue.url))"
+'
+
+echo ""
+echo "### 🔀 Pull Requests Created"
+# 変更点: [] の中に (repo#num) を入れました
+echo "$GRAPHQL_DATA" | jq -r '
+  .data.viewer.calendar.pullRequestContributions.nodes[] | 
+  "- [\(.pullRequest.title) (\(.pullRequest.repository.nameWithOwner)#\(.pullRequest.number))](\(.pullRequest.url))"
+'
