@@ -41,6 +41,14 @@ add-link .config/starship.toml .config/starship.toml
 : "erdtree"
 add-link .config/erdtree.toml .config/erdtree.toml
 
+: "gemini"
+mkdir -p ${HOME}/.gemini
+add-link .gemini/GEMINI.md .gemini/GEMINI.md
+add-link .gemini/v5.md .gemini/v5.md
+add-link .gemini/planning-mode-guard.md .gemini/planning-mode-guard.md
+add-link .gemini/commit-message-format.md .gemini/commit-message-format.md
+add-link .gemini/pr-message-format.md .gemini/pr-message-format.md
+
 : "vim"
 add-link home/.vimrc .vimrc
 
