@@ -15,12 +15,12 @@ $ curl -sSLf setup.kmdk.uk/setup.sh | bash
 Windows
 
 ```powershell
-$ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://setup.kmdk.uk/setup.ps1'))
+Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://setup.kmdk.uk/setup.ps1'))
 ```
 
 ## benchmark
 
-```
+```sh
 # 通常計測（5回実行して平均を表示）
 bash scripts/benchmark.sh
 # 回数指定
@@ -32,7 +32,7 @@ bash scripts/benchmark.sh --profile
 
 2026/01/13
 
-```
+```sh
 Analyzing profile log...
 Total entries: 884
 Total duration: 0.4139s
@@ -66,3 +66,7 @@ Total duration: 0.4139s
 ### Mac
 
 - **brew**: 基本的なパッケージマネージャ。なるべくこれで完結させる。その他は今のところ考えていない。
+
+## .gemini
+
+ref: <https://github.com/kinopeee/windsurf-antigravity-rules>

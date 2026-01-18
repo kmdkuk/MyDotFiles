@@ -69,8 +69,8 @@ fi
 # Bindings
 bind -x '"\C-r": peco_search_history'
 
-# Starship
-eval "$(starship init bash)"
-
 # Check for updates
 check_dirty_and_update
+
+# Starship
+eval "$(starship init bash)"
