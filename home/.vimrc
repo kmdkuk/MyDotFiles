@@ -263,10 +263,11 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
+set t_Co=256
+set termguicolors
 set background=dark
 " colorscheme molokai
 colorscheme iceberg
-set t_Co=256
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)

@@ -25,6 +25,14 @@ New-Item -Force -Type SymbolicLink $HOME\.config\git\template -Value ${DOTFILES_
 New-Item -Force -Type SymbolicLink $HOME\.config\git\ignore -Value ${DOTFILES_HOME}\.config\git\ignore
 New-Item -Force -Type SymbolicLink $HOME\.config\git\local.config -Value ${DOTFILES_HOME}\.config\git\win.config
 
+# wezterm
+Write-Output "wezterm"
+if (!(Test-Path -Path $HOME\.config\wezterm)) {
+    mkdir -p $HOME\.config\wezterm
+}
+New-Item -Force -Type SymbolicLink $HOME\.config\wezterm\wezterm.lua -Value ${DOTFILES_HOME}\.config\wezterm\wezterm.lua
+New-Item -Force -Type SymbolicLink $HOME\.config\wezterm\keybinds.lua -Value ${DOTFILES_HOME}\.config\wezterm\keybinds.lua
+
 # Powershell profile
 Write-Output "Powershell profile"
 New-Item -Force -Type SymbolicLink $HOME\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1 -Value ${DOTFILES_HOME}\windows\Microsoft.PowerShell_profile.ps1
