@@ -1,21 +1,52 @@
 #!/usr/bin/env bash
 
 # 引数の処理
-if [ -z "$1" ]; then
+if [ "$1" == "weekly" ]; then
+  # 週次モード
+  MODE="weekly"
+  
+  # 今週の月曜日を計算
+  # %u: 1 (Mon) .. 7 (Sun)
+  dow=$(date +%u)
+  monday_offset=$((dow-1))
+  this_monday=$(date -d "-$monday_offset days" +%Y-%m-%d)
+  
+  # 第2引数でオフセット指定 (デフォルト 0)
+  # weekly -1 => 先週
+  week_offset=${2:-0}
+  diff_days=$((week_offset * 7))
+  
+  REPORT_DATE=$(date -d "$this_monday $diff_days days" +%Y-%m-%d)
+  NEXT_DATE=$(date -d "$REPORT_DATE + 7 days" +%Y-%m-%d)
+  
+  # 範囲: 月曜 04:00 〜 翌月曜 04:00
+  FROM="${REPORT_DATE}T04:00:00+09:00"
+  TO="${NEXT_DATE}T04:00:00+09:00"
+
+elif [ -z "$1" ]; then
+  # デフォルト: 今日 (Yesterday 04:00 ~ Today 04:00 context usually, or simply T04:00 based logic below)
+  # 元のロジック: REPORT_DATE="now" -> date -d "now - 4 hours"
+  MODE="daily"
   TARGET_DATE_STR="now"
 elif [[ "$1" =~ ^-?[0-9]+$ ]]; then
+  # 数値指定: 日付オフセット (Daily)
+  MODE="daily"
   TARGET_DATE_STR="$1 day"
 else
+  # その他日付指定など
+  MODE="daily"
   TARGET_DATE_STR="$1"
 fi
 
-# 日付計算
-REPORT_DATE=$(date -d "$TARGET_DATE_STR - 4 hours" +%Y-%m-%d)
-NEXT_DATE=$(date -d "$REPORT_DATE + 1 day" +%Y-%m-%d)
+# 日付計算 (Dailyモードの場合のみ再計算が必要、WeeklyはすでにFROM/TO設定済み)
+if [ "$MODE" == "daily" ]; then
+  REPORT_DATE=$(date -d "$TARGET_DATE_STR - 4 hours" +%Y-%m-%d)
+  NEXT_DATE=$(date -d "$REPORT_DATE + 1 day" +%Y-%m-%d)
 
-# 厳密なタイムスタンプを作成 (04:00 JST 区切り)
-FROM="${REPORT_DATE}T04:00:00+09:00"
-TO="${NEXT_DATE}T04:00:00+09:00"
+  # 厳密なタイムスタンプを作成 (04:00 JST 区切り)
+  FROM="${REPORT_DATE}T04:00:00+09:00"
+  TO="${NEXT_DATE}T04:00:00+09:00"
+fi
 
 echo "Target Date: $REPORT_DATE (Range: $FROM ~ $TO)"
 
@@ -23,7 +54,7 @@ echo "Target Date: $REPORT_DATE (Range: $FROM ~ $TO)"
 # 1. コミットの取得 (gh search commits を使用)
 # ---------------------------------------------------------
 echo "Fetching commits..."
-COMMIT_DATA=$(gh search commits --author "@me" --committer-date "$FROM..$TO" --json repository --jq '
+COMMIT_DATA=$(gh search commits --author "@me" --committer-date "$FROM..$TO" --limit 1000 --json repository --jq '
   [.[] | .repository.name] 
   | group_by(.) 
   | map({name: .[0], count: length}) 
