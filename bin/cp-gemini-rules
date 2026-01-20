@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-RULE_PATH=$(ghq list -p | grep kmdkuk/gemini-rules)/ja/.agent
+RULE_PATH=$(ghq list -p | grep kmdkuk/antigravity-rules)/ja/.agent
 
 cp -r $RULE_PATH .
