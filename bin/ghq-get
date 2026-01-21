@@ -2,8 +2,7 @@
 
 set -e
 
-name=${1:-kmdkuk}
-url="$(gh-remote-list ${name})"
+url="$(gh-remote-list "$@")"
 if [ -n "$url" ]; then
     ghq get $url
 fi

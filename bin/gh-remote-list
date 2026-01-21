@@ -1,4 +1,19 @@
 #!/usr/bin/env bash
 
-name=${1:-kmdkuk}
-gh repo list $name -L 1000 --json url,nameWithOwner --jq ".[].url" | sort | peco
+name="kmdkuk"
+show_archived=false
+
+for arg in "$@"; do
+    if [[ "$arg" == "--all" ]]; then
+        show_archived=true
+    else
+        name="$arg"
+    fi
+done
+
+opts=""
+if [[ "$show_archived" == "false" ]]; then
+    opts="--no-archived"
+fi
+
+gh repo list "$name" -L 1000 $opts --json url,nameWithOwner --jq ".[].url" | sort | peco
