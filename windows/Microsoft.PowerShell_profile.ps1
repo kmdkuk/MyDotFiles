@@ -6,24 +6,42 @@ $ENV:Path = "${HOME}\bin;" + $ENV:Path
 
 Set-Alias git hub
 
-function ghq-cd {
-  cd $(ghq list  --full-path | peco)
+function Enter-GhqRepo {
+  Set-Location $(ghq list  --full-path | peco)
 }
+Set-Alias ghq-cd Enter-GhqRepo
 
-function ghq-get() {
+function Invoke-GhqGet() {
   $name = "kmdkuk"
   if ($1 -eq "") {
     name=$1
   }
-  $url = "$(gh repo list $name -L 1000 --json url --jq '.[].url' | sort | peco)"
+  $url = "$(gh repo list $name -L 1000 --json url --jq '.[].url' | Sort-Object | peco)"
   if ("$url" -ne "") {
     ghq get $url
   }
 }
+Set-Alias ghq-get Invoke-GhqGet
 
-function ghq-update-all() {
+function Update-AllGhqRepos() {
   ghq list | ghq get --update --parallel
 }
+Set-Alias ghq-update-all Update-AllGhqRepos
+
+function Show-PecoHistory {
+  $line = $null
+  $cursor = $null
+  [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+  $history = [Microsoft.PowerShell.PSConsoleReadLine]::GetHistoryItems() | Sort-Object -Descending Id | Select-Object -Unique CommandLine
+  $selected = $history.CommandLine | peco --query "$line"
+
+  if ($selected) {
+    [Microsoft.PowerShell.PSConsoleReadLine]::ReplaceInput($selected)
+  }
+}
+
+Set-PSReadLineKeyHandler -Key Ctrl+r -ScriptBlock { Show-PecoHistory }
 
 Invoke-Expression (&starship init powershell)
 

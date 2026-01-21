@@ -1,117 +1,117 @@
 {
   "apps": [
     {
-      "Source": "main",
       "Info": "",
+      "Name": "7zip",
+      "Source": "main",
       "Updated": "2026-01-14T01:17:26.5942352+09:00",
-      "Version": "25.01",
-      "Name": "7zip"
+      "Version": "25.01"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "aria2",
+      "Source": "main",
       "Updated": "2026-01-14T06:27:44.8082732+09:00",
-      "Version": "1.37.0-1",
-      "Name": "aria2"
+      "Version": "1.37.0-1"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "dark",
+      "Source": "main",
       "Updated": "2026-01-14T05:58:39.0523895+09:00",
-      "Version": "3.14.1",
-      "Name": "dark"
+      "Version": "3.14.1"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "gh",
+      "Source": "main",
       "Updated": "2026-01-14T05:50:50.9387321+09:00",
-      "Version": "2.83.2",
-      "Name": "gh"
+      "Version": "2.83.2"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "ghq",
+      "Source": "main",
       "Updated": "2026-01-14T05:55:28.2255999+09:00",
-      "Version": "1.8.0",
-      "Name": "ghq"
+      "Version": "1.8.0"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "git",
+      "Source": "main",
       "Updated": "2026-01-14T12:31:57.4090754+09:00",
-      "Version": "2.52.0",
-      "Name": "git"
+      "Version": "2.52.0"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "go",
+      "Source": "main",
       "Updated": "2026-01-14T05:56:37.2620998+09:00",
-      "Version": "1.25.5",
-      "Name": "go"
+      "Version": "1.25.5"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "hub",
+      "Source": "main",
       "Updated": "2026-01-14T20:47:51.3485207+09:00",
-      "Version": "2.14.2",
-      "Name": "hub"
+      "Version": "2.14.2"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "nodejs-lts",
+      "Source": "main",
       "Updated": "2026-01-14T05:57:13.4832536+09:00",
-      "Version": "24.13.0",
-      "Name": "nodejs-lts"
+      "Version": "24.13.0"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "peco",
+      "Source": "main",
       "Updated": "2026-01-14T05:55:17.8213055+09:00",
-      "Version": "0.5.11",
-      "Name": "peco"
+      "Version": "0.5.11"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "python",
+      "Source": "main",
       "Updated": "2026-01-14T05:59:11.3080592+09:00",
-      "Version": "3.14.2",
-      "Name": "python"
+      "Version": "3.14.2"
     },
     {
+      "Info": "",
+      "Name": "scoop-search",
       "Source": null,
-      "Info": "",
       "Updated": "2026-01-13T23:45:12.5231024+09:00",
-      "Version": "2.1.0",
-      "Name": "scoop-search"
+      "Version": "2.1.0"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "starship",
+      "Source": "main",
       "Updated": "2026-01-14T01:19:57.2415866+09:00",
-      "Version": "1.24.2",
-      "Name": "starship"
+      "Version": "1.24.2"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "uv",
+      "Source": "main",
       "Updated": "2026-01-14T05:59:35.7682464+09:00",
-      "Version": "0.9.24",
-      "Name": "uv"
+      "Version": "0.9.24"
     },
     {
-      "Source": "main",
       "Info": "",
+      "Name": "vim",
+      "Source": "main",
       "Updated": "2026-01-14T05:51:30.9015475+09:00",
-      "Version": "9.1.1825",
-      "Name": "vim"
+      "Version": "9.1.1825"
     }
   ],
   "buckets": [
     {
+      "Manifests": 1418,
       "Name": "main",
       "Source": "https://github.com/ScoopInstaller/Main",
-      "Updated": "2026-01-14T01:31:28+09:00",
-      "Manifests": 1418
+      "Updated": "2026-01-14T01:31:28+09:00"
     }
   ]
 }
