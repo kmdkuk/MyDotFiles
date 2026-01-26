@@ -33,4 +33,11 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   export AQUA_GLOBAL_CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
   echo "Install tools by aqua..."
   aqua i -l -a
+  if ! check_command rustc; then
+    rustup-init
+  fi
+  if check_command cargo; then
+    cargo install cargo-binstall
+    cargo binstall --strategies crate-meta-data jj-cli
+  fi
 fi

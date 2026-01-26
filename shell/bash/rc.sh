@@ -60,6 +60,7 @@ load_completion aqua "aqua completion bash"
 load_completion kubectl "kubectl completion bash"
 load_completion kubebuilder "kubebuilder completion bash"
 load_completion gh "gh completion -s bash"
+load_completion rustup "rustup completions bash cargo"
 
 alias g='git'
 if type __git_complete &>/dev/null; then

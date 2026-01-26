@@ -14,6 +14,10 @@ export GOPATH=${HOME}/go
 export PATH="/usr/local/go/bin:${PATH}"
 export PATH="${GOPATH}/bin:${PATH}"
 
+# Rust
+source $HOME/.cargo/env
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # Local bin
 export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

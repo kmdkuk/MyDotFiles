@@ -18,3 +18,4 @@ packages:
   - name: solidiquis/erdtree@v3.1.2
   - name: jqlang/jq@jq-1.8.1
   - name: nodejs/node@v25.4.0
+  - name: rust-lang/rustup@1.28.2
