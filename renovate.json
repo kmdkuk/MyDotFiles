@@ -5,5 +5,6 @@
     "github>aquaproj/aqua-renovate-config:file#2.10.0(\\.config/aquaproj-aqua/aqua.yaml)",
     "github>aquaproj/aqua-renovate-config:installer-script#2.10.0(bin/install-tools)"
   ],
-  "automerge": true
+  "automerge": true,
+  "platformAutomerge": true
 }
