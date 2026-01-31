@@ -1,3 +1,5 @@
 .DS_Store
 .idea_
 .tool-versions
+
+**/.claude/settings.local.json
