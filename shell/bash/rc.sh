@@ -61,6 +61,7 @@ load_completion kubectl "kubectl completion bash"
 load_completion kubebuilder "kubebuilder completion bash"
 load_completion gh "gh completion -s bash"
 load_completion rustup "rustup completions bash cargo"
+load_completion "${DOTFILES_ROOT}/shell/completions/gh-activity.bash"
 
 alias g='git'
 if type __git_complete &>/dev/null; then

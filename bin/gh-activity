@@ -23,6 +23,23 @@ if [ "$1" == "weekly" ]; then
   FROM="${REPORT_DATE}T04:00:00+09:00"
   TO="${NEXT_DATE}T04:00:00+09:00"
 
+elif [ "$1" == "monthly" ]; then
+  # 月次モード
+  MODE="monthly"
+
+  # 今月の1日を計算
+  this_month_start=$(date +%Y-%m-01)
+  
+  # 第2引数でオフセット指定 (デフォルト 0)
+  # monthly -1 => 先月
+  month_offset=${2:-0}
+  
+  REPORT_DATE=$(date -d "$this_month_start $month_offset month" +%Y-%m-%d)
+  NEXT_DATE=$(date -d "$REPORT_DATE + 1 month" +%Y-%m-%d)
+  
+  # 範囲: 1日 04:00 〜 翌月1日 04:00
+  FROM="${REPORT_DATE}T04:00:00+09:00"
+  TO="${NEXT_DATE}T04:00:00+09:00"
 elif [ -z "$1" ]; then
   # デフォルト: 今日 (Yesterday 04:00 ~ Today 04:00 context usually, or simply T04:00 based logic below)
   # 元のロジック: REPORT_DATE="now" -> date -d "now - 4 hours"
