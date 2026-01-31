@@ -19,3 +19,5 @@ packages:
   - name: jqlang/jq@jq-1.8.1
   - name: nodejs/node@v25.5.0
   - name: rust-lang/rustup@1.28.2
+  - name: anthropics/claude-code@v2.1.27
+  - name: openai/codex@rust-v0.93.0
