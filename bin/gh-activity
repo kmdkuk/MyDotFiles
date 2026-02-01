@@ -1,147 +1,159 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# 引数の処理
-if [ "$1" == "weekly" ]; then
-  # 週次モード
-  MODE="weekly"
-  
-  # 今週の月曜日を計算
-  # %u: 1 (Mon) .. 7 (Sun)
+# =========================================
+# 定数
+# =========================================
+readonly TZ_OFFSET="+09:00"
+readonly DAY_START_HOUR="04:00:00"
+
+# =========================================
+# ヘルプ
+# =========================================
+show_help() {
+  cat << EOF
+Usage: gh-activity [MODE] [OFFSET]
+
+Modes:
+  daily   [N]   日次 (デフォルト)  N=-1 で昨日
+  weekly  [N]   週次              N=-1 で先週
+  monthly [N]   月次              N=-1 で先月
+
+Examples:
+  gh-activity              今日のアクティビティ
+  gh-activity daily -1     昨日のアクティビティ
+  gh-activity weekly       今週のアクティビティ
+  gh-activity weekly -1    先週のアクティビティ
+  gh-activity monthly      今月のアクティビティ
+EOF
+}
+
+# =========================================
+# 日付範囲計算
+# =========================================
+calc_daily_range() {
+  local offset=${1:-0}
+  local base_date next_date
+  base_date=$(date -d "$offset day - 4 hours" +%Y-%m-%d)
+  next_date=$(date -d "$base_date + 1 day" +%Y-%m-%d)
+  echo "$base_date" "$next_date"
+}
+
+calc_weekly_range() {
+  local offset=${1:-0}
+  local dow monday diff_days base_date next_date
   dow=$(date +%u)
-  monday_offset=$((dow-1))
-  this_monday=$(date -d "-$monday_offset days" +%Y-%m-%d)
-  
-  # 第2引数でオフセット指定 (デフォルト 0)
-  # weekly -1 => 先週
-  week_offset=${2:-0}
-  diff_days=$((week_offset * 7))
-  
-  REPORT_DATE=$(date -d "$this_monday $diff_days days" +%Y-%m-%d)
-  NEXT_DATE=$(date -d "$REPORT_DATE + 7 days" +%Y-%m-%d)
-  
-  # 範囲: 月曜 04:00 〜 翌月曜 04:00
-  FROM="${REPORT_DATE}T04:00:00+09:00"
-  TO="${NEXT_DATE}T04:00:00+09:00"
+  monday=$(date -d "-$((dow - 1)) days" +%Y-%m-%d)
+  diff_days=$((offset * 7))
+  base_date=$(date -d "$monday $diff_days days" +%Y-%m-%d)
+  next_date=$(date -d "$base_date + 7 days" +%Y-%m-%d)
+  echo "$base_date" "$next_date"
+}
 
-elif [ "$1" == "monthly" ]; then
-  # 月次モード
-  MODE="monthly"
+calc_monthly_range() {
+  local offset=${1:-0}
+  local this_month base_date next_date
+  this_month=$(date +%Y-%m-01)
+  base_date=$(date -d "$this_month $offset month" +%Y-%m-%d)
+  next_date=$(date -d "$base_date + 1 month" +%Y-%m-%d)
+  echo "$base_date" "$next_date"
+}
 
-  # 今月の1日を計算
-  this_month_start=$(date +%Y-%m-01)
-  
-  # 第2引数でオフセット指定 (デフォルト 0)
-  # monthly -1 => 先月
-  month_offset=${2:-0}
-  
-  REPORT_DATE=$(date -d "$this_month_start $month_offset month" +%Y-%m-%d)
-  NEXT_DATE=$(date -d "$REPORT_DATE + 1 month" +%Y-%m-%d)
-  
-  # 範囲: 1日 04:00 〜 翌月1日 04:00
-  FROM="${REPORT_DATE}T04:00:00+09:00"
-  TO="${NEXT_DATE}T04:00:00+09:00"
-elif [ -z "$1" ]; then
-  # デフォルト: 今日 (Yesterday 04:00 ~ Today 04:00 context usually, or simply T04:00 based logic below)
-  # 元のロジック: REPORT_DATE="now" -> date -d "now - 4 hours"
-  MODE="daily"
-  TARGET_DATE_STR="now"
-elif [[ "$1" =~ ^-?[0-9]+$ ]]; then
-  # 数値指定: 日付オフセット (Daily)
-  MODE="daily"
-  TARGET_DATE_STR="$1 day"
-else
-  # その他日付指定など
-  MODE="daily"
-  TARGET_DATE_STR="$1"
-fi
+# =========================================
+# データ取得
+# =========================================
+fetch_commits() {
+  local from=$1 to=$2
+  gh search commits --author "@me" --committer-date "$from..$to" --limit 1000 --json repository --jq '
+    [.[] | .repository.name]
+    | group_by(.)
+    | map({name: .[0], count: length})
+    | sort_by(-.count)
+  '
+}
 
-# 日付計算 (Dailyモードの場合のみ再計算が必要、WeeklyはすでにFROM/TO設定済み)
-if [ "$MODE" == "daily" ]; then
-  REPORT_DATE=$(date -d "$TARGET_DATE_STR - 4 hours" +%Y-%m-%d)
-  NEXT_DATE=$(date -d "$REPORT_DATE + 1 day" +%Y-%m-%d)
-
-  # 厳密なタイムスタンプを作成 (04:00 JST 区切り)
-  FROM="${REPORT_DATE}T04:00:00+09:00"
-  TO="${NEXT_DATE}T04:00:00+09:00"
-fi
-
-echo "Target Date: $REPORT_DATE (Range: $FROM ~ $TO)"
-
-# ---------------------------------------------------------
-# 1. コミットの取得 (gh search commits を使用)
-# ---------------------------------------------------------
-echo "Fetching commits..."
-COMMIT_DATA=$(gh search commits --author "@me" --committer-date "$FROM..$TO" --limit 1000 --json repository --jq '
-  [.[] | .repository.name] 
-  | group_by(.) 
-  | map({name: .[0], count: length}) 
-  | sort_by(-.count)
-')
-
-TOTAL_COMMITS=$(echo "$COMMIT_DATA" | jq '[.[] | .count] | add // 0')
-COMMIT_LIST=$(echo "$COMMIT_DATA" | jq -r '.[] | "- \(.name): \(.count) commits"')
-
-# ---------------------------------------------------------
-# 2. IssueとPRの取得 (GraphQLを使用)
-# ---------------------------------------------------------
-echo "Fetching issues & PRs..."
-GRAPHQL_DATA=$(gh api graphql -f from="$FROM" -f to="$TO" -f query='
-  query($from: DateTime!, $to: DateTime!) {
-    viewer{
-      calendar: contributionsCollection(from: $from, to: $to) {
-        issueContributions(first: 10) {
-          nodes {
-            issue {
-              title
-              url
-              number
-              repository { nameWithOwner }
-            }
+fetch_contributions() {
+  local from=$1 to=$2
+  gh api graphql -f from="$from" -f to="$to" -f query='
+    query($from: DateTime!, $to: DateTime!) {
+      viewer {
+        calendar: contributionsCollection(from: $from, to: $to) {
+          issueContributions(first: 10) {
+            nodes { issue { title url number repository { nameWithOwner } } }
           }
-        }
-        pullRequestContributions(first: 10) {
-          nodes {
-            pullRequest {
-              title
-              url
-              number
-              repository { nameWithOwner }
-            }
+          pullRequestContributions(first: 10) {
+            nodes { pullRequest { title url number repository { nameWithOwner } } }
           }
         }
       }
     }
-  }
-' --jq '.')
+  '
+}
 
-# ---------------------------------------------------------
-# 3. 出力
-# ---------------------------------------------------------
-echo ""
-echo "startedAt: $FROM"
-echo "endedAt: $TO"
-echo ""
-echo "### 📊 Total Contributions: $TOTAL_COMMITS"
-echo ""
-echo "### 💻 Commits by Repository"
-if [ -z "$COMMIT_LIST" ]; then
-  echo "No commits found."
-else
-  echo "$COMMIT_LIST"
-fi
+# =========================================
+# 出力
+# =========================================
+print_report() {
+  local from=$1 to=$2 commit_data=$3 graphql_data=$4
 
-echo ""
-echo "### 🐛 Issues Created"
-# 変更点: [] の中に (repo#num) を入れました
-echo "$GRAPHQL_DATA" | jq -r '
-  .data.viewer.calendar.issueContributions.nodes[] | 
-  "- [\(.issue.title) (\(.issue.repository.nameWithOwner)#\(.issue.number))](\(.issue.url))"
-'
+  local total_commits commit_list
+  total_commits=$(echo "$commit_data" | jq '[.[] | .count] | add // 0')
+  commit_list=$(echo "$commit_data" | jq -r '.[] | "- \(.name): \(.count) commits"')
 
-echo ""
-echo "### 🔀 Pull Requests Created"
-# 変更点: [] の中に (repo#num) を入れました
-echo "$GRAPHQL_DATA" | jq -r '
-  .data.viewer.calendar.pullRequestContributions.nodes[] | 
-  "- [\(.pullRequest.title) (\(.pullRequest.repository.nameWithOwner)#\(.pullRequest.number))](\(.pullRequest.url))"
-'
+  echo ""
+  echo "Period: $from ~ $to"
+  echo ""
+  echo "### 📊 Total Commits: $total_commits"
+  echo ""
+  echo "### 💻 Commits by Repository"
+  echo "${commit_list:-No commits found.}"
+  echo ""
+  echo "### 🐛 Issues Created"
+  echo "$graphql_data" | jq -r '
+    .data.viewer.calendar.issueContributions.nodes // [] | .[] |
+    "- [\(.issue.title) (\(.issue.repository.nameWithOwner)#\(.issue.number))](\(.issue.url))"
+  ' | grep . || echo "No issues found."
+  echo ""
+  echo "### 🔀 Pull Requests Created"
+  echo "$graphql_data" | jq -r '
+    .data.viewer.calendar.pullRequestContributions.nodes // [] | .[] |
+    "- [\(.pullRequest.title) (\(.pullRequest.repository.nameWithOwner)#\(.pullRequest.number))](\(.pullRequest.url))"
+  ' | grep . || echo "No PRs found."
+}
+
+# =========================================
+# メイン
+# =========================================
+main() {
+  local mode="daily"
+  local offset=0
+
+  # 引数パース
+  case "${1:-}" in
+    -h|--help) show_help; exit 0 ;;
+    daily)     mode="daily";   offset=${2:-0} ;;
+    weekly)    mode="weekly";  offset=${2:-0} ;;
+    monthly)   mode="monthly"; offset=${2:-0} ;;
+    "")        mode="daily";   offset=0 ;;
+    *)         mode="daily";   offset=${1:-0} ;;
+  esac
+
+  # 日付範囲計算
+  local base_date next_date
+  read -r base_date next_date <<< "$(calc_${mode}_range "$offset")"
+
+  local from="${base_date}T${DAY_START_HOUR}${TZ_OFFSET}"
+  local to="${next_date}T${DAY_START_HOUR}${TZ_OFFSET}"
+
+  echo "Fetching $mode activity ($base_date)..."
+
+  # データ取得
+  local commit_data graphql_data
+  commit_data=$(fetch_commits "$from" "$to")
+  graphql_data=$(fetch_contributions "$from" "$to")
+
+  # 出力
+  print_report "$from" "$to" "$commit_data" "$graphql_data"
+}
+
+main "$@"
