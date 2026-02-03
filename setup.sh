@@ -48,6 +48,17 @@ add-link .gemini/v5.md .gemini/v5.md
 add-link .gemini/planning-mode-guard.md .gemini/planning-mode-guard.md
 add-link .gemini/commit-message-format.md .gemini/commit-message-format.md
 add-link .gemini/pr-message-format.md .gemini/pr-message-format.md
+add-link .gemini/commands .gemini/commands
+
+: "claude"
+mkdir -p ${HOME}/.claude
+add-link .claude/CLAUDE.md .claude/CLAUDE.md
+add-link .claude/commands .claude/commands
+
+: "codex"
+mkdir -p ${HOME}/.codex
+add-link .codex/AGENTS.md .codex/AGENTS.md
+add-link .codex/prompts .codex/prompts
 
 : "vim"
 add-link home/.vimrc .vimrc
