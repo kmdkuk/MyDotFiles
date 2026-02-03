@@ -53,6 +53,7 @@ add-link .gemini/commands .gemini/commands
 : "claude"
 mkdir -p ${HOME}/.claude
 add-link .claude/CLAUDE.md .claude/CLAUDE.md
+add-link .claude/WRITING.md .claude/WRITING.md
 add-link .claude/commands .claude/commands
 
 : "codex"
