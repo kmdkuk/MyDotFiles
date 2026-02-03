@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
-  "CreationDate": "2026-01-22T16:38:25.265+09:00",
+  "CreationDate": "2026-02-03T22:13:59.59+09:00",
   "Sources": [
     {
       "Packages": [
@@ -38,6 +38,9 @@
           "PackageIdentifier": "Discord.Discord"
         },
         {
+          "PackageIdentifier": "DistroAV.DistroAV"
+        },
+        {
           "PackageIdentifier": "Docker.DockerDesktop"
         },
         {
@@ -68,6 +71,9 @@
           "PackageIdentifier": "Microsoft.DotNet.SDK.10"
         },
         {
+          "PackageIdentifier": "Microsoft.DotNet.SDK.8"
+        },
+        {
           "PackageIdentifier": "Microsoft.Edge"
         },
         {
@@ -89,6 +95,9 @@
           "PackageIdentifier": "Microsoft.VCRedist.2013.x64"
         },
         {
+          "PackageIdentifier": "Microsoft.VCRedist.2013.x86"
+        },
+        {
           "PackageIdentifier": "Microsoft.VCRedist.2015+.x64"
         },
         {
@@ -105,6 +114,9 @@
         },
         {
           "PackageIdentifier": "Mozilla.Firefox"
+        },
+        {
+          "PackageIdentifier": "NDI.NDITools"
         },
         {
           "PackageIdentifier": "Notion.Notion"
@@ -154,5 +166,5 @@
       }
     }
   ],
-  "WinGetVersion": "1.12.440"
+  "WinGetVersion": "1.12.460"
 }
