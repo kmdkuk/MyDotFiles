@@ -21,4 +21,4 @@ packages:
   - name: nodejs/node@v25.6.1
   - name: rust-lang/rustup@1.28.2
   - name: anthropics/claude-code@v2.1.38
-  - name: openai/codex@rust-v0.98.0
+  - name: openai/codex@rust-v0.99.0
