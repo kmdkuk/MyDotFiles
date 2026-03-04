@@ -22,5 +22,5 @@ packages:
   - name: rust-lang/rustup@1.28.2
   - name: anthropics/claude-code@v2.1.38
   - name: openai/codex@rust-v0.107.0
-  - name: jetify-com/devbox@0.16.0
+  - name: jetify-com/devbox@0.17.0
   - name: aws/aws-cli@2.33.25
