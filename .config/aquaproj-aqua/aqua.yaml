@@ -7,7 +7,7 @@ packages:
   - name: neovim/neovim@v0.12.1
   - name: cli/cli@v2.89.0
   - name: github/hub@v2.14.2
-  - name: x-motemen/ghq@v1.9.4
+  - name: x-motemen/ghq@v1.10.0
   - name: golang/go@go1.26.2
   - name: golangci/golangci-lint@v2.11.4
   - name: starship/starship@v1.24.2
