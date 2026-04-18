@@ -10,7 +10,7 @@ packages:
   - name: x-motemen/ghq@v1.10.1
   - name: golang/go@go1.26.2
   - name: golangci/golangci-lint@v2.11.4
-  - name: starship/starship@v1.24.2
+  - name: starship/starship@v1.25.0
   - name: derailed/k9s@v0.50.18
   - name: simonwhitaker/gibo@v3.0.20
   - name: b4b4r07/git-bump@v0.1.1
