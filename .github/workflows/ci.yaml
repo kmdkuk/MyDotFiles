@@ -15,7 +15,7 @@ jobs:
           - ubuntu-latest
           - macos-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install dotfiles
         run: ./setup.sh
       - name: Verify setup
@@ -23,7 +23,7 @@ jobs:
   run-setup-win:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install dotfiles
         run: ./setup.ps1
       - name: Verify setup
