@@ -23,7 +23,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   if ! check_command aqua; then
     echo "aqua is not found. Install aqua..."
     # https://aquaproj.github.io/docs/products/aqua-installer#shell-script
-    curl -sSfL -O https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.4/aqua-installer
+    curl -sSfL -O https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.5/aqua-installer
     echo "acd21cbb06609dd9a701b0032ba4c21fa37b0e3b5cc4c9d721cc02f25ea33a28  aqua-installer" | sha256sum -c -
     chmod +x aqua-installer
     ./aqua-installer
