@@ -3,10 +3,40 @@
 set -eu
 
 function check_command() {
-  if command -v $1 > /dev/null 2>&1; then
+  if command -v "$1" > /dev/null 2>&1; then
     return 0
   fi
   return 1
+}
+
+function run_as_root() {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
+}
+
+function is_ubuntu() {
+  if [ -r /etc/os-release ]; then
+    . /etc/os-release
+    [ "${ID:-}" = "ubuntu" ]
+    return
+  fi
+  return 1
+}
+
+function install_ubuntu_packages() {
+  echo "Install Ubuntu base packages..."
+  run_as_root apt-get update
+  run_as_root apt-get install -y \
+    build-essential \
+    ca-certificates \
+    curl \
+    git \
+    libssl-dev \
+    pkg-config \
+    unzip
 }
 
 
@@ -18,16 +48,23 @@ if [ "$(uname)" == 'Darwin' ]; then
   fi
   brew bundle --global || true
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  if is_ubuntu; then
+    install_ubuntu_packages
+  fi
+
   # Managed by brew on macOS
   # Managed by aqua
   if ! check_command aqua; then
     echo "aqua is not found. Install aqua..."
     # https://aquaproj.github.io/docs/products/aqua-installer#shell-script
-    curl -sSfL -O https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.5/aqua-installer
-    echo "acd21cbb06609dd9a701b0032ba4c21fa37b0e3b5cc4c9d721cc02f25ea33a28  aqua-installer" | sha256sum -c -
-    chmod +x aqua-installer
-    ./aqua-installer
-    rm aqua-installer
+    tmpdir="$(mktemp -d)"
+    trap 'rm -rf "$tmpdir"' EXIT
+    curl -sSfL -o "${tmpdir}/aqua-installer" https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.5/aqua-installer
+    echo "451028d56959cc738564885b1dbebc2691ea038ffde04e2472e4d486a3591146  ${tmpdir}/aqua-installer" | sha256sum -c -
+    chmod +x "${tmpdir}/aqua-installer"
+    "${tmpdir}/aqua-installer"
+    rm -rf "$tmpdir"
+    trap - EXIT
   fi
   export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
   export AQUA_GLOBAL_CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
