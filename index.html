@@ -12,11 +12,11 @@ else
 fi
 
 function add-link() {
-    if [ -z $1 -a -z $2 ]; then
-        : "invalid args 1: ${1}, 2: ${2}"
+    if [ -z "${1:-}" ] || [ -z "${2:-}" ]; then
+        : "invalid args 1: ${1:-}, 2: ${2:-}"
         exit 1
     fi
-    ln -sf ${dotfiles_home}/${1} ${HOME}/${2}
+    ln -sfn "${dotfiles_home}/${1}" "${HOME}/${2}"
 }
 
 
