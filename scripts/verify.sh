@@ -3,15 +3,24 @@ set -e
 
 echo "Starting verification..."
 
+dotfiles_home="${HOME}/MyDotFiles"
+source "${dotfiles_home}/scripts/links.sh"
+
 # 1. Check Symlinks
 echo "Checking symlinks..."
-LINKS=(
-    "$HOME/.bashrc"
-    "$HOME/.zshrc"
-    "$HOME/.config/git/config"
-    "$HOME/.config/starship.toml"
-    "$HOME/.config/nvim/init.lua"
-)
+LINKS=()
+for entry in "${DOTFILES_LINKS[@]}"; do
+    LINKS+=("${HOME}/${entry#*:}")
+done
+if [ "$(uname)" == 'Darwin' ]; then
+    for entry in "${DOTFILES_LINKS_DARWIN[@]}"; do
+        LINKS+=("${HOME}/${entry#*:}")
+    done
+else
+    for entry in "${DOTFILES_LINKS_LINUX[@]}"; do
+        LINKS+=("${HOME}/${entry#*:}")
+    done
+fi
 
 for link in "${LINKS[@]}"; do
     if [ -L "$link" ]; then
