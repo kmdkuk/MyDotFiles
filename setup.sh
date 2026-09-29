@@ -16,101 +16,40 @@ function add-link() {
         : "invalid args 1: ${1:-}, 2: ${2:-}"
         exit 1
     fi
+    mkdir -p "$(dirname "${HOME}/${2}")"
     ln -sfn "${dotfiles_home}/${1}" "${HOME}/${2}"
 }
 
+function add-links() {
+    # takes link entries ("src:dest") as positional args, not an array name,
+    # since macOS's default /bin/bash (3.2) doesn't support `local -n`.
+    local entry src dest
+    for entry in "$@"; do
+        src="${entry%%:*}"
+        dest="${entry#*:}"
+        add-link "$src" "$dest"
+    done
+}
+
+source "${dotfiles_home}/scripts/links.sh"
 
 : "prepare shimlink"
-
-: "fish"
-mkdir -p ${HOME}/.config/fish/functions
-add-link .config/fish/config.fish .config/fish/config.fish
-mkdir -p ${HOME}/.config/fish/completions;
-add-link home/completions/asdf.fish .config/fish/completions
-add-link .config/fish/functions/ghq-cd.fish .config/fish/functions/ghq-cd.fish
-add-link .config/fish/functions/check-update-dotfiles.fish .config/fish/functions/check-update-dotfiles.fish
-
-: "bash/zsh"
-add-link home/.bashrc .bashrc
-add-link home/.inputrc .inputrc
-add-link home/.zshrc .zshrc
-
-: "starship"
-add-link .config/starship.toml .config/starship.toml
-
-: "erdtree"
-add-link .config/erdtree.toml .config/erdtree.toml
-
-: "gemini"
-mkdir -p ${HOME}/.gemini
-add-link .gemini/GEMINI.md .gemini/GEMINI.md
-add-link .gemini/v5.md .gemini/v5.md
-add-link .gemini/planning-mode-guard.md .gemini/planning-mode-guard.md
-add-link .gemini/commit-message-format.md .gemini/commit-message-format.md
-add-link .gemini/pr-message-format.md .gemini/pr-message-format.md
-add-link .gemini/commands .gemini/commands
-
-: "claude"
-mkdir -p ${HOME}/.claude
-add-link .claude/CLAUDE.md .claude/CLAUDE.md
-add-link .claude/WRITING.md .claude/WRITING.md
-add-link .claude/commands .claude/commands
-
-: "codex"
-mkdir -p ${HOME}/.codex
-add-link .codex/AGENTS.md .codex/AGENTS.md
-add-link .codex/prompts .codex/prompts
-
-: "vim"
-add-link home/.vimrc .vimrc
-
-: "nvim"
-mkdir -p ${HOME}/.config/nvim/lua
-add-link .config/nvim/init.lua .config/nvim/init.lua
-add-link .config/nvim/lua/lazy_nvim.lua .config/nvim/lua/lazy_nvim.lua
-add-link .config/nvim/lua/plugins.lua .config/nvim/lua/plugins.lua
-
-: "git"
-mkdir -p ${HOME}/.config/git
-add-link .config/git/config .config/git/config
-add-link .config/git/template .config/git/template
-add-link .config/git/ignore .config/git/ignore
-add-link .config/git/work.config .config/git/work.config
-add-link .config/git/alias.config .config/git/alias.config
-
-add-link home/.ghqlist .ghqlist
-
-: "tmux"
-mkdir -p ${HOME}/.tmux
-add-link home/.tmux/iceberg.tmux.conf .tmux/iceberg.tmux.conf
-add-link home/.tmux.conf .tmux.conf
+add-links "${DOTFILES_LINKS[@]}"
 
 # each OS. support macOSOS or Linux
 if [ "$(uname)" == 'Darwin' ]; then
     : "macOS"
-    add-link home/.Brewfile .Brewfile
-    add-link home/.tmux/osx.tmux.conf .tmux/local.tmux.conf
-    add-link .config/git/osx.config .config/git/local.config
+    add-links "${DOTFILES_LINKS_DARWIN[@]}"
     # set defaults
     defaults write com.apple.finder CreateDesktop -boolean false
     killAll Finder
 fi
 if [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     : "Linux"
-    add-link home/.tmux/linux.tmux.conf .tmux/local.tmux.conf
-    add-link .config/git/linux.config .config/git/local.config
+    add-links "${DOTFILES_LINKS_LINUX[@]}"
 fi
 
-: "aqua"
-mkdir -p ${HOME}/.config/aquaproj-aqua
-add-link .config/aquaproj-aqua/aqua.yaml .config/aquaproj-aqua/aqua.yaml
-
 : "bin"
-mkdir -p ${HOME}/bin
-# bins="$(ls ${dotfiles_home}/bin)"
-# for b in ${bins[@]}; do
-#     add-link bin/$b bin/$b
-# done
 # Use globs instead of ls command substitution for safety
 for b in ${dotfiles_home}/bin/*; do
     filename=$(basename "$b")
