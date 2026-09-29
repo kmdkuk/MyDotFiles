@@ -21,9 +21,10 @@ function add-link() {
 }
 
 function add-links() {
-    local -n entries="$1"
+    # takes link entries ("src:dest") as positional args, not an array name,
+    # since macOS's default /bin/bash (3.2) doesn't support `local -n`.
     local entry src dest
-    for entry in "${entries[@]}"; do
+    for entry in "$@"; do
         src="${entry%%:*}"
         dest="${entry#*:}"
         add-link "$src" "$dest"
@@ -33,19 +34,19 @@ function add-links() {
 source "${dotfiles_home}/scripts/links.sh"
 
 : "prepare shimlink"
-add-links DOTFILES_LINKS
+add-links "${DOTFILES_LINKS[@]}"
 
 # each OS. support macOSOS or Linux
 if [ "$(uname)" == 'Darwin' ]; then
     : "macOS"
-    add-links DOTFILES_LINKS_DARWIN
+    add-links "${DOTFILES_LINKS_DARWIN[@]}"
     # set defaults
     defaults write com.apple.finder CreateDesktop -boolean false
     killAll Finder
 fi
 if [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     : "Linux"
-    add-links DOTFILES_LINKS_LINUX
+    add-links "${DOTFILES_LINKS_LINUX[@]}"
 fi
 
 : "bin"
