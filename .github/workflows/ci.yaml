@@ -16,6 +16,14 @@ jobs:
           - macos-latest
     steps:
       - uses: actions/checkout@v7
+      # setup.sh clones $HOME/MyDotFiles from GitHub master when it doesn't
+      # exist yet, which would ignore this PR's changes. Seed it from the
+      # checkout instead so setup.sh actually exercises the code under test.
+      - name: Seed $HOME/MyDotFiles from checkout
+        run: |
+          rm -rf "$HOME/MyDotFiles"
+          cp -a "$GITHUB_WORKSPACE" "$HOME/MyDotFiles"
+          rm -rf "$HOME/MyDotFiles/.git"
       - name: Install dotfiles
         run: ./setup.sh
       - name: Verify setup
@@ -24,6 +32,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v7
+      # Same reasoning as above, for setup.ps1's self-clone.
+      - name: Seed $HOME/MyDotFiles from checkout
+        shell: pwsh
+        run: |
+          Remove-Item -Recurse -Force "$HOME\MyDotFiles" -ErrorAction SilentlyContinue
+          Copy-Item -Recurse -Force "$env:GITHUB_WORKSPACE" "$HOME\MyDotFiles"
+          Remove-Item -Recurse -Force "$HOME\MyDotFiles\.git" -ErrorAction SilentlyContinue
       - name: Install dotfiles
         run: ./setup.ps1
       - name: Verify setup
