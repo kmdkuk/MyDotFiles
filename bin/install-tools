@@ -59,7 +59,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     # https://aquaproj.github.io/docs/products/aqua-installer#shell-script
     tmpdir="$(mktemp -d)"
     trap 'rm -rf "$tmpdir"' EXIT
-    curl -sSfL -o "${tmpdir}/aqua-installer" https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.5/aqua-installer
+    curl -sSfL -o "${tmpdir}/aqua-installer" https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.1.0/aqua-installer
     echo "451028d56959cc738564885b1dbebc2691ea038ffde04e2472e4d486a3591146  ${tmpdir}/aqua-installer" | sha256sum -c -
     chmod +x "${tmpdir}/aqua-installer"
     "${tmpdir}/aqua-installer"
