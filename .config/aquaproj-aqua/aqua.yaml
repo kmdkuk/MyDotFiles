@@ -20,7 +20,7 @@ packages:
   - name: jqlang/jq@jq-1.8.2
   - name: nodejs/node@v26.12.1
   - name: rust-lang/rustup@1.28.2
-  - name: anthropics/claude-code@v2.1.310
+  - name: anthropics/claude-code@v2.1.311
   - name: openai/codex@rust-v0.164.0
   - name: jetify-com/devbox@0.18.5
   - name: aws/aws-cli@2.38.5
