@@ -23,4 +23,4 @@ packages:
   - name: anthropics/claude-code@v2.1.312
   - name: openai/codex@rust-v0.165.0
   - name: jetify-com/devbox@0.18.5
-  - name: aws/aws-cli@2.39.1
+  - name: aws/aws-cli@2.39.2
