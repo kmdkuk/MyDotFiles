@@ -35,10 +35,11 @@ done
 # 2. Check Shell Loading (Bash)
 echo "Checking bash loading..."
 # Run bash with FORCE_LOAD=1 to bypass interactive check
-FORCE_LOAD=1 bash -c "source $HOME/.bashrc && echo 'Bash loaded successfully'" > /dev/null 2>&1 || {
+if ! load_output="$(FORCE_LOAD=1 bash -c "source $HOME/.bashrc && echo 'Bash loaded successfully'" 2>&1)"; then
     echo "ERROR: Failed to load .bashrc"
+    echo "$load_output"
     exit 1
-}
+fi
 echo "OK: Bash loaded successfully"
 
 # 3. Check Environment Variables
