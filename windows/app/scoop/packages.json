@@ -3,122 +3,129 @@
     {
       "Name": "main",
       "Source": "https://github.com/ScoopInstaller/Main",
-      "Updated": "2026-02-03T09:54:16+09:00",
-      "Manifests": 1425
+      "Updated": "2026-11-03T17:25:32+09:00",
+      "Manifests": 1703
     }
   ],
   "apps": [
     {
-      "Updated": "2026-01-14T01:17:26.5942352+09:00",
+      "Name": "7zip",
+      "Version": "26.05",
       "Source": "main",
-      "Version": "25.01",
-      "Info": "",
-      "Name": "7zip"
+      "Updated": "2026-11-03T21:23:13.2394571+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-14T06:27:44.8082732+09:00",
-      "Source": "main",
+      "Name": "aria2",
       "Version": "1.37.0-1",
-      "Info": "",
-      "Name": "aria2"
+      "Source": "main",
+      "Updated": "2026-01-14T06:27:44.8082732+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-14T05:58:39.0523895+09:00",
-      "Source": "main",
+      "Name": "dark",
       "Version": "3.14.1",
-      "Info": "",
-      "Name": "dark"
+      "Source": "main",
+      "Updated": "2026-01-14T05:58:39.0523895+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-02-03T11:03:39.8788572+09:00",
+      "Name": "gh",
+      "Version": "2.103.3",
       "Source": "main",
-      "Version": "2.86.0",
-      "Info": "",
-      "Name": "gh"
+      "Updated": "2026-11-03T21:23:15.9947192+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-02-03T11:03:42.0046093+09:00",
+      "Name": "ghq",
+      "Version": "1.11.2",
       "Source": "main",
-      "Version": "1.8.1",
-      "Info": "",
-      "Name": "ghq"
+      "Updated": "2026-11-03T21:23:17.9363243+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-02-03T11:04:06.188529+09:00",
+      "Name": "git",
+      "Version": "2.56.0.4",
       "Source": "main",
-      "Version": "2.53.0",
-      "Info": "",
-      "Name": "git"
+      "Updated": "2026-11-03T21:24:01.2095302+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-02-03T11:05:02.0848505+09:00",
+      "Name": "go",
+      "Version": "1.27.3",
       "Source": "main",
-      "Version": "1.25.6",
-      "Info": "",
-      "Name": "go"
+      "Updated": "2026-11-03T21:25:39.9080443+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-14T20:47:51.3485207+09:00",
-      "Source": "main",
+      "Name": "hub",
       "Version": "2.14.2",
-      "Info": "",
-      "Name": "hub"
-    },
-    {
-      "Updated": "2026-01-26T15:16:59.0022948+09:00",
       "Source": "main",
-      "Version": "0.37.0",
-      "Info": "",
-      "Name": "jj"
+      "Updated": "2026-01-14T20:47:51.3485207+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-14T05:57:13.4832536+09:00",
+      "Name": "jj",
+      "Version": "0.46.0",
       "Source": "main",
-      "Version": "24.13.0",
-      "Info": "",
-      "Name": "nodejs-lts"
+      "Updated": "2026-11-03T21:25:42.6214736+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-14T05:55:17.8213055+09:00",
+      "Name": "jq",
+      "Version": "1.8.2",
       "Source": "main",
-      "Version": "0.5.11",
-      "Info": "",
-      "Name": "peco"
+      "Updated": "2026-09-24T01:11:03.8097145+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-14T05:59:11.3080592+09:00",
+      "Name": "nodejs-lts",
+      "Version": "26.13.0",
       "Source": "main",
-      "Version": "3.14.2",
-      "Info": "",
-      "Name": "python"
+      "Updated": "2026-11-03T21:26:03.0886324+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-13T23:45:12.5231024+09:00",
-      "Source": null,
+      "Name": "peco",
+      "Version": "0.6.0",
+      "Source": "main",
+      "Updated": "2026-11-03T21:26:04.754422+09:00",
+      "Info": ""
+    },
+    {
+      "Name": "python",
+      "Version": "3.15.2",
+      "Source": "main",
+      "Updated": "2026-11-03T21:27:09.4808352+09:00",
+      "Info": ""
+    },
+    {
+      "Name": "scoop-search",
       "Version": "2.1.0",
-      "Info": "",
-      "Name": "scoop-search"
+      "Source": "main",
+      "Updated": "2026-06-01T15:42:26.7818481+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-14T01:19:57.2415866+09:00",
+      "Name": "starship",
+      "Version": "1.27.0",
       "Source": "main",
-      "Version": "1.24.2",
-      "Info": "",
-      "Name": "starship"
+      "Updated": "2026-11-03T21:27:11.1881705+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-02-03T11:05:04.6748094+09:00",
+      "Name": "uv",
+      "Version": "0.13.7",
       "Source": "main",
-      "Version": "0.9.28",
-      "Info": "",
-      "Name": "uv"
+      "Updated": "2026-11-03T21:27:17.6542321+09:00",
+      "Info": ""
     },
     {
-      "Updated": "2026-01-14T05:51:30.9015475+09:00",
+      "Name": "vim",
+      "Version": "9.2.1276",
       "Source": "main",
-      "Version": "9.1.1825",
-      "Info": "",
-      "Name": "vim"
+      "Updated": "2026-11-03T21:27:38.3419758+09:00",
+      "Info": ""
     }
   ]
 }

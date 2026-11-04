@@ -20,9 +20,29 @@ if (Test-Path $ConfigPath) {
     Write-Output "Sorting packages by Name..."
     $json = Get-Content $ConfigPath -Encoding UTF8 | ConvertFrom-Json
     if ($json.apps) {
-        $json.apps = $json.apps | Sort-Object Name
-        $json | ConvertTo-Json -Depth 10 | Set-Content $ConfigPath -Encoding UTF8
+        # scoop export does not guarantee a stable property order, so fix it
+        # explicitly to avoid noisy diffs between runs.
+        $json.apps = @($json.apps | Sort-Object Name | ForEach-Object {
+            [ordered]@{
+                Name    = $_.Name
+                Version = $_.Version
+                Source  = $_.Source
+                Updated = $_.Updated
+                Info    = $_.Info
+            }
+        })
     }
+    if ($json.buckets) {
+        $json.buckets = @($json.buckets | Sort-Object Name | ForEach-Object {
+            [ordered]@{
+                Name      = $_.Name
+                Source    = $_.Source
+                Updated   = $_.Updated
+                Manifests = $_.Manifests
+            }
+        })
+    }
+    $json | ConvertTo-Json -Depth 10 | Set-Content $ConfigPath -Encoding UTF8
 }
 
 Write-Output "Done. Generated $ConfigPath"
