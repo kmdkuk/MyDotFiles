@@ -82,6 +82,7 @@ IME_SET(SetSts, WinTitle := "A") {
 ; 単押し: Space
 ; 長押し/同時押し: Shift
 ; --------------------------------------------------------------
+sandSEnabled := false ; false にしてリロードすると SandS を無効化する。
 press := 0     ; スペースキーを押しているかどうか。
 shifted := 0   ; スペースキー押下中に何かの印字可能文字を押したかどうか。
 pressedAt := 0 ; スペースキーを押した時間（msec）。
@@ -89,6 +90,17 @@ timeout := 300 ; pressedAt からこの時間が経過したら、もはや離�
 
 hook := InputHook() ; スペースキー押下中に何かの印字可能文字を押したかどうか捕捉するフック。
 
+; Ctrl + Alt + Shift + F12 で SandS を一時的にオン/オフする。
+^!+F12:: {
+    global sandSEnabled, press, hook
+    sandSEnabled := !sandSEnabled
+    press := 0
+    hook.Stop()
+    SendInput "{Shift Up}"
+    TrayTip sandSEnabled ? "enabled" : "disabled", "SandS", 1
+}
+
+#HotIf sandSEnabled
 $*Space:: {
     global
     SendInput "{Shift Down}"
@@ -132,3 +144,4 @@ $*Space up:: {
         SendInput "{Blind}{Space}"
     }
 }
+#HotIf
