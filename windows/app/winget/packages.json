@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
-  "CreationDate": "2026-02-03T22:13:59.59+09:00",
+  "CreationDate": "2026-11-05T03:53:01.77+09:00",
   "Sources": [
     {
       "Packages": [
@@ -8,10 +8,10 @@
           "PackageIdentifier": "AgileBits.1Password"
         },
         {
-          "PackageIdentifier": "Amazon.Kindle"
+          "PackageIdentifier": "Anki.Anki"
         },
         {
-          "PackageIdentifier": "Anki.Anki"
+          "PackageIdentifier": "Anthropic.Claude"
         },
         {
           "PackageIdentifier": "AntibodySoftware.WizTree"
@@ -23,16 +23,10 @@
           "PackageIdentifier": "calibre.calibre"
         },
         {
-          "PackageIdentifier": "Canonical.Ubuntu.2404"
-        },
-        {
           "PackageIdentifier": "Chocolatey.Chocolatey"
         },
         {
-          "PackageIdentifier": "CPUID.CPU-Z"
-        },
-        {
-          "PackageIdentifier": "CrystalDewWorld.CrystalDiskMark"
+          "PackageIdentifier": "CPUID.HWMonitor"
         },
         {
           "PackageIdentifier": "Discord.Discord"
@@ -44,10 +38,10 @@
           "PackageIdentifier": "Docker.DockerDesktop"
         },
         {
-          "PackageIdentifier": "Google.Antigravity"
+          "PackageIdentifier": "Google.Chrome"
         },
         {
-          "PackageIdentifier": "Google.Chrome"
+          "PackageIdentifier": "Google.GeminiDesktop"
         },
         {
           "PackageIdentifier": "Google.GoogleDrive"
@@ -59,13 +53,13 @@
           "PackageIdentifier": "Logitech.OptionsPlus"
         },
         {
-          "PackageIdentifier": "MartiCliment.UniGetUI"
-        },
-        {
           "PackageIdentifier": "Microsoft.AppInstaller"
         },
         {
           "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.6"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.Native.Runtime"
         },
         {
           "PackageIdentifier": "Microsoft.DotNet.SDK.10"
@@ -77,6 +71,9 @@
           "PackageIdentifier": "Microsoft.Edge"
         },
         {
+          "PackageIdentifier": "Microsoft.GameInput"
+        },
+        {
           "PackageIdentifier": "Microsoft.PowerShell"
         },
         {
@@ -86,10 +83,19 @@
           "PackageIdentifier": "Microsoft.UI.Xaml.2.8"
         },
         {
+          "PackageIdentifier": "Microsoft.VCLibs.14"
+        },
+        {
           "PackageIdentifier": "Microsoft.VCLibs.Desktop.14"
         },
         {
           "PackageIdentifier": "Microsoft.VCRedist.2010.x64"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VCRedist.2012.x64"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VCRedist.2012.x86"
         },
         {
           "PackageIdentifier": "Microsoft.VCRedist.2013.x64"
@@ -107,13 +113,28 @@
           "PackageIdentifier": "Microsoft.VisualStudioCode"
         },
         {
+          "PackageIdentifier": "Microsoft.WindowsAppRuntime.1.7"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WindowsAppRuntime.1.8"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WindowsAppRuntime.2"
+        },
+        {
           "PackageIdentifier": "Microsoft.WindowsTerminal"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WSL"
         },
         {
           "PackageIdentifier": "Mojang.MinecraftLauncher"
         },
         {
           "PackageIdentifier": "Mozilla.Firefox"
+        },
+        {
+          "PackageIdentifier": "NDI.NDIRuntime"
         },
         {
           "PackageIdentifier": "NDI.NDITools"
@@ -131,6 +152,15 @@
           "PackageIdentifier": "OBSProject.OBSStudio"
         },
         {
+          "PackageIdentifier": "Oracle.JDK.25"
+        },
+        {
+          "PackageIdentifier": "Overwolf.CurseForge"
+        },
+        {
+          "PackageIdentifier": "PathofBuildingCommunity.PathofBuildingCommunity"
+        },
+        {
           "PackageIdentifier": "Spotify.Spotify"
         },
         {
@@ -143,10 +173,10 @@
           "PackageIdentifier": "Surfshark.Surfshark"
         },
         {
-          "PackageIdentifier": "Unity.Unity.2020"
+          "PackageIdentifier": "TechPowerUp.GPU-Z"
         },
         {
-          "PackageIdentifier": "Unity.Unity.6000"
+          "PackageIdentifier": "Unity.Unity.2020"
         },
         {
           "PackageIdentifier": "Unity.UnityHub"
@@ -155,7 +185,7 @@
           "PackageIdentifier": "Valve.Steam"
         },
         {
-          "PackageIdentifier": "wez.wezterm"
+          "PackageIdentifier": "VideoLAN.VLC"
         }
       ],
       "SourceDetails": {
@@ -166,5 +196,5 @@
       }
     }
   ],
-  "WinGetVersion": "1.12.460"
+  "WinGetVersion": "1.29.380"
 }
