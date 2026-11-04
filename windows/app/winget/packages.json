@@ -8,37 +8,7 @@
           "PackageIdentifier": "AgileBits.1Password"
         },
         {
-          "PackageIdentifier": "Anki.Anki"
-        },
-        {
-          "PackageIdentifier": "Anthropic.Claude"
-        },
-        {
-          "PackageIdentifier": "Anthropic.ClaudeCode"
-        },
-        {
-          "PackageIdentifier": "AntibodySoftware.WizTree"
-        },
-        {
-          "PackageIdentifier": "AutoHotkey.AutoHotkey"
-        },
-        {
-          "PackageIdentifier": "calibre.calibre"
-        },
-        {
           "PackageIdentifier": "Chocolatey.Chocolatey"
-        },
-        {
-          "PackageIdentifier": "CPUID.HWMonitor"
-        },
-        {
-          "PackageIdentifier": "Devolutions.UniGetUI"
-        },
-        {
-          "PackageIdentifier": "Discord.Discord"
-        },
-        {
-          "PackageIdentifier": "DistroAV.DistroAV"
         },
         {
           "PackageIdentifier": "Docker.DockerDesktop"
@@ -83,9 +53,6 @@
           "PackageIdentifier": "Microsoft.PowerShell"
         },
         {
-          "PackageIdentifier": "Microsoft.PowerToys"
-        },
-        {
           "PackageIdentifier": "Microsoft.UI.Xaml.2.8"
         },
         {
@@ -116,9 +83,6 @@
           "PackageIdentifier": "Microsoft.VCRedist.2015+.x86"
         },
         {
-          "PackageIdentifier": "Microsoft.VisualStudioCode"
-        },
-        {
           "PackageIdentifier": "Microsoft.WindowsAppRuntime.1.7"
         },
         {
@@ -128,34 +92,13 @@
           "PackageIdentifier": "Microsoft.WindowsAppRuntime.2"
         },
         {
-          "PackageIdentifier": "Microsoft.WindowsTerminal"
-        },
-        {
           "PackageIdentifier": "Microsoft.WSL"
         },
         {
           "PackageIdentifier": "Mojang.MinecraftLauncher"
         },
         {
-          "PackageIdentifier": "Mozilla.Firefox"
-        },
-        {
-          "PackageIdentifier": "NDI.NDIRuntime"
-        },
-        {
-          "PackageIdentifier": "NDI.NDITools"
-        },
-        {
-          "PackageIdentifier": "Notion.Notion"
-        },
-        {
           "PackageIdentifier": "Nvidia.PhysX"
-        },
-        {
-          "PackageIdentifier": "Obsidian.Obsidian"
-        },
-        {
-          "PackageIdentifier": "OBSProject.OBSStudio"
         },
         {
           "PackageIdentifier": "Oracle.JDK.25"
@@ -164,22 +107,10 @@
           "PackageIdentifier": "Overwolf.CurseForge"
         },
         {
-          "PackageIdentifier": "PathofBuildingCommunity.PathofBuildingCommunity"
-        },
-        {
-          "PackageIdentifier": "Spotify.Spotify"
-        },
-        {
           "PackageIdentifier": "SteelSeries.GG"
         },
         {
-          "PackageIdentifier": "SumatraPDF.SumatraPDF"
-        },
-        {
           "PackageIdentifier": "Surfshark.Surfshark"
-        },
-        {
-          "PackageIdentifier": "TechPowerUp.GPU-Z"
         },
         {
           "PackageIdentifier": "Unity.Unity.2020"
@@ -189,9 +120,6 @@
         },
         {
           "PackageIdentifier": "Valve.Steam"
-        },
-        {
-          "PackageIdentifier": "VideoLAN.VLC"
         }
       ],
       "SourceDetails": {
