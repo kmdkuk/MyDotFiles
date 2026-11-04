@@ -82,6 +82,21 @@ if ($NO_INSTALL -eq "0") {
     else {
         Write-Warning "register-taskscheduler.ps1 not found at $AhkRegisterScript"
     }
+
+    # WSL + Ubuntu
+    # Detailed setup (dotfiles, tools) is handled by this repo's own setup.sh,
+    # cloned and run from inside Ubuntu — not duplicated here.
+    Write-Output "Checking WSL Ubuntu distro..."
+    $ExistingDistros = (wsl -l -q 2>$null) -join "`n"
+    if ($ExistingDistros -notmatch "Ubuntu") {
+        Write-Output "Installing WSL Ubuntu distro..."
+        wsl --install -d Ubuntu --no-launch
+        Write-Output "WSL Ubuntu installed. Launch it once to finish account setup, then inside it run:"
+        Write-Output "  curl -sSLf setup.kmdk.uk | bash"
+    }
+    else {
+        Write-Output "WSL Ubuntu distro already installed. Skipping."
+    }
 }
 else {
     Write-Output "Skipping tool installation (NO_INSTALL=$NO_INSTALL)"

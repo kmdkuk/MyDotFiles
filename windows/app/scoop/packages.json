@@ -3,8 +3,14 @@
     {
       "Name": "main",
       "Source": "https://github.com/ScoopInstaller/Main",
-      "Updated": "2026-11-03T17:25:32+09:00",
-      "Manifests": 1703
+      "Updated": "2026-11-04T17:25:16+09:00",
+      "Manifests": 1704
+    },
+    {
+      "Name": "nerd-fonts",
+      "Source": "https://github.com/matthewjberger/scoop-nerd-fonts",
+      "Updated": "2026-10-25T13:05:48+09:00",
+      "Manifests": 367
     }
   ],
   "apps": [
@@ -104,6 +110,13 @@
       "Version": "2.1.0",
       "Source": "main",
       "Updated": "2026-06-01T15:42:26.7818481+09:00",
+      "Info": ""
+    },
+    {
+      "Name": "SourceCodePro-NF",
+      "Version": "3.5.1",
+      "Source": "nerd-fonts",
+      "Updated": "2026-11-04T19:21:17.1658365+09:00",
       "Info": ""
     },
     {

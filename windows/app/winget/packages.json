@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
-  "CreationDate": "2026-11-05T03:53:01.77+09:00",
+  "CreationDate": "2026-11-04T19:22:54.81+09:00",
   "Sources": [
     {
       "Packages": [
@@ -12,6 +12,9 @@
         },
         {
           "PackageIdentifier": "Anthropic.Claude"
+        },
+        {
+          "PackageIdentifier": "Anthropic.ClaudeCode"
         },
         {
           "PackageIdentifier": "AntibodySoftware.WizTree"
@@ -27,6 +30,9 @@
         },
         {
           "PackageIdentifier": "CPUID.HWMonitor"
+        },
+        {
+          "PackageIdentifier": "Devolutions.UniGetUI"
         },
         {
           "PackageIdentifier": "Discord.Discord"
@@ -193,6 +199,22 @@
         "Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
         "Name": "winget",
         "Type": "Microsoft.PreIndexed.Package"
+      }
+    },
+    {
+      "Packages": [
+        {
+          "PackageIdentifier": "9NTRHF51WGGB"
+        },
+        {
+          "PackageIdentifier": "9PFXXSHC64H3"
+        }
+      ],
+      "SourceDetails": {
+        "Argument": "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
+        "Identifier": "StoreEdgeFD",
+        "Name": "msstore",
+        "Type": "Microsoft.Rest"
       }
     }
   ],

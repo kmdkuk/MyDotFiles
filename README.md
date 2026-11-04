@@ -67,6 +67,12 @@ Total duration: 0.4139s
 
 - **brew**: 基本的なパッケージマネージャ。なるべくこれで完結させる。その他は今のところ考えていない。
 
+### 手動インストールが必要なアプリ(Windows)
+
+winget/choco/scoop のどれにも存在しないため、Windows再セットアップ時は以下を手動で入れ直す。
+
+- **LDPlayer**: <https://www.ldplayer.net/> から公式インストーラーを取得してインストール。
+
 ## .gemini
 
 ref: <https://github.com/kinopeee/windsurf-antigravity-rules>
